@@ -23,7 +23,7 @@ class PostActionCreators {
   }
 
   getPost(id = null) {
-    let type = Object.prototype.toString.call(parseInt(id));
+    let type = Object.prototype.toString.call(id);
 
     invariant(
       type === '[object Number]',
