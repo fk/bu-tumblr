@@ -17,7 +17,7 @@ var app = koa();
 
 app.use(compress());
 app.use(bodyparser());
-app.use(serveStatic(join(__dirname, 'public')));
+app.use(serveStatic(join(__dirname, '../public')));
 app.use(isomorphic({ routes, alt }));
 
 app.listen(PORT, () => {

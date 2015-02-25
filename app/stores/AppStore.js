@@ -1,23 +1,28 @@
+"use strict";
+
+import alt from "../alt";
+import { OrderedMap, Map, fromJS } from "immutable";
 import AppActionCreators from "../actions/AppActionCreators";
-import flux from "../flux";
 
 class AppStore {
   constructor() {
     this.bindActions(AppActionCreators);
-    this.toggle = false;
+
+    this.app = OrderedMap({
+      navOpen: false
+    });
+
+    this.on('init', this.setup);
+    this.on('bootstrap', this.setup);
   }
 
-  onToggle(data = {}) {
-    this.toggle = !this.toggle;
-  }
-
-  onActivate(data = {}) {
-    this.toggle = true;
-  }
-
-  onDeactivate(data = {}) {
-    this.toggle = false;
+  setup() {
+    if (! OrderedMap.isOrderedMap(this.app)) {
+      this.app = fromJS(this.app, (key, value) => {
+        return value.toOrderedMap();
+      });
+    }
   }
 }
 
-export default flux.createStore(AppStore);
+export default alt.createStore(AppStore, 'AppStore');

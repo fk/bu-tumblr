@@ -1,13 +1,13 @@
-import flux from "../flux";
+"use strict";
+
+import alt from "../alt";
 
 class AppActionCreators {
   constructor() {
     this.generateActions(
-      'toggle',
-      'activate',
-      'deactivate'
+      'toggleNavigation'
     );
   }
 }
 
-export default flux.createActions(AppActionCreators);
+export default alt.createActions(AppActionCreators);
