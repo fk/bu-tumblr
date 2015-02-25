@@ -6,8 +6,8 @@ pruno(function(mix) {
   mix
     .configure({dir: __dirname + '/config'})
     .del()
-    .publish()
-    .publish({
+    .publish('assets')
+    .publish('fonts', {
       pkg: 'font-awesome',
       src: ['fonts/**/*'],
       dist: '::dist/fonts'

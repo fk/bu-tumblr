@@ -1,5 +1,6 @@
 "use strict";
 
+import Header from "./Header";
 import React from "react/addons";
 import {RouteHandler} from "react-router";
 
@@ -30,7 +31,7 @@ var App = React.createClass({
         <link rel="stylesheet" href={`/stylesheets/${css}.css`} />
       </head>
       <body>
-        <h1>Test</h1>
+        <Header />
         <RouteHandler />
         <script src={`${bundle}.js`} />
       </body>
