@@ -36,6 +36,10 @@ class PostStore {
 
   }
 
+  onGetPost(id = null) {
+
+  }
+
   onGetPostSuccess(resp = {}) {
     let { posts } = resp.entities;
 
