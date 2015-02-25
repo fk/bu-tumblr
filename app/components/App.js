@@ -28,6 +28,7 @@ var App = React.createClass({
       <html lang="en">
       <head>
         <title>Brooklyn United</title>
+        <link href="http://fonts.googleapis.com/css?family=Montserrat:700" rel="stylesheet" />
         <link rel="stylesheet" href={`/stylesheets/${css}.css`} />
       </head>
       <body>

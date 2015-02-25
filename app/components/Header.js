@@ -16,12 +16,15 @@ var Header = React.createClass({
 
     return (
       <header className="header">
-        <a href={ home }>
+        <a className="logo item" href={ home }>
           <h1>Brooklyn<br/>United</h1>
         </a>
-        <a href={ home }>
+        <a className="gear item" href={ home }>
           <img src="/img/brooklyn-united-header-gear.gif" />
         </a>
+        <button className="menu-btn item">
+          Menu <img src="/img/menu-icon.png" />
+        </button>
       </header>
     );
   }
