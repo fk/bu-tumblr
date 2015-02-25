@@ -5,7 +5,8 @@ import alt from "../alt";
 class AppActionCreators {
   constructor() {
     this.generateActions(
-      'toggleNavigation'
+      'toggleNavigation',
+      'setScrollState'
     );
   }
 }

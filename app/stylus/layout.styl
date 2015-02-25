@@ -1,13 +1,20 @@
 .header
-  background-color #ccc
-  position absolute
-  top 10px
-  left 10px
-  right 10px
-  z-index 3
-  text-align justify
-  font-size 0
-  transition transform 600ms ease-in-out
-  transform none
-  padding 20px 0
-  display block
+  position relative
+  height 315px
+  width 100%
+  transition background-color 175ms ease-in-out
+  cf()
+
+  a
+    text-decoration none
+    color #fff
+
+  &.fixed
+    position fixed
+    height 53px
+    left 0
+    right 0
+    top 0
+    padding 0 10px
+    background-color #fff
+    border-bottom 1px solid #f2f2f2

@@ -1,8 +1,12 @@
 "use strict";
 
-import React from "react";
+import React from "react/addons";
+
+var { PureRenderMixin } = React.addons;
 
 var IndexRoute = React.createClass({
+  mixins: [PureRenderMixin],
+
   render() {
     return (
       <div className="index-route">

@@ -9,7 +9,10 @@ class AppStore {
     this.bindActions(AppActionCreators);
 
     this.app = OrderedMap({
-      navOpen: false
+      homeUrl: 'http://brooklynunited.com',
+      navOpen: false,
+      mastheadColor: '#58AEDF',
+      fixedHeader: false
     });
 
     this.on('init', this.setup);
@@ -22,6 +25,15 @@ class AppStore {
         return value.toOrderedMap();
       });
     }
+  }
+
+  onSetScrollState(dY) {
+    this.app = this.app.set('fixedHeader', dY > 465);
+  }
+
+  onToggleNavigation() {
+    let navState = !this.app.get('navOpen');
+    this.app = this.app.set('navOpen', navState);
   }
 }
 

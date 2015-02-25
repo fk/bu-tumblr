@@ -3,6 +3,14 @@
 *::after
   box-sizing border-box
 
+::selection
+  background lighten(#ed6550, 15%)
+  color #fff
+
+::-moz-selection
+  background lighten(#ed6550, 15%)
+  color #fff
+
 html
   min-height 100%
   border 10px solid #fff
@@ -11,11 +19,19 @@ body
   min-height 100%
   height 100%
   text-rendering optimizeLegibility
-  font-smothing antialiased
+  font-smoothing antialiased
   font-size 16px
+  &.fixed-header
+    padding-top 465px
 
 h1
   font-size 2em
-  margin 0.67em 0
+  margin 0
   font-weight 700
+  text-transform uppercase
+  font-family Montserrat
+  font-weight 700
+  font-size 1.9em
+  line-height 0.8em
+  letter-spacing -0.08em
   text-transform uppercase
