@@ -1,0 +1,40 @@
+{
+  "name": "bu-tumblr",
+  "version": "0.1.0",
+  "description": "New Pruno application",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "pruno",
+  "license": "ISC",
+  "dependencies": {
+    "alt": "^0.13.8",
+    "babel": "^4.4.6",
+    "fluxd": "^1.0.9",
+    "font-awesome": "^4.3.0",
+    "koa": "^0.18.0",
+    "koa-bodyparser": "^1.3.1",
+    "koa-compress": "^1.0.8",
+    "koa-favicon": "^1.2.0",
+    "koa-isomorphic": "^2.0.2",
+    "koa-static": "^1.4.9",
+    "normalize.css": "^3.0.2",
+    "react": "^0.12.2",
+    "react-router": "^0.12.4"
+  },
+  "devDependencies": {
+    "babel-core": "^4.4.6",
+    "babel-loader": "^4.0.0",
+    "gulp": "^3.8.11",
+    "pruno": "^2.0.3",
+    "pruno-del": "^1.1.1",
+    "pruno-http": "^2.0.2",
+    "pruno-publish": "^1.0.3",
+    "pruno-stylus": "^2.0.0",
+    "pruno-webpack": "^1.0.3",
+    "react-hot-loader": "^1.1.5",
+    "webpack": "^1.6.0",
+    "webpack-dev-server": "^1.7.0"
+  }
+}

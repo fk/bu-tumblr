@@ -1,0 +1,42 @@
+vars:
+  src: ./app
+  dist: ./public
+del:
+  dirs:
+    - "::dist"
+  watch: false
+stylus:
+  entry: "::src/stylus/index.styl"
+  dist: "::dist/stylesheets/app.css"
+  search: "::src/**/*.styl"
+  minify: false
+  source-maps: true
+  concat:
+    - ./node_modules/normalize.css/normalize.css
+    - ./node_modules/font-awesome/css/font-awesome.css
+  use:
+    - nib
+    - jeet
+    - rupture
+  normalize: true
+  font-awesome: true
+http:
+  lrPort: 35729
+  listen: 3000
+  env: development
+  dist: "::dist"
+  file: "./server.js"
+publish:
+  pkg: false
+  src:
+    - "::src/assets/**/*"
+  dist: "::dist"
+webpack:
+  entry: "::src/index.js"
+  dist: "::dist/bundle.js"
+  hot-load: true
+  uglify: false
+  es6: true
+  context: false
+  devtool: eval-source-map
+  devport: 9000
