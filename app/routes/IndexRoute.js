@@ -23,7 +23,7 @@ var IndexRoute = React.createClass({
     return { posts };
   },
 
-  componentDidMount() {
+  componentWillMount() {
     this.listenTo(PostStore, () => {
       this.setState(this.getInitialState());
     });
