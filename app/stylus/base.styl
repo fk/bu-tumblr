@@ -21,8 +21,14 @@ body
   text-rendering optimizeLegibility
   font-smoothing antialiased
   font-size 16px
+
   &.fixed-header
     padding-top 465px
+
+  &.navigation-open
+    background-color #ddd
+    overflow hidden
+    position relative
 
 h1
   font-size 2em
@@ -35,3 +41,7 @@ h1
   line-height 0.8em
   letter-spacing -0.08em
   text-transform uppercase
+
+button
+  &:focus
+    outline none

@@ -9,7 +9,7 @@ import ListenerMixin from "alt/mixins/ListenerMixin";
 import AppActionCreators from "../actions/AppActionCreators";
 
 var { PropTypes } = React;
-var { PureRenderMixin, classSet } = React.addons;
+var { PureRenderMixin, classSet, CSSTransitionGroup } = React.addons;
 
 var App = React.createClass({
   mixins: [PureRenderMixin, ListenerMixin],
@@ -72,11 +72,15 @@ var App = React.createClass({
         <link rel="stylesheet" href={`/stylesheets/${css}.css`} />
       </head>
       <body className={cx}>
-        <Header />
-        <RouteHandler />
-        { navOpen &&
-          <Navigation />
-        }
+        <div className="container">
+          <Header />
+          <RouteHandler />
+        </div>
+        <CSSTransitionGroup transitionName="navigation">
+          { navOpen &&
+            <Navigation key="nav" />
+          }
+        </CSSTransitionGroup>
       </body>
       </html>
     );
