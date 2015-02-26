@@ -1,15 +1,15 @@
 "use strict";
 
 import alt from "../alt";
-import { OrderedMap, fromJS } from "immutable";
+import { Iterable, OrderedMap, fromJS } from "immutable";
 import PostActionCreators from "../actions/PostActionCreators";
 
 class PostStore {
   constructor() {
     this.bindActions(PostActionCreators);
 
-    this.on('init', setup);
-    this.on('bootstrap', setup);
+    this.on('init', this.setup);
+    this.on('bootstrap', this.setup);
 
     this.posts = OrderedMap();
   }
@@ -17,7 +17,8 @@ class PostStore {
   setup() {
     if (! OrderedMap.isOrderedMap(this.posts)) {
       this.posts = fromJS(this.posts, (key, value) => {
-        return OrderedMap(value);
+        let isIndexed = Iterable.isIndexed(value);
+        return isIndexed ? value.toList() : value.toOrderedMap();
       });
     }
   }
