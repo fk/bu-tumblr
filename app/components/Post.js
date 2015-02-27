@@ -14,7 +14,9 @@ var Post = React.createClass({
 
   renderPhoto(photo, key) {
     return (
-      <li key={key}></li>
+      <li key={key}>
+        <img src={photo.alt_sizes[0].url} />
+      </li>
     );
   },
 
@@ -26,7 +28,7 @@ var Post = React.createClass({
       <div className="post">
         { post.photos &&
           <ul className="photos">
-
+            {post.photos.map(this.renderPhoto)}
           </ul>
         }
       </div>
