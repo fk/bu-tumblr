@@ -18,10 +18,13 @@ var app = koa();
 app.use(compress());
 app.use(bodyparser());
 app.use(serveStatic(join(__dirname, '../public')));
-app.use(isomorphic({ routes, alt }));
+app.use(isomorphic({ alt, routes }));
 
-app.listen(PORT, () => {
-  if (DEV) {
+app.listen(PORT, (err) => {
+  if (err) {
+    throw err;
+  }
+  else if (DEV) {
     console.log(`Server running at http://localhost:${PORT}`)
   }
 });

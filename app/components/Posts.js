@@ -1,20 +1,41 @@
 "use strict";
 
-import React from "react/addons";
 import Post from "./Post";
+import React from "react/addons";
+import PostStore from "../stores/PostStore";
+import ListenerMixin from "alt/mixins/ListenerMixin";
+import PostActionCreators from "../actions/PostActionCreators";
 
 var { PropTypes } = React;
 var { PureRenderMixin } = React.addons;
 
 var Posts = React.createClass({
-  mixins: [PureRenderMixin],
+  mixins: [ListenerMixin, PureRenderMixin],
 
-  propTypes: {
-    posts: PropTypes.object.isRequired
+  statics: {
+    fetchData() {
+      return PostActionCreators.getPosts();
+    }
+  },
+
+  getInitialState() {
+    let { posts } = PostStore.getState();
+
+    return { posts };
+  },
+
+  componentWillMount() {
+    this.listenTo(PostStore, this.onStoreChange);
+  },
+
+  onStoreChange() {
+    if (this.isMounted()) {
+      this.setState(this.getInitialState());
+    }
   },
 
   render() {
-    let { posts: rawPosts } = this.props;
+    let { posts: rawPosts } = this.state;
     let posts = [];
 
     for (let [id, post] of rawPosts.entries()) {

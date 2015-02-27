@@ -1,7 +1,6 @@
 "use strict";
 
 import alt from "../alt";
-import invariant from "react/lib/invariant";
 import TumblrAPI from "../utils/TumblrAPI";
 
 class PostActionCreators {

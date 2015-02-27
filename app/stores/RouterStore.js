@@ -7,10 +7,11 @@ import RouterActionCreators from "../actions/RouterActionCreators";
 class RouterStore {
   constructor() {
     this.bindActions(RouterActionCreators);
-    this.on('init', this.setup);
-    this.on('bootstrap', this.setup);
 
     this.router = Map();
+
+    this.on('init', this.setup);
+    this.on('bootstrap', this.setup);
   }
 
   setup() {

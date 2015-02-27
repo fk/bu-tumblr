@@ -8,10 +8,10 @@ class PostStore {
   constructor() {
     this.bindActions(PostActionCreators);
 
+    this.posts = OrderedMap();
+
     this.on('init', this.setup);
     this.on('bootstrap', this.setup);
-
-    this.posts = OrderedMap();
   }
 
   setup() {
