@@ -5,33 +5,25 @@ import React from "react/addons";
 import Navigation from "./Navigation";
 import {RouteHandler} from "react-router";
 import AppStore from "../stores/AppStore";
-import ListenerMixin from "alt/mixins/ListenerMixin";
 import AppActionCreators from "../actions/AppActionCreators";
+import ReactStateMagicMixin from "alt/mixins/ReactStateMagicMixin";
 
 var { PropTypes } = React;
 var { PureRenderMixin, classSet, CSSTransitionGroup } = React.addons;
 
 var App = React.createClass({
-  mixins: [PureRenderMixin, ListenerMixin],
+  mixins: [PureRenderMixin, ReactStateMagicMixin],
+
+  statics: {
+    registerStore: AppStore
+  },
 
   propTypes: {
     env: PropTypes.string
   },
 
-  getInitialState() {
-    let { app } = AppStore.getState();
-
-    return { app };
-  },
-
   getDefaultProps() {
     return { env: 'development' };
-  },
-
-  componentWillMount() {
-    this.listenTo(AppStore, () => {
-      this.setState(this.getInitialState());
-    });
   },
 
   componentDidMount() {

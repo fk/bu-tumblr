@@ -2,22 +2,16 @@
 
 import React from "react/addons";
 import AppStore from "../stores/AppStore";
-import ListenerMixin from "alt/mixins/ListenerMixin";
 import AppActionCreators from "../actions/AppActionCreators";
+import ReactStateMagicMixin from "alt/mixins/ReactStateMagicMixin";
 
 var { PureRenderMixin, CSSTransitionGroup } = React.addons;
 
 var Navigation = React.createClass({
-  mixins: [PureRenderMixin, ListenerMixin],
+  mixins: [PureRenderMixin, ReactStateMagicMixin],
 
-  getInitialState() {
-    let { app } = AppStore.getState();
-
-    return { app };
-  },
-
-  componentWillMount() {
-    this.listenTo(AppStore, () => this.setState(this.getInitialState()));
+  statics: {
+    registerStore: AppStore
   },
 
   handleClickClose(event) {
