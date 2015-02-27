@@ -9,8 +9,9 @@
   "author": "pruno",
   "license": "ISC",
   "dependencies": {
-    "alt": "^0.13.8",
+    "alt": "^0.13.10",
     "babel": "^4.4.6",
+    "classnames": "^1.1.4",
     "co": "^4.4.0",
     "fluxd": "^1.0.9",
     "font-awesome": "^4.3.0",

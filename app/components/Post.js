@@ -1,6 +1,7 @@
 "use strict";
 
 import React from "react/addons";
+import TagList from "./TagList";
 
 var { PropTypes } = React;
 var { PureRenderMixin } = React.addons;
@@ -29,6 +30,11 @@ var Post = React.createClass({
         { post.photos &&
           <ul className="photos">
             {post.photos.map(this.renderPhoto)}
+          </ul>
+        }
+        { post.tags && post.tags.length > 0 &&
+          <ul className="tags">
+
           </ul>
         }
       </div>

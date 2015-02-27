@@ -58,11 +58,25 @@ var Header = React.createClass({
         <button
           className="menu-btn item"
           onClick={this.handleNavToggle}>
-          Menu <img src="/img/menu-icon.png" />
+          Menu
+          <svg
+            className="menu-icon"
+            viewBox="0 0 16 12"
+            preserveAspectRatio="none">
+            <g className="line">
+              <path d="M0,0 L16,0 L16,2 L0,2" />
+            </g>
+            <g className="line">
+              <path d="M0,5 L16,5 L16,7 L0,7" />
+            </g>
+            <g className="line">
+              <path d="M0,10 L16,10 L16,12 L0,12" />
+            </g>
+          </svg>
         </button>
       </header>
     );
   }
 });
-
+// <img src="/img/menu-icon.png" />
 export default Header;

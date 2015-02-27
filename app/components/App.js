@@ -3,13 +3,14 @@
 import Header from "./Header";
 import React from "react/addons";
 import Navigation from "./Navigation";
+import classNames from "classnames";
 import {RouteHandler} from "react-router";
 import AppStore from "../stores/AppStore";
 import AppActionCreators from "../actions/AppActionCreators";
 import ReactStateMagicMixin from "alt/mixins/ReactStateMagicMixin";
 
 var { PropTypes } = React;
-var { PureRenderMixin, classSet, CSSTransitionGroup } = React.addons;
+var { PureRenderMixin, CSSTransitionGroup } = React.addons;
 
 var App = React.createClass({
   mixins: [PureRenderMixin, ReactStateMagicMixin],
@@ -51,7 +52,7 @@ var App = React.createClass({
     const { app } = this.state;
     const { fixedHeader, navOpen } = app.toJS();
 
-    const cx = classSet({
+    const cx = classNames({
       'fixed-header': fixedHeader,
       'navigation-open': navOpen
     });
