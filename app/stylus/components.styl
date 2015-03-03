@@ -58,10 +58,6 @@
 
 .menu-btn
   display inline-block
-  .line
-    fill #fff
-
-.menu-btn
   background none
   border none
   text-align right
@@ -75,8 +71,12 @@
     margin-left 10px
     margin-bottom 2px
     width 6.5em
+  .line
+    fill #fff
   .fixed &
     color #333
+    .line
+      fill #58AEDF
 
 .navigation
   font-family Montserrat, Helvetica, Arial, sans-serif
@@ -184,6 +184,17 @@
   padding-bottom 48%
   display block
   position relative
+
+  .post-title
+    position absolute
+    z-index 10
+    background-color #333
+    color #fff
+    width 32.5%
+    margin-bottom 2em
+    padding 2em 40px
+    bottom 8em
+    left 1.25em
 
   .tag-list
     position absolute

@@ -51,6 +51,11 @@ let Post = React.createClass({
             { post.photos.map(this.renderPhoto({ rows, sizes })) }
           </ul>
         }
+        { post.title &&
+          <div className="post-title">
+            <h2>{ post.title }</h2>
+          </div>
+        }
         { post.tags && post.tags.length > 0 &&
           <TagList tags={ post.tags } />
         }

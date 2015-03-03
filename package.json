@@ -39,7 +39,7 @@
     "pruno-http": "^2.0.2",
     "pruno-publish": "^1.0.3",
     "pruno-stylus": "^2.0.0",
-    "pruno-webpack": "^1.0.3",
+    "pruno-webpack": "^1.1.0",
     "react-hot-loader": "^1.1.5",
     "webpack": "^1.6.0",
     "webpack-dev-server": "^1.7.0"
