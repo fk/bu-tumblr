@@ -1,10 +1,10 @@
 "use strict";
 
-var co = require("co");
+let co = require("co");
 
 function noop() {}
 
-var ID_COUNTER = 0;
+let ID_COUNTER = 0;
 
 function makeUrl(url, params) {
   if (params) {
@@ -32,13 +32,13 @@ function cancel(script, _id) {
 }
 
 function request (url, params) {
-  var _id = `jsonp${++ID_COUNTER}`;
-  var callbackUrl = `${url}&callback=${_id}`;
+  let _id = `jsonp${++ID_COUNTER}`;
+  let callbackUrl = `${url}&callback=${_id}`;
 
   return new Promise((resolve, reject) => {
     try {
-      var script;
-      var target = document.getElementsByTagName("script")[0] || document.head;
+      let script;
+      let target = document.getElementsByTagName("script")[0] || document.head;
 
       window[_id] = function (data){
         cleanup(script, _id);
@@ -51,9 +51,9 @@ function request (url, params) {
       target.parentNode.insertBefore(script, target);
     }
     catch (err) {
-      var http = require("http");
+      let http = require("http");
       http.get(url, function(res) {
-        var body = "";
+        let body = "";
 
         res.on("data", function(chunk) {
           body += chunk;
@@ -61,7 +61,7 @@ function request (url, params) {
 
         res.on("end", function() {
           try {
-            var json = JSON.parse(body);
+            let json = JSON.parse(body);
             resolve(json);
           }
           catch (err) {
@@ -77,7 +77,7 @@ module.exports = function jsonp(url, params) {
   url = makeUrl(url, params);
 
   return co(function *() {
-    var result = yield request(url, params);
+    let result = yield request(url, params);
 
     return result;
   }).catch(function(err) {

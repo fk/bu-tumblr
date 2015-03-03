@@ -13,7 +13,7 @@ const ENV = process.env.NODE_ENV || "development";
 const DEV = ENV === "development";
 const PORT = process.env.PORT || 3000;
 
-var app = koa();
+let app = koa();
 
 app.use(compress());
 app.use(bodyparser());

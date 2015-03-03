@@ -5,9 +5,9 @@ import AppStore from "../stores/AppStore";
 import AppActionCreators from "../actions/AppActionCreators";
 import ReactStateMagicMixin from "alt/mixins/ReactStateMagicMixin";
 
-var { PureRenderMixin, classSet } = React.addons;
+const { PureRenderMixin, classSet } = React.addons;
 
-var Header = React.createClass({
+let Header = React.createClass({
   mixins: [PureRenderMixin, ReactStateMagicMixin],
 
   statics: {

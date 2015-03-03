@@ -35,9 +35,7 @@ class PostStore {
   }
 
   onGetPostsError(err = null) {
-    if (err) {
-      warning("Get posts error");
-    }
+    warning(err, "Get posts error");
   }
 
   onGetPost(id = null) {
@@ -52,7 +50,7 @@ class PostStore {
 
   onGetPostError(err = null) {
     if (err) {
-      warning("Get post error");
+      warning(err, "Get post error");
     }
   }
 }

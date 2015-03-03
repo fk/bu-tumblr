@@ -19,6 +19,6 @@ export default {
   }
 };
 
-var makeUrl = (resource) => {
+let makeUrl = (resource) => {
   return ENDPOINT_ROOT + "/" + path.join(TUMBLR, resource);
 };

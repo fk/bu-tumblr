@@ -3,10 +3,10 @@
 import React from "react/addons";
 import TagList from "./TagList";
 
-var { PropTypes } = React;
-var { PureRenderMixin } = React.addons;
+const { PropTypes } = React;
+const { PureRenderMixin } = React.addons;
 
-var Post = React.createClass({
+let Post = React.createClass({
   mixins: [PureRenderMixin],
 
   propTypes: {
@@ -14,10 +14,16 @@ var Post = React.createClass({
   },
 
   renderPhoto(photo, key) {
+    let { url } = photo.alt_sizes[0];
+    let style = {
+      backgroundImage: `url(${url})`
+    };
+
     return (
-      <li key={key}>
-        <img src={photo.alt_sizes[0].url} />
-      </li>
+      <li
+        className="photo"
+        key={key}
+        style={style} />
     );
   },
 

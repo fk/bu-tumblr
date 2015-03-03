@@ -5,9 +5,9 @@ import AppStore from "../stores/AppStore";
 import AppActionCreators from "../actions/AppActionCreators";
 import ReactStateMagicMixin from "alt/mixins/ReactStateMagicMixin";
 
-var { PureRenderMixin, CSSTransitionGroup } = React.addons;
+const { PureRenderMixin, CSSTransitionGroup } = React.addons;
 
-var Navigation = React.createClass({
+let Navigation = React.createClass({
   mixins: [PureRenderMixin, ReactStateMagicMixin],
 
   statics: {

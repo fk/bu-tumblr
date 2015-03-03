@@ -3,10 +3,10 @@
 import Post from "./Post";
 import React from "react/addons";
 
-var { PropTypes } = React;
-var { PureRenderMixin } = React.addons;
+const { PropTypes } = React;
+const { PureRenderMixin } = React.addons;
 
-var Posts = React.createClass({
+let Posts = React.createClass({
   mixins: [PureRenderMixin],
 
   render() {

@@ -6,9 +6,9 @@ import PostStore from "../stores/PostStore";
 import PostActionCreators from "../actions/PostActionCreators";
 import ReactStateMagicMixin from "alt/mixins/ReactStateMagicMixin";
 
-var { PureRenderMixin } = React.addons;
+const { PureRenderMixin } = React.addons;
 
-var IndexRoute = React.createClass({
+let IndexRoute = React.createClass({
   mixins: [ReactStateMagicMixin, PureRenderMixin],
 
   statics: {

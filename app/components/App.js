@@ -9,10 +9,10 @@ import AppStore from "../stores/AppStore";
 import AppActionCreators from "../actions/AppActionCreators";
 import ReactStateMagicMixin from "alt/mixins/ReactStateMagicMixin";
 
-var { PropTypes } = React;
-var { PureRenderMixin, CSSTransitionGroup } = React.addons;
+const { PropTypes } = React;
+const { PureRenderMixin, CSSTransitionGroup } = React.addons;
 
-var App = React.createClass({
+let App = React.createClass({
   mixins: [PureRenderMixin, ReactStateMagicMixin],
 
   statics: {
@@ -57,11 +57,13 @@ var App = React.createClass({
       "navigation-open": navOpen
     });
 
+    const fonts = "http://fonts.googleapis.com/css?family=Montserrat:700";
+
     return (
       <html lang="en">
       <head>
         <title>Brooklyn United</title>
-        <link href="http://fonts.googleapis.com/css?family=Montserrat:700" rel="stylesheet" />
+        <link href={fonts} rel="stylesheet" />
         <link rel="stylesheet" href={`/stylesheets/${css}.css`} />
       </head>
       <body className={cx}>

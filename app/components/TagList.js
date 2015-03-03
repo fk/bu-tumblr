@@ -2,9 +2,9 @@
 
 import React from "react/addons";
 
-var { PureRenderMixin } = React.addons;
+const { PureRenderMixin } = React.addons;
 
-var TagList = React.createClass({
+let TagList = React.createClass({
   mixins: [PureRenderMixin],
 
   render() {
