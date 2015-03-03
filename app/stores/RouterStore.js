@@ -8,20 +8,20 @@ class RouterStore {
   constructor() {
     this.bindActions(RouterActionCreators);
 
-    this.router = Map();
+    this.router = new Map();
 
-    this.on('init', this.setup);
-    this.on('bootstrap', this.setup);
+    this.on("init", this.setup);
+    this.on("bootstrap", this.setup);
   }
 
   setup() {
-    if (! Map.isMap(this.router)) {
-      this.router = fromJS(this.router, (key, value) => Map(value));
+    if (!Map.isMap(this.router)) {
+      this.router = fromJS(this.router, (key, value) => new Map(value));
     }
   }
 
   onRouteChange(state) {
-    this.router = Map(state);
+    this.router = new Map(state);
   }
 }
 

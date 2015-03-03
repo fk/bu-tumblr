@@ -25,8 +25,8 @@ var Header = React.createClass({
     const { mastheadColor, homeUrl, fixedHeader } = app.toJS();
 
     const cx = classSet({
-      'header': true,
-      'fixed': fixedHeader
+      "header": true,
+      "fixed": fixedHeader
     });
 
     return (

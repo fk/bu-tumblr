@@ -30,10 +30,12 @@
   },
   "devDependencies": {
     "babel-core": "^4.4.6",
+    "babel-eslint": "^1.0.12",
     "babel-loader": "^4.0.0",
     "gulp": "^3.8.11",
     "pruno": "^2.0.3",
     "pruno-del": "^1.1.1",
+    "pruno-eslint": "^0.2.3",
     "pruno-http": "^2.0.2",
     "pruno-publish": "^1.0.3",
     "pruno-stylus": "^2.0.0",

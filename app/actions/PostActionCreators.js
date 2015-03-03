@@ -2,14 +2,15 @@
 
 import alt from "../alt";
 import TumblrAPI from "../utils/TumblrAPI";
+import invariant from "react/lib/invariant";
 
 class PostActionCreators {
   constructor() {
     this.generateActions(
-      'getPostsSuccess',
-      'getPostsError',
-      'getPostSuccess',
-      'getPostError'
+      "getPostsSuccess",
+      "getPostsError",
+      "getPostSuccess",
+      "getPostError"
     );
   }
 
@@ -25,9 +26,9 @@ class PostActionCreators {
     let type = Object.prototype.toString.call(id);
 
     invariant(
-      type === '[object Number]',
-      'PostActionCreators.getPost(...): Please provide a valid number id. ' +
-      'Received `%s`',
+      type === "[object Number]",
+      "PostActionCreators.getPost(...): Please provide a valid number id. " +
+      "Received `%s`",
       type
     );
 

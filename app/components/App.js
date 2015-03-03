@@ -24,12 +24,12 @@ var App = React.createClass({
   },
 
   getDefaultProps() {
-    return { env: 'development' };
+    return { env: "development" };
   },
 
   componentDidMount() {
-    document.addEventListener('scroll', this.updateScrollState, false);
-    document.addEventListener('resize', this.updateScrollState, false);
+    document.addEventListener("scroll", this.updateScrollState, false);
+    document.addEventListener("resize", this.updateScrollState, false);
   },
 
   updateScrollState(event) {
@@ -46,15 +46,15 @@ var App = React.createClass({
 
   render() {
     const { env } = this.props;
-    const css = env === 'production' ? 'app.min' : 'app';
-    const bundle = env === 'production' ?
-      '/bundle.min' : 'http://localhost:9000/dist/bundle';
+    const css = env === "production" ? "app.min" : "app";
+    const bundle = env === "production" ?
+      "/bundle.min" : "http://localhost:9000/dist/bundle";
     const { app } = this.state;
     const { fixedHeader, navOpen } = app.toJS();
 
     const cx = classNames({
-      'fixed-header': fixedHeader,
-      'navigation-open': navOpen
+      "fixed-header": fixedHeader,
+      "navigation-open": navOpen
     });
 
     return (

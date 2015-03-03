@@ -1,6 +1,6 @@
 "use strict";
 
-require('babel/polyfill');
+require("babel/polyfill");
 
 import alt from "./alt";
 import React from "react";
@@ -12,7 +12,7 @@ let { snapshot } = window;
 alt.bootstrap(snapshot);
 
 router.run((Handler, state) => {
-  if (! bootstrapped) {
+  if (!bootstrapped) {
     let { routes } = state;
     routes.filter(r => r.handler.fetchData)
       .forEach(r => r.handler.fetchData(state));
