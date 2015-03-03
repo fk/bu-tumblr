@@ -17,7 +17,9 @@ let TagList = React.createClass({
 
     return (
       <ul className="tag-list">
-        { tags.map((tag, key) => <li key={ key }>{ tag }</li>) }
+        { tags.map((tag, key) => (
+          <li className="tag" key={ key }>{ tag }</li>
+        )) }
       </ul>
     );
   }

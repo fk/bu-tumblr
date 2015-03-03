@@ -180,9 +180,25 @@
 .post
   col(1)
   height 0
+  margin-top 8em
   padding-bottom 48%
   display block
   position relative
+
+  .tag-list
+    position absolute
+    top 0
+    left 0
+    z-index 10
+    background-color rgba(255, 255, 255, 0.5)
+    padding 1em
+
+    .tag
+      float left
+
+      & + .tag
+        margin-left 1em
+
   .photos
     display block
     position absolute
@@ -190,9 +206,11 @@
     left 0
     right 0
     bottom 0
-    li
+
+    .photo
+      width 100%
+      height 100%
+      float left
       background-repeat no-repeat
       background-size cover
       background-position center center
-      width 100%
-      height 100%

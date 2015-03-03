@@ -23,8 +23,7 @@ let Post = React.createClass({
       let style = {
         backgroundImage: `url(${url})`,
         width: `${(1 / size) * 100}%`,
-        height: `${(1 / rows.length) * 100}%`,
-        float: "left"
+        height: `${(1 / rows.length) * 100}%`
       };
 
       return (
