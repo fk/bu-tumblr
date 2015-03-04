@@ -12,7 +12,7 @@ let IndexRoute = React.createClass({
   mixins: [ReactStateMagicMixin, PureRenderMixin],
 
   statics: {
-    fetchData() {
+    fetchData(state) {
       return PostActionCreators.getPosts();
     },
 
