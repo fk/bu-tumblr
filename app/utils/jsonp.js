@@ -1,7 +1,5 @@
 "use strict";
 
-let co = require("co");
-
 function noop() {}
 
 let ID_COUNTER = 0;
@@ -73,14 +71,9 @@ function request (url, params) {
   });
 }
 
-module.exports = function jsonp(url, params) {
-  url = makeUrl(url, params);
+export default async function jsonp(resource, params) {
+  let url = makeUrl(resource, params);
+  let result = await request(url, params);
 
-  return co(function *() {
-    let result = yield request(url, params);
-
-    return result;
-  }).catch(function(err) {
-    console.warn("Unhandled Exception:", err);
-  });
+  return result;
 };

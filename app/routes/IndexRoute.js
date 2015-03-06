@@ -12,8 +12,8 @@ let IndexRoute = React.createClass({
   mixins: [ReactStateMagicMixin, PureRenderMixin],
 
   statics: {
-    fetchData(state) {
-      return PostActionCreators.getPosts();
+    async fetchData(state) {
+      return await PostActionCreators.getPosts();
     },
 
     registerStore: PostStore

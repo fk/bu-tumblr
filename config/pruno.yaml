@@ -18,30 +18,31 @@ stylus:
     - nib
     - jeet
     - rupture
-  normalize: true
-  font-awesome: true
 http:
   lrPort: 35729
   listen: 3000
   env: development
   dist: "::dist"
-  file: ./server.js
+  file: "./server.js"
 publish:
   pkg: false
   src:
+    - "::src/assets/**/*"
+  search:
     - "::src/assets/**/*"
   dist: "::dist"
 webpack:
   entry: "::src/index.js"
   dist: "::dist/bundle.js"
+  config: false
   hot-load: true
   uglify: false
-  es6: true
+  es6: false
+  es7: true
   context: false
   devtool: eval-source-map
   devport: 9000
 eslint:
-  parser: babel-eslint
   envs:
     browser: true
     node: true
@@ -49,7 +50,7 @@ eslint:
     radix: 1
     max-nested-callbacks:
       - 2
-      - 2
+      - 3
     no-new-wrappers: 2
     no-sequences: 2
     no-var: 2
@@ -83,5 +84,8 @@ eslint:
   dirs:
     - "::src/**/*.js"
     - "./api/**/*.js"
+  search:
+    - "::src/**/*.js"
+    - "./api/**/*.js"
   format: stylish
-  useEslintrc: false
+  useEslintrc: true

@@ -5,6 +5,5 @@ stylus:
 webpack:
   dist: "::dist/bundle.min.js"
   uglify: true
-  es6: true
   context: false
   devtool: false

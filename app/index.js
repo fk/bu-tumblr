@@ -12,13 +12,31 @@ let { snapshot } = window;
 alt.bootstrap(snapshot);
 
 router.run((Handler, state) => {
-  if (!bootstrapped) {
-    let { routes } = state;
-    routes.filter(r => r.handler.fetchData)
-      .forEach(r => r.handler.fetchData(state));
+  fetchData(state);
 
-    bootstrapped = true;
-  }
   RouterActionCreators.routeChange(state);
   React.render(<Handler { ...state } />, document);
 });
+
+async function fetchData(state) {
+  let routes = state.routes.filter(route => route.handler.fetchData);
+  let data = {};
+
+  if (!bootstrapped) {
+    return true;
+  }
+
+  for (let route of routes) {
+    let { handler } = route;
+    let { displayName } = handler;
+
+    try {
+      data[displayName] = await handler.fetchData(state);
+    }
+    catch (err) { }
+  }
+
+  bootstrapped = true;
+
+  return data;
+}
