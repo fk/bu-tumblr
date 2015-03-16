@@ -58,11 +58,14 @@ let App = React.createClass({
     });
 
     const fonts = "http://fonts.googleapis.com/css?family=Montserrat:700";
+    const TYPE_KIT_EXEC = "try{Typekit.load();}catch(e){}";
 
     return (
       <html lang="en">
       <head>
         <title>Brooklyn United</title>
+        <script src="//use.typekit.net/iey8vjp.js"></script>
+        <script dangerouslySetInnerHTML={{__html: TYPE_KIT_EXEC }} />
         <link href={fonts} rel="stylesheet" />
         <link rel="stylesheet" href={`/stylesheets/${css}.css`} />
       </head>

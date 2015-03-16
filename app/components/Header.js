@@ -31,20 +31,6 @@ let Header = React.createClass({
 
     return (
       <header className={cx}>
-        <div
-          className="masthead"
-          style={{ backgroundColor: mastheadColor }}>
-          <svg
-            className="angle"
-            width="80"
-            height="80"
-            viewBox="0 0 80 80"
-            preserveAspectRatio="none">
-            <g fill={mastheadColor}>
-              <path d="M0,0 L80,0 L80,80" />
-            </g>
-          </svg>
-        </div>
         <a
           className="logo item"
           href={ homeUrl }>
@@ -78,5 +64,4 @@ let Header = React.createClass({
     );
   }
 });
-// <img src="/img/menu-icon.png" />
 export default Header;
