@@ -9,6 +9,10 @@ const { PureRenderMixin } = React.addons;
 let Posts = React.createClass({
   mixins: [PureRenderMixin],
 
+  propTypes: {
+    posts: PropTypes.object.isRequired
+  },
+
   render() {
     let posts = [];
     let { posts: rawPosts } = this.props;

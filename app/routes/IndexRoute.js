@@ -22,12 +22,14 @@ let IndexRoute = React.createClass({
   },
 
   render() {
-    let posts = this.state.posts.toList();
+    let postsArr = this.state.posts.toList();
+    let leadingPost = postsArr.first();
+    let posts = postsArr.shift();
 
     return (
       <div className="index-route">
         <LeadingQuote />
-        <HeroUnit />
+        <HeroUnit post={ leadingPost } />
         <Posts posts={ posts } />
       </div>
     );
