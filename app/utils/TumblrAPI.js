@@ -14,11 +14,34 @@ export default {
   async getPosts() {
     let url = makeUrl("posts");
     let data = await jsonp(url, { apiKey: API_KEY });
+    const posts = camelify(data.response.posts);
 
-    return normalize(data.response.posts, arrayOf(Post));
+    return normalize(posts, arrayOf(Post));
   }
 };
 
-let makeUrl = (resource) => {
+
+const camelify = (posts) => posts.map(post => {
+  return Object.keys(post).reduce((memo, key) => {
+    const sanitized = key.replace(/_([A-Za-z])/g, (str, p) => p.toUpperCase());
+    memo[sanitized] = post[key];
+
+    return memo;
+  }, {});
+});
+
+const underscorify = (posts) => posts.map(post => {
+  return Object.keys(post).reduce((memo, key) => {
+    const sanitized = key.replace(/[a-z][A-Z]/g, (...parts) => {
+      const [str, p1, p2] = parts;
+      return `${p1}_${p2.toLowerCase()()}`;
+    });
+    memo[sanitized] = post[key];
+
+    return memo;
+  });
+});
+
+const makeUrl = (resource) => {
   return ENDPOINT_ROOT + "/" + path.join(TUMBLR, resource);
 };

@@ -55,7 +55,7 @@ eslint:
     no-sequences: 2
     no-var: 2
     generator-star:
-      - 1
+      - 0
       - end
     max-params:
       - 1
