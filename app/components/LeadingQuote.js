@@ -1,10 +1,15 @@
 "use strict";
 
-import React, { addons, PropTypes } from "react";
+import React, { PropTypes } from "react";
 
-const { PureRenderMixin } = addons;
+const { PureRenderMixin } = React.addons;
 
-const LeadingQuote = React.createClass({
+export default class LeadingQuote extends React.Component {
+  shouldComponentUpdate(nextProps, nextState) {
+    return PureRenderMixin.shouldComponentUpdate
+      .call(this, nextProps, nextState);
+  }
+
   render() {
     return (
       <div className="leading-quote">
@@ -14,6 +19,4 @@ const LeadingQuote = React.createClass({
       </div>
     );
   }
-});
-
-export default LeadingQuote;
+};

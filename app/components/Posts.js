@@ -1,34 +1,55 @@
 "use strict";
 
 import Post from "./Post";
-import React from "react/addons";
+import React, { PropTypes } from "react/addons";
 
-const { PropTypes } = React;
 const { PureRenderMixin } = React.addons;
 
-let Posts = React.createClass({
-  mixins: [PureRenderMixin],
+export default class Posts extends React.Component {
+  constructor(props) {
+    super(props);
 
-  propTypes: {
-    posts: PropTypes.object.isRequired
-  },
+    this.state = { width: 0 };
+
+    this.onResize = this.onResize.bind(this);
+  }
+
+  componentDidMount() {
+    window.addEventListener("resize", this.onResize, false);
+    this.onResize();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.onResize);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return PureRenderMixin.shouldComponentUpdate
+      .call(this, nextProps, nextState);
+  }
+
+  onResize(event) {
+    const node = React.findDOMNode(this);
+    const width = node.clientWidth;
+
+    this.setState({ width });
+  }
 
   render() {
-    let posts = [];
-    let { posts: rawPosts } = this.props;
-
-    for (let [id, post] of rawPosts.entries()) {
-      posts.push(
-        <Post key={id} post={post} />
-      );
-    }
+    let { posts } = this.props;
+    let { width } = this.state;
 
     return (
       <div className="posts">
-        { posts }
+        { posts.map((post, key) => {
+          return (
+            <Post
+              key={ key }
+              width={ width }
+              post={ post } />
+          );
+        }) }
       </div>
     );
   }
-});
-
-export default Posts;
+};

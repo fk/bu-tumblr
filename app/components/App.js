@@ -1,36 +1,33 @@
 "use strict";
 
-import Header from "./Header";
-import React from "react/addons";
-import Navigation from "./Navigation";
+import React, { PropTypes } from "react/addons";
+import { RouteHandler } from "react-router";
 import classNames from "classnames";
-import {RouteHandler} from "react-router";
+import Header from "./Header";
+import Navigation from "./Navigation";
 import AppStore from "../stores/AppStore";
+import storeComponent from "../utils/storeComponent";
 import AppActionCreators from "../actions/AppActionCreators";
-import ReactStateMagicMixin from "alt/mixins/ReactStateMagicMixin";
 
-const { PropTypes } = React;
 const { PureRenderMixin, CSSTransitionGroup } = React.addons;
 
-let App = React.createClass({
-  mixins: [PureRenderMixin, ReactStateMagicMixin],
+const getState = (props) => {
+  let { app } = AppStore.getState();
 
-  statics: {
-    registerStore: AppStore
-  },
+  return { app };
+};
 
-  propTypes: {
-    env: PropTypes.string
-  },
+class App extends React.Component {
+  constructor(props) {
+    super(props);
 
-  getDefaultProps() {
-    return { env: "development" };
-  },
+    this.updateScrollState = this.updateScrollState.bind(this);
+  }
 
   componentDidMount() {
     document.addEventListener("scroll", this.updateScrollState, false);
     document.addEventListener("resize", this.updateScrollState, false);
-  },
+  }
 
   updateScrollState(event) {
     let dY = window.pageYOffset !== undefined ?
@@ -42,15 +39,14 @@ let App = React.createClass({
       ).scrollTop;
 
     AppActionCreators.setScrollState(dY);
-  },
+  }
 
   render() {
-    const { env } = this.props;
+    const { env, app } = this.props;
+    const { fixedHeader, navOpen } = app.toJS();
     const css = env === "production" ? "app.min" : "app";
     const bundle = env === "production" ?
       "/bundle.min" : "http://localhost:9000/dist/bundle";
-    const { app } = this.state;
-    const { fixedHeader, navOpen } = app.toJS();
 
     const cx = classNames({
       "fixed-header": fixedHeader,
@@ -83,6 +79,9 @@ let App = React.createClass({
       </html>
     );
   }
-});
+};
 
-export default App;
+App.propTypes = { env: PropTypes.string };
+App.defaultProps = { env: "development" };
+
+export default storeComponent(App, [AppStore], getState);

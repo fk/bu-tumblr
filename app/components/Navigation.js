@@ -2,26 +2,32 @@
 
 import React from "react/addons";
 import AppStore from "../stores/AppStore";
+import storeComponent from "../utils/storeComponent";
 import AppActionCreators from "../actions/AppActionCreators";
-import ReactStateMagicMixin from "alt/mixins/ReactStateMagicMixin";
 
 const { PureRenderMixin, CSSTransitionGroup } = React.addons;
 
-let Navigation = React.createClass({
-  mixins: [PureRenderMixin, ReactStateMagicMixin],
+const getState = (props) => {
+  let { app } = AppStore.getState();
 
-  statics: {
-    registerStore: AppStore
-  },
+  return { app };
+};
+
+class Navigation extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleClickClose = this.handleClickClose.bind(this);
+  }
 
   handleClickClose(event) {
     event.preventDefault();
 
     AppActionCreators.toggleNavigation();
-  },
+  }
 
   render() {
-    let { app } = this.state;
+    let { app } = this.props;
     let { homeUrl } = app.toJS();
 
     return (
@@ -51,6 +57,6 @@ let Navigation = React.createClass({
       </div>
     );
   }
-});
+};
 
-export default Navigation;
+export default storeComponent(Navigation, [AppStore], getState);

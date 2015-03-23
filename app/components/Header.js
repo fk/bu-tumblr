@@ -1,30 +1,41 @@
 "use strict";
 
 import React from "react/addons";
+import classNames from "classnames";
 import AppStore from "../stores/AppStore";
 import AppActionCreators from "../actions/AppActionCreators";
-import ReactStateMagicMixin from "alt/mixins/ReactStateMagicMixin";
+import storeComponent from "../utils/storeComponent";
 
-const { PureRenderMixin, classSet } = React.addons;
+const { PureRenderMixin } = React.addons;
 
-let Header = React.createClass({
-  mixins: [PureRenderMixin, ReactStateMagicMixin],
+const getState = (props) => {
+  let { app } = AppStore.getState();
 
-  statics: {
-    registerStore: AppStore
-  },
+  return { app };
+};
+
+class Header extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleNavToggle = this.handleNavToggle.bind(this);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return PureRenderMixin.shouldComponentUpdate
+      .call(this, nextProps, nextState);
+  }
 
   handleNavToggle(event) {
     event.preventDefault();
     AppActionCreators.toggleNavigation();
-  },
+  }
 
   render() {
-    const { home } = this.props;
-    const { app } = this.state;
+    const { home, app } = this.props;
     const { mastheadColor, homeUrl, fixedHeader } = app.toJS();
 
-    const cx = classSet({
+    const cx = classNames({
       "header": true,
       "fixed": fixedHeader
     });
@@ -63,5 +74,6 @@ let Header = React.createClass({
       </header>
     );
   }
-});
-export default Header;
+};
+
+export default storeComponent(Header, [AppStore], getState);
