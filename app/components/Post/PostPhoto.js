@@ -1,6 +1,7 @@
 "use strict";
 
 import { Map } from "immutable";
+import ShareBox from "../ShareBox";
 import React, { PropTypes } from "react/addons";
 
 const { PureRenderMixin } = React.addons;
@@ -29,12 +30,7 @@ export default class PostPhoto extends React.Component {
         </ul>
         <div className="title-box">
           <h3>{ post.get("title") }</h3>
-          <nav className="social">
-            <a href="#"><i className="fa fa-envelope" /></a>
-            <a href="#"><i className="fa fa-twitter" /></a>
-            <a href="#"><i className="fa fa-retweet" /></a>
-            <a href="#"><i className="fa fa-facebook" /></a>
-          </nav>
+          <ShareBox />
         </div>
       </div>
     );

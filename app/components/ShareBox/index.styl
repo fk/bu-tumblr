@@ -1,0 +1,60 @@
+.social
+  position absolute
+  height 4.125rem
+  line-height 1
+  left 1.625rem
+  bottom -@height * (1/2)
+  cf()
+
+  a
+    position relative
+    display block
+    float left
+    color #fff
+    height 4.125rem
+    width 4.125rem
+    line-height @height
+
+    .cube
+      position relative
+      display block
+      height 4.125rem
+      width 4.125rem
+      transform translate3d(0, 0, -4.125rem / 2)
+      transition transform 275ms ease-in-out
+      transform-style preserve-3d
+
+    &:hover .cube
+      transform translate3d(0, 0, -4.125rem / 2) rotateX(-90deg)
+
+    .face
+      display block
+      position absolute
+      top 0
+      left 0
+      width 100%
+      height 100%
+      backface-visiblity hidden
+
+      &.front
+        background-color #69C29F
+        transform translate3d(0, 0, -4.125rem / 2)
+
+      &.bottom
+        transform rotateX(90deg) translate3d(0, 0, -4.125rem / 2)
+        &.envelope
+          background-color #ed6550
+        &.facebook
+          background-color #3b5998
+        &.retweet
+          background-color #35465c
+        &.twitter
+          background-color #55acee
+
+  .fa
+    height @height
+    width @height
+    text-align center
+    font-size 1.5rem
+    line-height 1
+    height 1.5rem
