@@ -1,7 +1,7 @@
 "use strict";
 
 import alt from "../alt";
-import { OrderedMap, Map, fromJS } from "immutable";
+import { OrderedMap, Map, List, fromJS } from "immutable";
 import AppActionCreators from "../actions/AppActionCreators";
 
 class AppStore {
@@ -12,7 +12,8 @@ class AppStore {
       homeUrl: "http://brooklynunited.com",
       navOpen: false,
       mastheadColor: "#58AEDF",
-      fixedHeader: false
+      fixedHeader: false,
+      viewport: List.of(0, 0, 0, 0)
     });
 
     this.on("init", this.setup);
@@ -27,8 +28,9 @@ class AppStore {
     }
   }
 
-  onSetScrollState(dY) {
-    this.app = this.app.set("fixedHeader", dY > 465);
+  onSetScrollState({x, y, w, h}) {
+    this.app = this.app.set("fixedHeader", y > 465);
+    this.app = this.app.set("viewport", List.of(x, y, w, h));
   }
 
   onToggleNavigation() {

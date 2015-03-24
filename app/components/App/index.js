@@ -11,12 +11,6 @@ import AppActionCreators from "../../actions/AppActionCreators";
 
 const { PureRenderMixin, CSSTransitionGroup } = React.addons;
 
-const getState = (props) => {
-  let { app } = AppStore.getState();
-
-  return { app };
-};
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -27,18 +21,11 @@ class App extends React.Component {
   componentDidMount() {
     document.addEventListener("scroll", this.updateScrollState, false);
     document.addEventListener("resize", this.updateScrollState, false);
+    this.updateScrollState();
   }
 
   updateScrollState(event) {
-    let dY = window.pageYOffset !== undefined ?
-      window.pageYOffset :
-      (
-        document.documentElement ||
-        document.body.parentNode ||
-        document.body
-      ).scrollTop;
-
-    AppActionCreators.setScrollState(dY);
+    AppActionCreators.setScrollState(getViewport());
   }
 
   render() {
@@ -83,5 +70,39 @@ class App extends React.Component {
 
 App.propTypes = { env: PropTypes.string };
 App.defaultProps = { env: "development" };
+
+const getState = (props) => {
+  let { app } = AppStore.getState();
+
+  return { app };
+};
+
+const getViewport = () => {
+  let y = window.pageYOffset !== undefined ?
+    window.pageYOffset :
+    (
+      document.documentElement ||
+      document.body.parentNode ||
+      document.body
+    ).scrollTop;
+
+  let x = window.pageXOffset !== undefined ?
+    window.pageYOffset :
+    (
+      document.documentElement ||
+      document.body.parentNode ||
+      document.body
+    ).scrollLeft;
+
+    var w = window.innerWidth ||
+      document.documentElement.clientWidth ||
+      document.body.clientWidth;
+
+    var h = window.innerHeight ||
+      document.documentElement.clientHeight ||
+      document.body.clientHeight;
+
+    return { x, y, w, h };
+};
 
 export default storeComponent(App, [AppStore], getState);
