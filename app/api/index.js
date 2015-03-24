@@ -2,8 +2,8 @@
 
 import koa from "koa";
 import { join } from "path";
-import alt from "../app/alt";
-import routes from "../app/routes";
+import alt from "../alt";
+import routes from "../routes";
 import compress from "koa-compress";
 import serveStatic from "koa-static";
 import isomorphic from "koa-isomorphic";
@@ -17,7 +17,7 @@ let app = koa();
 
 app.use(compress());
 app.use(bodyparser());
-app.use(serveStatic(join(__dirname, "../public")));
+app.use(serveStatic(join(__dirname, "../../public")));
 app.use(isomorphic({ alt, routes }));
 
 app.listen(PORT, (err) => {

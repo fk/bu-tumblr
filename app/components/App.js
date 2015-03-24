@@ -79,7 +79,7 @@ class App extends React.Component {
       </html>
     );
   }
-};
+}
 
 App.propTypes = { env: PropTypes.string };
 App.defaultProps = { env: "development" };

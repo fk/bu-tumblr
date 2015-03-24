@@ -74,6 +74,6 @@ class Header extends React.Component {
       </header>
     );
   }
-};
+}
 
 export default storeComponent(Header, [AppStore], getState);

@@ -57,6 +57,6 @@ class Navigation extends React.Component {
       </div>
     );
   }
-};
+}
 
 export default storeComponent(Navigation, [AppStore], getState);
