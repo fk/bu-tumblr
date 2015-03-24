@@ -1,7 +1,7 @@
 "use strict";
 
-import Post from "./Post";
 import React, { PropTypes } from "react/addons";
+import Post from "../Post";
 
 const { PureRenderMixin } = React.addons;
 

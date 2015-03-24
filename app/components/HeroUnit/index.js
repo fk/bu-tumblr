@@ -1,6 +1,6 @@
 "use strict";
 
-import Post from "./Post";
+import Post from "../Post";
 import { Link } from "react-router";
 import warning from "react/lib/warning";
 import { OrderedMap, Map } from "immutable";
@@ -68,9 +68,11 @@ export default class HeroUnit extends React.Component {
             </ul>
           </nav>
         </div>
-        <Post
-          post={ post }
-          width={ width } />
+        <div className="hero-unit-post">
+          <Post
+            post={ post }
+            width={ width } />
+        </div>
         <svg
           viewBox="0 0 100 100"
           className="backer"

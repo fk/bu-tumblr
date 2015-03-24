@@ -1,9 +1,9 @@
 "use strict";
 
 import React from "react/addons";
-import AppStore from "../stores/AppStore";
-import storeComponent from "../utils/storeComponent";
-import AppActionCreators from "../actions/AppActionCreators";
+import AppStore from "../../stores/AppStore";
+import storeComponent from "../../utils/storeComponent";
+import AppActionCreators from "../../actions/AppActionCreators";
 
 const { PureRenderMixin, CSSTransitionGroup } = React.addons;
 

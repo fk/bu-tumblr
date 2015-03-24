@@ -1,6 +1,7 @@
 "use strict";
 
 import { Map } from "immutable";
+import classNames from "classnames";
 import PostPhoto from "./PostPhoto";
 import React, { PropTypes } from "react/addons";
 
@@ -14,12 +15,17 @@ export default class Post extends React.Component {
   render() {
     const { post } = this.props;
     const Component = getPostComponent(post);
+    const cx = classNames({
+      "post": true,
+      [`post-${post.get("type")}`]: true
+    });
 
     return (
       <Component
         { ...this.props }
         { ...this.state }
-        post={ post } />
+        post={ post }
+        className={ cx } />
     );
   }
 };

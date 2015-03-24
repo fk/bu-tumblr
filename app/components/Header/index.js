@@ -2,9 +2,9 @@
 
 import React from "react/addons";
 import classNames from "classnames";
-import AppStore from "../stores/AppStore";
-import AppActionCreators from "../actions/AppActionCreators";
-import storeComponent from "../utils/storeComponent";
+import AppStore from "../../stores/AppStore";
+import AppActionCreators from "../../actions/AppActionCreators";
+import storeComponent from "../../utils/storeComponent";
 
 const { PureRenderMixin } = React.addons;
 

@@ -16,14 +16,14 @@ export default class PostPhoto extends React.Component {
   }
 
   render() {
-    const { post, width } = this.props;
+    const { post, width, className } = this.props;
     const style = { width };
     const { photosetLayout, photos } = post.toJS();
 
     return (
       <div
         style={ style }
-        className="hero-unit-post">
+        className={ className }>
         <ul className="photos">
           { getPhotos(photos, photosetLayout) }
         </ul>

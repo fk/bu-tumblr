@@ -3,11 +3,11 @@
 import React, { PropTypes } from "react/addons";
 import { RouteHandler } from "react-router";
 import classNames from "classnames";
-import Header from "./Header";
-import Navigation from "./Navigation";
-import AppStore from "../stores/AppStore";
-import storeComponent from "../utils/storeComponent";
-import AppActionCreators from "../actions/AppActionCreators";
+import Header from "../Header";
+import Navigation from "../Navigation";
+import AppStore from "../../stores/AppStore";
+import storeComponent from "../../utils/storeComponent";
+import AppActionCreators from "../../actions/AppActionCreators";
 
 const { PureRenderMixin, CSSTransitionGroup } = React.addons;
 
