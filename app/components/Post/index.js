@@ -14,6 +14,7 @@ class Post extends React.Component {
   constructor(props) {
     super(props);
 
+    this.animation = false;
     this.state = { inViewport: false };
     this.onAdjust = this.onAdjust.bind(this);
   }
@@ -24,38 +25,37 @@ class Post extends React.Component {
   }
 
   componentDidMount() {
-    window.addEventListener("scroll", this.onAdjust, false);
-    window.addEventListener("resize", this.onAdjust, false);
     this.onAdjust();
+    this.animation = requestAnimationFrame(this.onAdjust);
   }
 
   componentWillUnmount() {
-    window.removeEventListener("scroll", this.onAdjust);
-    window.removeEventListener("resize", this.onAdjust);
+    this.animation = cancelAnimationFrame(this.animation);
   }
 
   onAdjust() {
     const { viewport } = this.props;
-    const [x, y, width, height] = viewport.toArray();
     const node = React.findDOMNode(this);
+    const inViewport = getInViewport(node);
 
-
-    let inViewport = getInViewport([x, y, width, height]);
-
-    this.setState({ inViewport });
+    this.setState({ inViewport }, () => {
+      this.animation = requestAnimationFrame(this.onAdjust);
+    });
   }
 
   render() {
-    const { post, viewport } = this.props;
+    const { inViewport } = this.state;
+    const { post, viewport, ...otherProps } = this.props;
     const Component = getPostComponent(post);
     const cx = classNames({
       "post": true,
-      [`post-${post.get("type")}`]: true
+      [`post-${post.get("type")}`]: true,
+      "in-viewport": inViewport
     });
 
     return (
       <Component
-        { ...this.props }
+        { ...otherProps }
         { ...this.state }
         post={ post }
         className={ cx } />
@@ -63,8 +63,19 @@ class Post extends React.Component {
   }
 };
 
-const getInViewport = (x, y, width, height) => {
+const getInViewport = (node) => {
+  let rect = node.getBoundingClientRect();
+  let windowHeight = window.innerHeight ||
+    document.documentElement.clientHeight;
+  let windowWidth = window.innerWidth ||
+    document.documentElement.clientWidth
 
+  return (
+    rect.bottom >= 0 &&
+    rect.right >= 0 &&
+    rect.top <= windowHeight &&
+    rect.left <= windowWidth
+  );
 };
 
 const getStoreStates = (params) => {
@@ -91,11 +102,10 @@ Post.propTypes = {
         "Expected Post.props.post to be an instance of Map() and to have " +
         "a \"type\" property."
       );
+
+      return null;
     }
-  }),
-  viewport(props, propName, componentName) {
-    // console.log(props, propName, componentName);
-  }
+  })
 };
 
 export default storeComponent(Post, [AppStore], getStoreStates);

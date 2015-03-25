@@ -8,19 +8,6 @@ const { PureRenderMixin } = React.addons;
 export default class Posts extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = { width: 0 };
-
-    this.onResize = this.onResize.bind(this);
-  }
-
-  componentDidMount() {
-    window.addEventListener("resize", this.onResize, false);
-    this.onResize();
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.onResize);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -28,16 +15,8 @@ export default class Posts extends React.Component {
       .call(this, nextProps, nextState);
   }
 
-  onResize(event) {
-    const node = React.findDOMNode(this);
-    const width = node.clientWidth;
-
-    this.setState({ width });
-  }
-
   render() {
     let { posts } = this.props;
-    let { width } = this.state;
 
     return (
       <div className="posts">
@@ -45,7 +24,6 @@ export default class Posts extends React.Component {
           return (
             <Post
               key={ key }
-              width={ width }
               post={ post } />
           );
         }) }

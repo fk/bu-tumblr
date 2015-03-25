@@ -2,6 +2,7 @@
 
 import { Map } from "immutable";
 import ShareBox from "../ShareBox";
+import warning from "react/lib/warning";
 import React, { PropTypes } from "react/addons";
 
 const { PureRenderMixin } = React.addons;
@@ -37,8 +38,18 @@ export default class PostPhoto extends React.Component {
 
 PostPhoto.propTypes = {
   post(props, propName, component) {
-    return Map.isMap(props);
-  }
+    let post = props[propName];
+
+    warning(
+      Map.isMap(post),
+      "Expected map to be an instance of an Immutable.Map, received %s",
+      typeof post
+    );
+
+    return null;
+  },
+  inViewport: PropTypes.bool.isRequired,
+  className: PropTypes.string
 };
 
 const getIndex = (memo, row) => {
