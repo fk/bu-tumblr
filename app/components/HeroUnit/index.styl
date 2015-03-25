@@ -6,7 +6,11 @@
   display block
   position relative
   padding 0 0.625rem
-  cf()
+  width 100%
+
+  .hero-wrapper
+    display table
+    width: 100%
 
   .title-box
     background-color #333
@@ -36,9 +40,9 @@
       fill #E5E5E5
 
   .intro
+    display table-cell
     width 25rem
     text-align right
-    float left
     cf()
 
     .we-are, .hashtags
@@ -77,7 +81,7 @@
         text-decoration none
 
   .hero-unit-post
+    display table-cell
     position relative
-    float left
     height 75vh
-    margin-left 0.625rem
+    padding-left 0.625rem

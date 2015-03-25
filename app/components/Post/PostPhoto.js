@@ -17,13 +17,11 @@ export default class PostPhoto extends React.Component {
   }
 
   render() {
-    const { post, width, className } = this.props;
-    const style = { width };
+    const { post, className } = this.props;
     const { photosetLayout, photos } = post.toJS();
 
     return (
       <div
-        style={ style }
         className={ className }>
         <ul className="photos">
           { getPhotos(photos, photosetLayout) }
@@ -38,7 +36,6 @@ export default class PostPhoto extends React.Component {
 };
 
 PostPhoto.propTypes = {
-  width: PropTypes.number.isRequired,
   post(props, propName, component) {
     return Map.isMap(props);
   }
