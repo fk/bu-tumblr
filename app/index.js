@@ -7,7 +7,7 @@ import React from "react";
 import router from "./router";
 import RouterActionCreators from "./actions/RouterActionCreators";
 
-let bootstrapped = false;
+let bootstrapping = true;
 let { snapshot } = window;
 alt.bootstrap(snapshot);
 
@@ -22,7 +22,9 @@ async function fetchData(state) {
   let routes = state.routes.filter(route => route.handler.fetchData);
   let data = {};
 
-  if (!bootstrapped) {
+  if (!bootstrapping) {
+    bootstrapping = false;
+
     return true;
   }
 
@@ -35,8 +37,6 @@ async function fetchData(state) {
     }
     catch (err) { }
   }
-
-  bootstrapped = true;
 
   return data;
 }

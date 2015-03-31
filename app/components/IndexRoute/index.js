@@ -31,7 +31,9 @@ class IndexRoute extends React.Component {
 };
 
 const getState = () => {
-  const { posts } = PostStore.getState();
+  let { posts } = PostStore.getState();
+
+  posts = posts.sort((a, b) => a.get("id") < b.get("id") ? 1 : -1);
 
   return { posts };
 };

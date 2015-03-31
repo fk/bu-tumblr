@@ -16,7 +16,7 @@ export default function(Component, stores, getState) {
         return Component.fetchData(props);
       }
       catch (err) {
-        Promise.reject(err);
+        return true;
       }
     }
 

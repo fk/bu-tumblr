@@ -19,12 +19,7 @@ class NoteBox extends React.Component {
   render() {
     return (
       <ul className="note-box">
-        { this.props.notes.map(note => {
-          console.log(note);
-          return (
-            <li></li>
-          );
-        }) }
+
       </ul>
     );
   }
