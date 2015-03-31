@@ -1,10 +1,11 @@
 "use strict";
 
+import React, { PropTypes } from "react/addons";
+import { Link } from "react-router";
 import { Map } from "immutable";
-import HeroBox from "./TitleBox";
 import warning from "react/lib/warning";
 import classNames from "classnames";
-import React, { PropTypes } from "react/addons";
+import HeroBox from "./TitleBox";
 
 const { PureRenderMixin } = React.addons;
 
@@ -56,9 +57,13 @@ export default class PostPhoto extends React.Component {
     return (
       <div
         className={ className }>
-        <ul className="photos">
-          { photos.map(this.renderPhoto) }
-        </ul>
+        <Link
+          to="post"
+          params={{ postId: post.get("id") }}>
+          <ul className="photos">
+            { photos.map(this.renderPhoto) }
+          </ul>
+        </Link>
         <HeroBox post={ post } />
       </div>
     );

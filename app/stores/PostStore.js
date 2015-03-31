@@ -24,6 +24,10 @@ class PostStore {
     }
   }
 
+  static getById(id) {
+    // console.log(id, this.posts);
+  }
+
   onGetPosts() {
 
   }

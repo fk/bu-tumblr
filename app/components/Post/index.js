@@ -38,13 +38,18 @@ class Post extends React.Component {
   }
 
   onAdjust() {
-    const { viewport } = this.props;
-    const node = React.findDOMNode(this);
-    const inViewport = getInViewport(node);
+    try {
+      const { viewport } = this.props;
+      const node = React.findDOMNode(this);
+      const inViewport = getInViewport(node);
 
-    this.setState({ inViewport }, () => {
-      this.animation = requestAnimationFrame(this.onAdjust);
-    });
+      this.setState({ inViewport }, () => {
+        this.animation = requestAnimationFrame(this.onAdjust);
+      });
+    }
+    catch (err) {
+      return false;
+    }
   }
 
   render() {
