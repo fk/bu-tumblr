@@ -1,17 +1,18 @@
 "use strict";
 
 var gulp = require("gulp");
-var mocha = require("gulp-mocha");
+var mocha = require("gulp-spawn-mocha");
 var plumber = require("gulp-plumber");
 
 module.exports = {
   taskName: "mocha",
   dependencies: ["del"],
   task: function() {
-    require("babel/register")({ experimental: true });
     gulp.src("./tests/**/*Test.js", { read: false })
       .pipe(plumber())
-      .pipe(mocha());
+      .pipe(mocha({
+        compilers: "babel:babel/register"
+      }));
   },
 
   watch: function() {

@@ -5,6 +5,10 @@ import warning from "react/lib/warning";
 import classNames from "classnames";
 import { Map, List } from "immutable";
 import PostPhoto from "./PostPhoto";
+import PostLink from "./PostLink";
+import PostQuote from "./PostQuote";
+import PostText from "./PostText";
+import PostVideo from "./PostVideo";
 import AppStore from "../../stores/AppStore";
 import storeComponent from "../../utils/storeComponent";
 
@@ -89,8 +93,19 @@ const getPostComponent = (post) => {
     const postType = post.get("type");
 
     switch (postType) {
+      case "text":
+        return PostText;
+      case "video":
+        return PostVideo;
+      case "link":
+        return PostLink;
+      case "quote":
+        return PostQuote;
       case "photo":
         return PostPhoto;
+      default:
+        console.warn(post.get("type"), "is unhandled.");
+        return false;
     }
 };
 

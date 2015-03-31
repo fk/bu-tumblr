@@ -1,8 +1,9 @@
 "use strict";
 
 import { Map } from "immutable";
-import ShareBox from "../ShareBox";
+import HeroBox from "./TitleBox";
 import warning from "react/lib/warning";
+import classNames from "classnames";
 import React, { PropTypes } from "react/addons";
 
 const { PureRenderMixin } = React.addons;
@@ -10,6 +11,8 @@ const { PureRenderMixin } = React.addons;
 export default class PostPhoto extends React.Component {
   constructor(props) {
     super(props);
+
+    this.renderPhoto = this.renderPhoto.bind(this);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -17,20 +20,46 @@ export default class PostPhoto extends React.Component {
       .call(this, nextProps, nextState);
   }
 
+  renderPhoto(photo, key, array) {
+    const { post } = this.props;
+    const { photosetLayout } = post.toJS();
+    let flex = 1;
+    let height = 1;
+
+    if (photosetLayout) {
+      let rows = photosetLayout.split("");
+      let flexList = rows.map(n => parseInt(n, 10))
+        .reduce((memo, n) => {
+          return memo.concat(Array.from({ length: n }, o => n));
+        }, []);
+
+      height = rows.length;
+      flex = flexList[key];
+    }
+
+    let styles = {
+      backgroundImage: `url("${photo.alt_sizes[0].url}")`
+    };
+
+    return (
+      <li
+        key={ key }
+        className={ `photo flex-${flex} height-${height}` }
+        style={ styles } />
+    );
+  }
+
   render() {
     const { post, className } = this.props;
-    const { photosetLayout, photos } = post.toJS();
+    const { photos } = post.toJS();
 
     return (
       <div
         className={ className }>
         <ul className="photos">
-          { getPhotos(photos, photosetLayout) }
+          { photos.map(this.renderPhoto) }
         </ul>
-        <div className="title-box">
-          <h3>{ post.get("title") }</h3>
-          <ShareBox />
-        </div>
+        <HeroBox post={ post } />
       </div>
     );
   }
@@ -55,34 +84,3 @@ PostPhoto.propTypes = {
 const getIndex = (memo, row) => {
   return memo + row.props.children.length;
 };
-
-const getPhotos = (photos, layout) => (layout || "1").split("")
-  .reduce((...parts) => {
-    const [memo, row, key, rows] = parts;
-    let chunk = [];
-
-    for (let i = 0; i < row; i++) {
-      const index = memo.reduce(getIndex, i);
-      let backgroundImage = photos[index].original_size.url;
-
-      chunk.push(
-        <div
-          key={ `row-${row}-image-${i}` }
-          className={ `photo-layout photo-layout-${row}` }>
-          <figure
-            className="photo-figure"
-            style={{ backgroundImage: `url("${backgroundImage}")` }} />
-        </div>
-      );
-    }
-
-    let setRow = (
-      <li
-        key={key}
-        className={ `photoset-row row-${rows.length}` }>
-        { chunk }
-      </li>
-    );
-
-    return memo.concat([setRow]);
-  }, []);

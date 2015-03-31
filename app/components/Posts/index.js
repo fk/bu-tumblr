@@ -23,6 +23,7 @@ export default class Posts extends React.Component {
         { posts.map((post, key) => {
           return (
             <Post
+              className={ `post post-${post.get("type")}` }
               key={ key }
               post={ post } />
           );

@@ -2,6 +2,7 @@
 
 var gulp = require("gulp");
 var gif = require("gulp-if");
+var watch = require('gulp-watch');
 var concat = require("gulp-concat");
 var stylus = require("gulp-stylus");
 var plumber = require("gulp-plumber");
@@ -42,6 +43,6 @@ module.exports = {
 
   watch: function() {
     this.task();
-    gulp.watch(["./app/**/*.styl"], this.task);
+    watch(["./app/**/*.styl"], this.task);
   }
 };
