@@ -1,6 +1,7 @@
 "use strict";
 
 import React, { PropTypes } from "react/addons";
+import warning from "react/lib/warning";
 import PostStore from "../stores/PostStore";
 import RouterStore from "../stores/RouterStore";
 import storeComponent from "../utils/storeComponent";
@@ -18,6 +19,8 @@ class PostRoute extends React.Component {
   }
 
   render() {
+    let { router } = this.props;
+
     return (
       <div className="post-route">
 
@@ -26,12 +29,12 @@ class PostRoute extends React.Component {
   }
 };
 
-const getState = props => {
+const getState = () => {
   let { router } = RouterStore.getState();
-  // let { postId } = router.get("params");
-  // let post = PostStore.getById(postId);
+  let postId = router.getIn(["params", "postId"]);
+  let post = PostStore.getById(postId);
 
-  // return { post };
+  return { router };
 };
 
 export default storeComponent(PostRoute, [PostStore, RouterStore], getState);
