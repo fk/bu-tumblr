@@ -82,26 +82,12 @@ class PostRoute extends React.Component {
           { noteCount > 0 &&
             <span className="note-count">{ noteCount } notes</span>
           }
-          { noteCount > 0 &&
-            <NoteBox notes={ post.get("notes") } />
-          }
         </div>
+        { noteCount > 0 &&
+          <NoteBox notes={ post.get("notes") } />
+        }
       </div>
     );
-  }
-};
-
-PostRoute.propTypes = {
-  post(props, propName, componentName) {
-    let post = props[propName];
-
-    warning(
-      OrderedMap.isOrderedMap(post) && post.has("type"),
-      `${componentName}.props.${propName} should be an OrderedMap with a "type" ` +
-      `property.`
-    );
-
-    return null;
   }
 };
 

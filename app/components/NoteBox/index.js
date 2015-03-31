@@ -17,9 +17,20 @@ class NoteBox extends React.Component {
   }
 
   render() {
+    let { notes } = this.props;
+
     return (
       <ul className="note-box">
-
+        { notes.map((note, key) => {
+          console.log(note.toJS());
+          return (
+            <li
+              className="note"
+              key={ key }>
+              <span>{ note.get("blog_name") }</span>
+            </li>
+          );
+        }) }
       </ul>
     );
   }
@@ -31,7 +42,7 @@ NoteBox.propTypes = {
 
     warning(
       List.isList(notes),
-      `${componentName}.props.${propName} expects an immutable List.`
+      `${componentName}.props.${propName} should be an immutable List.`
     );
 
     return null;

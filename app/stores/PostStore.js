@@ -37,22 +37,7 @@ class PostStore {
   onGetPostsSuccess(resp = {}) {
     let { posts } = resp.entities;
 
-    Object.keys(posts).forEach(id => {
-      let post = posts[id];
-      let { tags } = post;
-
-      post.tags = tags.filter(tag => {
-        if (/^_post\./.test(tag)) {
-          let [prop, value] = tag.split(".").pop().split(":");
-
-          post[prop] = value;
-
-          return false;
-        }
-
-        return true;
-      });
-    });
+    posts = sanitize(posts);
 
     this.posts = this.posts.merge(posts);
   }
@@ -68,6 +53,8 @@ class PostStore {
   onGetPostSuccess(resp = {}) {
     let { posts } = resp.entities;
 
+    posts = sanitize(posts);
+
     this.posts = this.posts.merge(posts);
   }
 
@@ -76,6 +63,28 @@ class PostStore {
       warning(err, "Get post error");
     }
   }
+}
+
+const sanitize = (posts) => {
+  return Object.keys(posts).reduce((memo, id) => {
+    let post = posts[id];
+    let { tags } = post;
+
+    post.tags = tags.filter(tag => {
+      if (/^_post\./.test(tag)) {
+        let [prop, value] = tag.split(".").pop().split(":");
+
+        post[prop] = value;
+
+        return false;
+      }
+
+      return true;
+    });
+
+    memo[id] = post;
+    return memo;
+  }, {});
 }
 
 export default alt.createStore(PostStore, "PostStore");
