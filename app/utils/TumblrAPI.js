@@ -17,6 +17,20 @@ export default {
     const posts = camelify(data.response.posts);
 
     return normalize(posts, arrayOf(Post));
+  },
+
+  async getPost(postId) {
+    let url = makeUrl("posts");
+    let params = {
+      apiKey: API_KEY,
+      id: postId,
+      reblogInfo: true,
+      notesInfo: true
+    };
+    let data = await jsonp(url, params);
+    const posts = camelify(data.response.posts);
+
+    return normalize(posts, arrayOf(Post));
   }
 };
 

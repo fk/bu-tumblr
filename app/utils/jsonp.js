@@ -11,7 +11,7 @@ function makeUrl(url, params) {
         return `${p1}_${p2.toLowerCase()}`;
       });
 
-      memo += `${underscored}=${encodeURIComponent(params[param])}`;
+      memo += `&${underscored}=${encodeURIComponent(params[param])}`;
       return memo;
     }, "");
   }

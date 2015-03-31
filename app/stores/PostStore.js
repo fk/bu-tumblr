@@ -25,7 +25,9 @@ class PostStore {
   }
 
   static getById(id) {
-    // console.log(id, this.posts);
+    let { posts } = this.getState();
+
+    return posts.get(id);
   }
 
   onGetPosts() {

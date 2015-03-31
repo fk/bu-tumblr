@@ -17,8 +17,6 @@ html
   min-height 100%
   border 10px solid #fff
 
-  +below(DISPLAY_LARGE)
-    font-size 14px
 
 
 body
@@ -28,6 +26,7 @@ body
   font-smoothing antialiased
   font-size 16px
   padding-bottom 4rem
+  font-family "proxima-nova", Helvetica, Arial, sans-serif
 
   &.navigation-open
     background-color #ddd
@@ -50,7 +49,20 @@ button
   &:focus
     outline none
 
+h2
+  font-size 1rem * (36 / 16)
+
 ul
   list-style none
   margin 0
   padding 0
+
+.go-back
+  position relative
+  display block
+  color #58AEDF
+  z-index 1000
+  text-decoration none
+  text-transform uppercase
+  font-size 1rem
+  margin 4rem 2rem

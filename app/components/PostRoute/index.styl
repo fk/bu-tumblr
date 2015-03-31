@@ -1,0 +1,85 @@
+@import "nib"
+@import "jeet"
+@import "rupture"
+
+.post-route
+  position relative
+  padding-bottom 5.125rem
+  color #fff
+
+  .backer
+    background-color #E5E5E5
+    position absolute
+    top 7.625rem
+    right 0
+    bottom 0
+    left 0
+
+    svg
+      position absolute
+      height 7.625rem * (3/4)
+      top -@height
+      left 0
+      width 100%
+      g
+        fill @background-color
+        width 100%
+
+  .post-column
+    background-color #333
+    padding 5.125rem 4.5rem
+    max-width 51.5rem
+    margin 3.25rem auto 0
+    position relative
+
+    .post-caption
+      display block
+      margin-top 5.25rem
+
+      p
+        font-size 1rem * (14/16)
+        line-height 1rem * (24/16)
+
+    .social
+      bottom auto
+      top -4.125rem * (1/2)
+
+    .post-photo, .post-video
+      position relative
+      top 0
+      left 50%
+      transform translate3d(-50%, 0, 0)
+      padding 0 1rem
+      width 100vw
+      max-width 95rem
+
+  .note-band
+    width 100%
+    margin 0 auto
+    max-width 51.5rem
+    padding 1rem
+    z-index 1000
+    color #333333
+    background-color #F1F1F1
+    transform translateZ(0)
+    cf()
+
+    .tag-list
+      opacity 0.5
+      col(9/12)
+      float left
+
+      a
+        text-decoration none
+        color #333
+
+        & + a::before
+          content ', '
+
+    .note-count
+      position relative
+      col(3/12)
+      float right
+      text-transform uppercase
+      opacity 0.5
+      text-align right

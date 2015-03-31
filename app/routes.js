@@ -1,9 +1,9 @@
 import React from "react";
 import {Route, DefaultRoute} from "react-router";
 
-import App from "../components/App";
-import IndexRoute from "./IndexRoute";
-import PostRoute from "./PostRoute";
+import App from "./components/App";
+import IndexRoute from "./components/IndexRoute";
+import PostRoute from "./components/PostRoute";
 
 /* eslint-disable */
 const routes = (

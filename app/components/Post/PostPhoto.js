@@ -5,7 +5,7 @@ import { Link } from "react-router";
 import { Map } from "immutable";
 import warning from "react/lib/warning";
 import classNames from "classnames";
-import HeroBox from "./TitleBox";
+import TitleBox from "./TitleBox";
 
 const { PureRenderMixin } = React.addons;
 
@@ -51,7 +51,7 @@ export default class PostPhoto extends React.Component {
   }
 
   render() {
-    const { post, className } = this.props;
+    const { post, className, single } = this.props;
     const { photos } = post.toJS();
 
     return (
@@ -64,10 +64,16 @@ export default class PostPhoto extends React.Component {
             { photos.map(this.renderPhoto) }
           </ul>
         </Link>
-        <HeroBox post={ post } />
+        {!single &&
+          <TitleBox post={ post } />
+        }
       </div>
     );
   }
+};
+
+PostPhoto.defaultProps = {
+  single: false
 };
 
 PostPhoto.propTypes = {
@@ -83,7 +89,8 @@ PostPhoto.propTypes = {
     return null;
   },
   inViewport: PropTypes.bool.isRequired,
-  className: PropTypes.string
+  className: PropTypes.string,
+  single: PropTypes.bool
 };
 
 const getIndex = (memo, row) => {

@@ -1,12 +1,12 @@
 "use strict";
 
 import React from "react/addons";
-import Posts from "../components/Posts";
-import PostStore from "../stores/PostStore";
-import HeroUnit from "../components/HeroUnit";
-import LeadingQuote from "../components/LeadingQuote";
-import PostActionCreators from "../actions/PostActionCreators";
-import storeComponent from "../utils/storeComponent";
+import Posts from "../Posts";
+import HeroUnit from "../HeroUnit";
+import LeadingQuote from "../LeadingQuote";
+import PostActionCreators from "../../actions/PostActionCreators";
+import PostStore from "../../stores/PostStore";
+import storeComponent from "../../utils/storeComponent";
 
 const { PureRenderMixin } = React.addons;
 

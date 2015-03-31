@@ -95,23 +95,23 @@ const getStoreStates = (params) => {
 };
 
 const getPostComponent = (post) => {
-    const postType = post.get("type");
+  const postType = post.get("type");
 
-    switch (postType) {
-      case "text":
-        return PostText;
-      case "video":
-        return PostVideo;
-      case "link":
-        return PostLink;
-      case "quote":
-        return PostQuote;
-      case "photo":
-        return PostPhoto;
-      default:
-        console.warn(post.get("type"), "is unhandled.");
-        return false;
-    }
+  switch (postType) {
+    case "text":
+      return PostText;
+    case "video":
+      return PostVideo;
+    case "link":
+      return PostLink;
+    case "quote":
+      return PostQuote;
+    case "photo":
+      return PostPhoto;
+    default:
+      console.warn(post.get("type"), "is unhandled.");
+      return false;
+  }
 };
 
 Post.propTypes = {

@@ -26,7 +26,7 @@ class PostActionCreators {
     let type = Object.prototype.toString.call(id);
 
     invariant(
-      type === "[object Number]",
+      type === "[object String]",
       "PostActionCreators.getPost(...): Please provide a valid number id. " +
       "Received `%s`",
       type
