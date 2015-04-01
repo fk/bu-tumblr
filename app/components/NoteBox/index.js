@@ -1,10 +1,16 @@
 "use strict";
 
 import React, { PropTypes } from "react/addons";
+import { Link } from "react-router";
 import warning from "react/lib/warning";
 import { List } from "immutable";
 
 const { PureRenderMixin } = React.addons;
+
+const ACTION_MAP = {
+  like: "likes",
+  reblog: "reblogged"
+};
 
 class NoteBox extends React.Component {
   constructor(props) {
@@ -22,12 +28,25 @@ class NoteBox extends React.Component {
     return (
       <ul className="note-box">
         { notes.map((note, key) => {
-          console.log(note.toJS());
+          let name = `${note.get("blog_name")}.tumblr.com`;
+          let avatar = `http://api.tumblr.com/v2/blog/${name}/avatar/16`;
+          let action = ACTION_MAP[note.get("type")];
           return (
             <li
               className="note"
               key={ key }>
-              <span>{ note.get("blog_name") }</span>
+              <img
+                className="avatar"
+                src={ avatar } />
+              <a
+                href={ note.get("blog_url") }
+                className="blog-name">
+                { note.get("blog_name") }
+              </a>
+              <span className="action">{ action } this</span>
+              { note.get("type") === "reblog" &&
+                <span className="from-statement">from <Link to="/">Brooklyn United</Link></span>
+              }
             </li>
           );
         }) }

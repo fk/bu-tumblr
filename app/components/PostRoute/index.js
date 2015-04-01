@@ -69,20 +69,22 @@ class PostRoute extends React.Component {
           }
           <ShareBox />
         </div>
-        <div className="note-band">
-          { tags.size > 0 &&
-            <span className="tag-list">
-              # { tags.map(tag => {
-                return (
-                  <Link to="/">{ tag.toUpperCase() }</Link>
-                );
-              }) }
-            </span>
-          }
-          { noteCount > 0 &&
-            <span className="note-count">{ noteCount } notes</span>
-          }
-        </div>
+        { (tags.size > 0 || noteCount > 0) &&
+          <div className="note-band">
+            { tags.size > 0 &&
+              <span className="tag-list">
+                # { tags.map(tag => {
+                  return (
+                    <Link to="/">{ tag.toUpperCase() }</Link>
+                  );
+                }) }
+              </span>
+            }
+            { noteCount > 0 &&
+              <span className="note-count">{ noteCount } notes</span>
+            }
+          </div>
+        }
         { noteCount > 0 &&
           <NoteBox notes={ post.get("notes") } />
         }

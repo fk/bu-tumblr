@@ -14,6 +14,7 @@ export default class PostPhoto extends React.Component {
     super(props);
 
     this.renderPhoto = this.renderPhoto.bind(this);
+    this.handlePhotoClick = this.handlePhotoClick.bind(this);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -21,8 +22,20 @@ export default class PostPhoto extends React.Component {
       .call(this, nextProps, nextState);
   }
 
+  handlePhotoClick(photo) {
+    const { single } = this.props;
+    let photos = this.props.post.get("photos");
+
+    return (event) => {
+      if (single) {
+        event.preventDefault();
+
+      }
+    };
+  }
+
   renderPhoto(photo, key, array) {
-    const { post } = this.props;
+    const { post, single } = this.props;
     const { photosetLayout } = post.toJS();
     let flex = 1;
     let height = 1;
@@ -39,12 +52,13 @@ export default class PostPhoto extends React.Component {
     }
 
     let styles = {
-      backgroundImage: `url("${photo.alt_sizes[0].url}")`
+      backgroundImage: `url("${photo.getIn(["alt_sizes", 0, "url"])}")`
     };
 
     return (
       <li
         key={ key }
+        onClick={ this.handlePhotoClick(photo) }
         className={ `photo flex-${flex} height-${height}` }
         style={ styles } />
     );
@@ -52,18 +66,25 @@ export default class PostPhoto extends React.Component {
 
   render() {
     const { post, className, single } = this.props;
-    const { photos } = post.toJS();
+    const photos = post.get("photos");
 
     return (
       <div
         className={ className }>
-        <Link
-          to="post"
-          params={{ postId: post.get("id") }}>
+        { single &&
           <ul className="photos">
             { photos.map(this.renderPhoto) }
           </ul>
-        </Link>
+        }
+        { !single &&
+          <Link
+            to="post"
+            params={{ postId: post.get("id") }}>
+            <ul className="photos">
+              { photos.map(this.renderPhoto) }
+            </ul>
+          </Link>
+        }
         {!single &&
           <TitleBox post={ post } />
         }
