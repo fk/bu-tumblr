@@ -5,10 +5,11 @@ import { RouteHandler } from "react-router";
 import classNames from "classnames";
 import Header from "../Header";
 import Navigation from "../Navigation";
+import Lightbox from "../Lightbox";
+import AppActionCreators from "../../actions/AppActionCreators";
 import AppStore from "../../stores/AppStore";
 import LightboxStore from "../../stores/LightboxStore";
 import storeComponent from "../../utils/storeComponent";
-import AppActionCreators from "../../actions/AppActionCreators";
 
 const { PureRenderMixin, CSSTransitionGroup } = React.addons;
 
@@ -64,7 +65,9 @@ class App extends React.Component {
           }
         </CSSTransitionGroup>
         { lightbox.get("photos").size > 0 &&
-          <span>Lightbox Open</span>
+          <Lightbox
+            photos={ lightbox.get("photos") }
+            index={ lightbox.get("index")} />
         }
       </body>
       </html>
