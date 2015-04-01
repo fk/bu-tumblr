@@ -6,6 +6,7 @@ import { Map } from "immutable";
 import warning from "react/lib/warning";
 import classNames from "classnames";
 import TitleBox from "./TitleBox";
+import LightboxActionCreators from "../../actions/LightboxActionCreators";
 
 const { PureRenderMixin } = React.addons;
 
@@ -29,7 +30,8 @@ export default class PostPhoto extends React.Component {
     return (event) => {
       if (single) {
         event.preventDefault();
-
+        let index = photos.indexOf(photo);
+        LightboxActionCreators.openLightboxWithPhotosAtIndex({ photos, index });
       }
     };
   }

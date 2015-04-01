@@ -6,6 +6,7 @@ import classNames from "classnames";
 import Header from "../Header";
 import Navigation from "../Navigation";
 import AppStore from "../../stores/AppStore";
+import LightboxStore from "../../stores/LightboxStore";
 import storeComponent from "../../utils/storeComponent";
 import AppActionCreators from "../../actions/AppActionCreators";
 
@@ -29,7 +30,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { env, app } = this.props;
+    const { env, app, lightbox } = this.props;
     const { fixedHeader, navOpen } = app.toJS();
     const css = env === "production" ? "app.min" : "app";
     const bundle = env === "production" ?
@@ -62,6 +63,9 @@ class App extends React.Component {
             <Navigation key="nav" />
           }
         </CSSTransitionGroup>
+        { lightbox.get("photos").size > 0 &&
+          <span>Lightbox Open</span>
+        }
       </body>
       </html>
     );
@@ -73,8 +77,9 @@ App.defaultProps = { env: "development" };
 
 const getState = (props) => {
   let { app } = AppStore.getState();
+  let { lightbox } = LightboxStore.getState();
 
-  return { app };
+  return { app, lightbox };
 };
 
 const getViewport = () => {
@@ -105,4 +110,4 @@ const getViewport = () => {
     return { x, y, w, h };
 };
 
-export default storeComponent(App, [AppStore], getState);
+export default storeComponent(App, [AppStore, LightboxStore], getState);

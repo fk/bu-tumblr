@@ -9,3 +9,5 @@ class LightboxActionCreators {
     );
   }
 }
+
+export default alt.createActions(LightboxActionCreators);
