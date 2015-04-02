@@ -15,8 +15,6 @@ class PostText extends React.Component {
   render() {
     const { className, post, single, ...otherProps } = this.props;
 
-    console.log(className);
-
     return (
       <div className={ classNames([className, { "single": single }]) }>
         { !single &&
