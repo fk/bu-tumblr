@@ -27,7 +27,7 @@ class NoteBox extends React.Component {
 
     return (
       <ul className="note-box">
-        { notes.map((note, key) => {
+        { notes && notes.size > 0 && notes.map((note, key) => {
           let name = `${note.get("blog_name")}.tumblr.com`;
           let avatar = `http://api.tumblr.com/v2/blog/${name}/avatar/16`;
           let action = ACTION_MAP[note.get("type")];

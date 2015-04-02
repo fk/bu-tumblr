@@ -24,15 +24,12 @@ export default class PostPhoto extends React.Component {
   }
 
   handlePhotoClick(photo) {
-    const { single } = this.props;
     let photos = this.props.post.get("photos");
 
     return (event) => {
-      if (single) {
-        event.preventDefault();
-        let index = photos.indexOf(photo);
-        LightboxActionCreators.openLightboxWithPhotosAtIndex({ photos, index });
-      }
+      event.preventDefault();
+      let index = photos.indexOf(photo);
+      LightboxActionCreators.openLightboxWithPhotosAtIndex({ photos, index });
     };
   }
 
@@ -73,20 +70,9 @@ export default class PostPhoto extends React.Component {
     return (
       <div
         className={ className }>
-        { single &&
-          <ul className="photos">
-            { photos.map(this.renderPhoto) }
-          </ul>
-        }
-        { !single &&
-          <Link
-            to="post"
-            params={{ postId: post.get("id") }}>
-            <ul className="photos">
-              { photos.map(this.renderPhoto) }
-            </ul>
-          </Link>
-        }
+        <ul className="photos">
+          { photos.map(this.renderPhoto) }
+        </ul>
         {!single &&
           <TitleBox post={ post } />
         }

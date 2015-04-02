@@ -22,7 +22,7 @@ class TitleBox extends React.Component {
     return (
       <div className={ cx }>
         <h3>{ post.get("title") }</h3>
-        <ShareBox />
+        <ShareBox post={ post } />
       </div>
     );
   }

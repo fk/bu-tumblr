@@ -1,15 +1,33 @@
 "use strict";
 
 import React, { PropTypes } from "react/addons";
+import { Link } from "react-router";
 
-export default class ShareBox extends React.Component {
+class ShareBox extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
+    const { post, single } = this.props;
+
     return (
       <nav className="social">
+        { !single &&
+          <Link
+            to="post"
+            params={{ postId: post.get("id") }}
+            className="large">
+            <span className="cube">
+              <span className="face front link">
+                <i className="fa fa-link" />
+              </span>
+              <span className="face bottom link">
+                <i className="fa fa-link" />
+              </span>
+            </span>
+          </Link>
+        }
         <a href="#">
           <span className="cube">
             <span className="face front envelope">
@@ -54,3 +72,14 @@ export default class ShareBox extends React.Component {
     );
   }
 };
+
+ShareBox.propTypes = {
+  post: PropTypes.object.isRequired,
+  single: PropTypes.bool
+};
+
+ShareBox.defaultProps = {
+  single: false
+};
+
+export default ShareBox;

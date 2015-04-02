@@ -12,7 +12,7 @@ class PostQuote extends React.Component {
   }
 
   render() {
-    const { className, post } = this.props;
+    const { className, single, post } = this.props;
 
     return (
       <div className={ className }>
@@ -20,10 +20,22 @@ class PostQuote extends React.Component {
         { post.has("source") &&
           <span className="source">{ post.get("source") }</span>
         }
-        <TitleBox post={ post } />
+        { !single &&
+          <TitleBox post={ post } />
+        }
       </div>
     );
   }
 }
+
+PostQuote.propTypes = {
+  post: PropTypes.object.isRequired,
+  single: PropTypes.bool
+};
+
+PostQuote.defaultProps = {
+  single: false
+};
+
 
 export default PostQuote;

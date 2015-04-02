@@ -62,12 +62,14 @@ class PostRoute extends React.Component {
           <Post
             post={ post }
             single={ true } />
-          { caption.trim() &&
+          { !!caption && !!caption.trim() &&
             <span
               className="post-caption"
               dangerouslySetInnerHTML={{ __html: caption }} />
           }
-          <ShareBox />
+          <ShareBox
+            post={ post }
+            single={ true } />
         </div>
         { (tags.size > 0 || noteCount > 0) &&
           <div className="note-band">

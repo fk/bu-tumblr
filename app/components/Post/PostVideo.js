@@ -1,7 +1,7 @@
 "use strict";
 
 import React, { PropTypes } from "react/addons";
-import TitleBox from "./TitleBox";
+import ShareBox from "../ShareBox";
 
 const { PureRenderMixin } = React.addons;
 
@@ -12,7 +12,7 @@ class PostVideo extends React.Component {
   }
 
   render() {
-    const { className, post } = this.props;
+    const { className, post, single } = this.props;
     let embed = post.getIn(["player", 2, "embed_code"]);
 
     return (
@@ -20,10 +20,21 @@ class PostVideo extends React.Component {
         <div
           className="player"
           dangerouslySetInnerHTML={{ __html: embed }} />
-        <TitleBox post={ post } />
+        { !single &&
+          <ShareBox post={ post } />
+        }
       </div>
     );
   }
 }
+
+PostVideo.propTypes = {
+  post: PropTypes.object.isRequired,
+  single: PropTypes.bool
+};
+
+PostVideo.defaultProps = {
+  single: false
+};
 
 export default PostVideo;
