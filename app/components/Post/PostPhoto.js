@@ -1,28 +1,39 @@
 "use strict";
 
-import React, { PropTypes } from "react/addons";
+import React, { PropTypes } from "react";
 import { Link } from "react-router";
-import { Map } from "immutable";
 import warning from "react/lib/warning";
+import { Map } from "immutable";
 import classNames from "classnames";
 import TitleBox from "./TitleBox";
 import LightboxActionCreators from "../../actions/LightboxActionCreators";
+import autobind from "../../decorators/autobind";
+import purerender from "../../decorators/purerender";
 
-const { PureRenderMixin } = React.addons;
-
+@purerender
 export default class PostPhoto extends React.Component {
-  constructor(props) {
-    super(props);
+  static propTypes = {
+    post(props, propName, component) {
+      let post = props[propName];
 
-    this.renderPhoto = this.renderPhoto.bind(this);
-    this.handlePhotoClick = this.handlePhotoClick.bind(this);
+      warning(
+        Map.isMap(post),
+        "Expected map to be an instance of an Immutable.Map, received %s",
+        typeof post
+      );
+
+      return null;
+    },
+    inViewport: PropTypes.bool.isRequired,
+    className: PropTypes.string,
+    single: PropTypes.bool
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return PureRenderMixin.shouldComponentUpdate
-      .call(this, nextProps, nextState);
+  static defaultProps = {
+    single: false
   }
 
+  @autobind
   handlePhotoClick(photo) {
     let photos = this.props.post.get("photos");
 
@@ -33,6 +44,7 @@ export default class PostPhoto extends React.Component {
     };
   }
 
+  @autobind
   renderPhoto(photo, key, array) {
     const { post, single } = this.props;
     const { photosetLayout } = post.toJS();
@@ -79,29 +91,4 @@ export default class PostPhoto extends React.Component {
       </div>
     );
   }
-};
-
-PostPhoto.defaultProps = {
-  single: false
-};
-
-PostPhoto.propTypes = {
-  post(props, propName, component) {
-    let post = props[propName];
-
-    warning(
-      Map.isMap(post),
-      "Expected map to be an instance of an Immutable.Map, received %s",
-      typeof post
-    );
-
-    return null;
-  },
-  inViewport: PropTypes.bool.isRequired,
-  className: PropTypes.string,
-  single: PropTypes.bool
-};
-
-const getIndex = (memo, row) => {
-  return memo + row.props.children.length;
 };

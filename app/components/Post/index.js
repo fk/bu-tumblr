@@ -1,6 +1,6 @@
 "use strict";
 
-import React, { PropTypes } from "react/addons";
+import React, { PropTypes } from "react";
 import warning from "react/lib/warning";
 import classNames from "classnames";
 import { Map, List } from "immutable";
@@ -11,21 +11,31 @@ import PostText from "./PostText";
 import PostVideo from "./PostVideo";
 import AppStore from "../../stores/AppStore";
 import storeComponent from "../../utils/storeComponent";
+import autobind from "../../decorators/autobind";
+import purerender from "../../decorators/purerender";
+import { getInViewport } from "../../utils/viewport";
 
-const { PureRenderMixin } = React.addons;
-
+@purerender
 class Post extends React.Component {
+  static propTypes = {
+    post: PropTypes.shape({
+      type(props, propName, componentName) {
+        warning(
+          Map.isMap(props) && props.has("type"),
+          "Expected Post.props.post to be an instance of Map() and to have " +
+          "a \"type\" property."
+        );
+
+        return null;
+      }
+    })
+  }
+
   constructor(props) {
     super(props);
 
     this.animation = false;
     this.state = { inViewport: false };
-    this.onAdjust = this.onAdjust.bind(this);
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return PureRenderMixin.shouldComponentUpdate
-      .call(this, nextProps, nextState);
   }
 
   componentDidMount() {
@@ -37,6 +47,7 @@ class Post extends React.Component {
     this.animation = cancelAnimationFrame(this.animation);
   }
 
+  @autobind
   onAdjust() {
     try {
       const { viewport } = this.props;
@@ -72,21 +83,6 @@ class Post extends React.Component {
   }
 };
 
-const getInViewport = (node) => {
-  let rect = node.getBoundingClientRect();
-  let windowHeight = window.innerHeight ||
-    document.documentElement.clientHeight;
-  let windowWidth = window.innerWidth ||
-    document.documentElement.clientWidth
-
-  return (
-    rect.bottom >= 0 &&
-    rect.right >= 0 &&
-    rect.top <= windowHeight &&
-    rect.left <= windowWidth
-  );
-};
-
 const getStoreStates = (params) => {
   const { app } = AppStore.getState();
   const viewport = app.get("viewport");
@@ -112,20 +108,6 @@ const getPostComponent = (post) => {
       console.warn(post.get("type"), "is unhandled.");
       return false;
   }
-};
-
-Post.propTypes = {
-  post: PropTypes.shape({
-    type(props, propName, componentName) {
-      warning(
-        Map.isMap(props) && props.has("type"),
-        "Expected Post.props.post to be an instance of Map() and to have " +
-        "a \"type\" property."
-      );
-
-      return null;
-    }
-  })
 };
 
 export default storeComponent(Post, [AppStore], getStoreStates);

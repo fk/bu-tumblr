@@ -10,15 +10,25 @@ import AppActionCreators from "../../actions/AppActionCreators";
 import AppStore from "../../stores/AppStore";
 import LightboxStore from "../../stores/LightboxStore";
 import storeComponent from "../../utils/storeComponent";
+import { getViewport } from "../../utils/viewport";
+import purerender from "../../decorators/purerender";
+import subscribeTo from "../../decorators/subscribeTo";
 
-const { PureRenderMixin, CSSTransitionGroup } = React.addons;
+const { CSSTransitionGroup } = React.addons;
+const getStateFromStores = (props) => {
+  let { app } = AppStore.getState();
+  let { lightbox } = LightboxStore.getState();
 
+  return { app, lightbox };
+};
+
+
+@purerender
+// @subscribeTo(AppStore, LightboxStore, getStateFromStores)
 class App extends React.Component {
-  constructor(props) {
-    super(props);
+  static propTypes = { env: PropTypes.string }
 
-    this.updateScrollState = this.updateScrollState.bind(this);
-  }
+  static defaultProps = { env: "development" }
 
   componentDidMount() {
     document.addEventListener("scroll", this.updateScrollState, false);
@@ -75,42 +85,11 @@ class App extends React.Component {
   }
 }
 
-App.propTypes = { env: PropTypes.string };
-App.defaultProps = { env: "development" };
-
 const getState = (props) => {
   let { app } = AppStore.getState();
   let { lightbox } = LightboxStore.getState();
 
   return { app, lightbox };
-};
-
-const getViewport = () => {
-  let y = window.pageYOffset !== undefined ?
-    window.pageYOffset :
-    (
-      document.documentElement ||
-      document.body.parentNode ||
-      document.body
-    ).scrollTop;
-
-  let x = window.pageXOffset !== undefined ?
-    window.pageYOffset :
-    (
-      document.documentElement ||
-      document.body.parentNode ||
-      document.body
-    ).scrollLeft;
-
-    var w = window.innerWidth ||
-      document.documentElement.clientWidth ||
-      document.body.clientWidth;
-
-    var h = window.innerHeight ||
-      document.documentElement.clientHeight ||
-      document.body.clientHeight;
-
-    return { x, y, w, h };
 };
 
 export default storeComponent(App, [AppStore, LightboxStore], getState);
