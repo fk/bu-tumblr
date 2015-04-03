@@ -1,4 +1,4 @@
 "use strict";
 
-require("babel/register")({ experimental: true });
+require("babel/register");
 require("./api");

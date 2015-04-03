@@ -30,7 +30,7 @@ var base = {
   ],
   module: {
     loaders: [
-      { test: /\.js$/, loader: "babel?experimental", exclude: /node_modules/ },
+      { test: /\.js$/, loader: "babel", exclude: /node_modules/ },
       { test: /\.json$/, loader: "json" }
     ]
   }
@@ -62,7 +62,7 @@ exports.server = assign({}, base, {
     loaders: [
       {
         test: /\.js$/,
-        loaders: ["react-hot", "babel?experimental"],
+        loaders: ["react-hot", "babel"],
         exclude: /node_modules/
       }, {
         test: /\.json$/,
