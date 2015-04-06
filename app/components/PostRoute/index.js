@@ -3,6 +3,7 @@
 import React, { PropTypes } from "react/addons";
 import { Link } from "react-router";
 import { OrderedMap } from "immutable";
+import moment from "moment";
 import Post from "../Post";
 import NoteBox from "../NoteBox";
 import ShareBox from "../ShareBox";
@@ -15,10 +16,6 @@ import PostActionCreators from "../../actions/PostActionCreators";
 const { PureRenderMixin } = React.addons;
 
 class PostRoute extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   static async fetchData(props) {
     let { postId } = props.params;
 
@@ -37,6 +34,8 @@ class PostRoute extends React.Component {
     let caption = post.get("caption");
     let tags = post.get("tags");
     let noteCount = post.get("noteCount");
+    let author = post.get("author");
+    let date = moment(new Date(post.get("date"))).format("MMMM DD, YYYY");
 
     return (
       <div className="post-route">
@@ -66,6 +65,15 @@ class PostRoute extends React.Component {
             <span
               className="post-caption"
               dangerouslySetInnerHTML={{ __html: caption }} />
+          }
+          { author &&
+            <div className="author">
+              By <Link
+                to="author"
+                params={{ authorName: author }}>
+                { author }
+              </Link> on { date }
+            </div>
           }
           <ShareBox
             post={ post }

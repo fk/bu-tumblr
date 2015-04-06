@@ -1,6 +1,7 @@
 "use strict";
 
 import alt from "../alt";
+import sanitize from "../utils/sanitize";
 import warning from "react/lib/warning";
 import { Iterable, OrderedMap, fromJS } from "immutable";
 import PostActionCreators from "../actions/PostActionCreators";
@@ -63,28 +64,6 @@ class PostStore {
       warning(err, "Get post error");
     }
   }
-}
-
-const sanitize = (posts) => {
-  return Object.keys(posts).reduce((memo, id) => {
-    let post = posts[id];
-    let { tags } = post;
-
-    post.tags = tags.filter(tag => {
-      if (/^_post\./.test(tag)) {
-        let [prop, value] = tag.split(".").pop().split(":");
-
-        post[prop] = value;
-
-        return false;
-      }
-
-      return true;
-    });
-
-    memo[id] = post;
-    return memo;
-  }, {});
 }
 
 export default alt.createStore(PostStore, "PostStore");
