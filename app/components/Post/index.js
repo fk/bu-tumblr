@@ -88,7 +88,9 @@ class Post extends React.Component {
           { ...this.state }
           post={ post }
           className={ cx } />
-        <ShareBox post={ post } />
+        { !single &&
+          <ShareBox post={ post } />
+        }
       </div>
     );
   }
