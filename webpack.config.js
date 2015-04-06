@@ -4,6 +4,14 @@ var webpack = require("webpack");
 var path = require("path");
 var assign = require("object-assign");
 
+var progressEvent = function(percentage, message) {
+  var MOVE_LEFT = new Buffer("1b5b3130303044", "hex").toString();
+  var CLEAR_LINE = new Buffer("1b5b304b", "hex").toString();
+
+  process.stdout.write(CLEAR_LINE + Math.round(percentage * 100) + "%, " +
+    message + MOVE_LEFT);
+};
+
 var base = {
   entry: {
     bundle: "./app/index.js"
@@ -21,16 +29,20 @@ var base = {
   plugins: [
     new webpack.DefinePlugin({
       "process.env": {
-        "NODE_ENV": JSON.stringify(process.env.NODE_ENV)
+        "NODE_ENV": JSON.stringify("production"),
+        "BROWSER": JSON.stringify(true)
       }
     }),
+    new webpack.ProgressPlugin(progressEvent),
     new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin({ comments: false }),
-    new webpack.optimize.OccurenceOrderPlugin()
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.UglifyJsPlugin({ comments: false })
   ],
   module: {
     loaders: [
       { test: /\.js$/, loader: "babel?stage=0", exclude: /node_modules/ },
+      { test: /\.(jpe?g|png|gif|svg)$/, loader: "file" },
+      { test: /\.styl$/, loader: "style!css!stylus" },
       { test: /\.json$/, loader: "json" }
     ]
   }
@@ -52,23 +64,20 @@ exports.server = assign({}, base, {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
+    new webpack.ProgressPlugin(progressEvent),
     new webpack.DefinePlugin({
       "process.env": {
-        "NODE_ENV": JSON.stringify(process.env.NODE_ENV)
+        "NODE_ENV": JSON.stringify("development"),
+        "BROWSER": JSON.stringify(true)
       }
     })
   ],
   module: {
     loaders: [
-      {
-        test: /\.js$/,
-        loaders: ["react-hot", "babel?stage=0"],
-        exclude: /node_modules/
-      }, {
-        test: /\.json$/,
-        loader: "json",
-        exclude: /node_modules/
-      }
+      { test: /\.js$/, loader: "react-hot!babel?stage=0", exclude: /node_modules/ },
+      { test: /\.json$/, loader: "json", exclude: /node_modules/ },
+      { test: /\.(jpe?g|png|gif|svg)$/, loader: "file" },
+      { test: /\.styl$/, loader: "style!css!stylus" }
     ]
   }
 });

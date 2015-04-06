@@ -5,7 +5,6 @@ import { Link } from "react-router";
 import warning from "react/lib/warning";
 import { Map } from "immutable";
 import classNames from "classnames";
-import TitleBox from "./TitleBox";
 import LightboxActionCreators from "../../actions/LightboxActionCreators";
 import autobind from "../../decorators/autobind";
 import purerender from "../../decorators/purerender";
@@ -85,9 +84,6 @@ export default class PostPhoto extends React.Component {
         <ul className="photos">
           { photos.map(this.renderPhoto) }
         </ul>
-        {!single &&
-          <TitleBox post={ post } />
-        }
       </div>
     );
   }

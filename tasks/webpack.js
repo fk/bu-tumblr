@@ -7,7 +7,7 @@ var config = require("../webpack.config");
 
 module.exports = {
   taskName: "webpack",
-  dependencies: ["del", "mocha", "eslint"],
+  dependencies: ["del", "mocha"],
   task: function (callback) {
     webpack(config.build, function (err, stats) {
       if (err) {

@@ -1,7 +1,6 @@
 "use strict";
 
 import React, { PropTypes } from "react/addons";
-import ShareBox from "../ShareBox";
 
 const { PureRenderMixin } = React.addons;
 
@@ -20,9 +19,6 @@ class PostVideo extends React.Component {
         <div
           className="player"
           dangerouslySetInnerHTML={{ __html: embed }} />
-        { !single &&
-          <ShareBox post={ post } />
-        }
       </div>
     );
   }

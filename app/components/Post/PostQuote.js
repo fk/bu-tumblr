@@ -1,7 +1,6 @@
 "use strict";
 
 import React, { PropTypes } from "react/addons";
-import TitleBox from "./TitleBox";
 
 const { PureRenderMixin } = React.addons;
 
@@ -19,9 +18,6 @@ class PostQuote extends React.Component {
         <quote dangerouslySetInnerHTML={{ __html: post.get("text") }} />
         { post.has("source") &&
           <span className="source">{ post.get("source") }</span>
-        }
-        { !single &&
-          <TitleBox post={ post } />
         }
       </div>
     );

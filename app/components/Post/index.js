@@ -9,6 +9,8 @@ import PostLink from "./PostLink";
 import PostQuote from "./PostQuote";
 import PostText from "./PostText";
 import PostVideo from "./PostVideo";
+import TitleBox from "../TitleBox";
+import ShareBox from "../ShareBox";
 import AppStore from "../../stores/AppStore";
 import storeComponent from "../../utils/storeComponent";
 import autobind from "../../decorators/autobind";
@@ -65,20 +67,29 @@ class Post extends React.Component {
 
   render() {
     const { inViewport } = this.state;
-    const { post, viewport, ...otherProps } = this.props;
+    const { post, viewport, single, ...otherProps } = this.props;
     const Component = getPostComponent(post);
     const cx = classNames({
       "post": true,
       [`post-${post.get("type")}`]: true,
       "in-viewport": inViewport
     });
+    const hasTitle = (
+      ["text"].indexOf(post.get("type")) === -1
+    );
 
     return (
-      <Component
-        { ...otherProps }
-        { ...this.state }
-        post={ post }
-        className={ cx } />
+      <div className="post-wrapper">
+        { !single && hasTitle &&
+          <TitleBox post={ post } />
+        }
+        <Component
+          { ...otherProps }
+          { ...this.state }
+          post={ post }
+          className={ cx } />
+        <ShareBox post={ post } />
+      </div>
     );
   }
 };

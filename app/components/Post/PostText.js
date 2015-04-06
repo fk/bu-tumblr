@@ -2,7 +2,6 @@
 
 import React, { PropTypes } from "react/addons";
 import classNames from "classnames";
-import ShareBox from "../ShareBox";
 
 const { PureRenderMixin } = React.addons;
 
@@ -23,9 +22,6 @@ class PostText extends React.Component {
         <div
           className="text-body"
           dangerouslySetInnerHTML={{ __html: post.get("body") }} />
-        {! single &&
-          <ShareBox post={ post } />
-        }
       </div>
     );
   }

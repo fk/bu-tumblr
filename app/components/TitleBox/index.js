@@ -2,7 +2,6 @@
 
 import React, { PropTypes } from "react/addons";
 import classNames from "classnames";
-import ShareBox from "../ShareBox";
 
 const { PureRenderMixin } = React.addons;
 
@@ -22,7 +21,6 @@ class TitleBox extends React.Component {
     return (
       <div className={ cx }>
         <h3>{ post.get("title") }</h3>
-        <ShareBox post={ post } />
       </div>
     );
   }
