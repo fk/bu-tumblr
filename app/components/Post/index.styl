@@ -18,9 +18,16 @@
   color #fff
   padding 4.5rem 3.25rem
 
+  +below(750px)
+    padding 2.25rem 1.675rem
+
   quote
     font-size 2.25rem
     display block
+
+    +below(750px)
+      font-size 1.625rem
+
 
   .source
     margin-top 2.25rem
@@ -36,6 +43,9 @@
   background-color #333
   color #fff
   font-family "proxima-nova", helvetica, arial, sans-serif
+
+  +below(900px)
+    padding 2.375rem 1.6125rem
 
   &.single
     padding 0
@@ -79,6 +89,9 @@
       for n in 1..7
         &.height-{n}
           height 38.75rem - (6.25rem * n)
+
+          +below(600px)
+            height @height * (1/2)
 
 .post-video
   .player
