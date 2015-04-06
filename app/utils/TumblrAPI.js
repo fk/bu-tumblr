@@ -42,11 +42,24 @@ export default {
       reblogInfo: false,
       notesInfo: false
     };
-
     let data = await jsonp(url, params);
     const authors = camelify(data.response.posts);
 
     return normalize(authors, arrayOf(Author));
+  },
+
+  async getPostsByAuthor(name) {
+    let url = makeUrl("posts");
+    let params = {
+      apiKey: API_KEY,
+      tag: `_post.author:${name}`,
+      reblogInfo: false,
+      notesInfo: false
+    };
+    let data = await jsonp(url, params);
+    const posts = camelify(data.response.posts);
+
+    return normalize(posts, arrayOf(Post));
   }
 };
 

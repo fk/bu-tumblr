@@ -5,10 +5,12 @@ import sanitize from "../utils/sanitize";
 import warning from "react/lib/warning";
 import { Iterable, OrderedMap, fromJS } from "immutable";
 import PostActionCreators from "../actions/PostActionCreators";
+import AuthorActionCreators from "../actions/AuthorActionCreators";
 
 class PostStore {
   constructor() {
     this.bindActions(PostActionCreators);
+    this.bindActions(AuthorActionCreators);
 
     this.posts = new OrderedMap();
 
@@ -25,6 +27,15 @@ class PostStore {
     }
   }
 
+  static getPostsByAuthor(authorName) {
+    let { posts } = this.getState();
+
+    return posts
+      .filter(post => {
+        return post.get("tags").indexOf(`_post.author:${authorName}`) > -1;
+      });
+  }
+
   static getById(id) {
     let { posts } = this.getState();
 
@@ -33,6 +44,11 @@ class PostStore {
 
   onGetPosts() {
 
+  }
+
+  onGetAuthorSuccess(resp = {}) {
+    this.onGetPostsSuccess.call(this, resp);
+    console.log(this.posts);
   }
 
   onGetPostsSuccess(resp = {}) {

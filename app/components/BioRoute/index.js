@@ -3,6 +3,7 @@
 import React from "react/addons";
 import AuthorActionCreators from "../../actions/AuthorActionCreators";
 import AuthorStore from "../../stores/AuthorStore";
+import PostStore from "../../stores/PostStore";
 import RouterStore from "../../stores/RouterStore";
 import storeComponent from "../../utils/storeComponent";
 
@@ -14,6 +15,10 @@ class BioRoute extends React.Component {
   }
 
   render() {
+    let { author, posts, loading } = this.props;
+
+    console.log(author);
+
     return (
       <div className="bio-route">
 
@@ -28,8 +33,13 @@ const getState = (props) => {
 
   let authorName = router.getIn(["params", "authorName"]);
   let author = AuthorStore.getByName(authorName);
+  let posts = PostStore.getPostsByAuthor(authorName);
 
-  return { author, loading };
+  return { author, loading, posts };
 };
 
-export default storeComponent(BioRoute, [AuthorStore, RouterStore], getState);
+export default storeComponent(
+  BioRoute,
+  [AuthorStore, RouterStore, PostStore],
+  getState
+);

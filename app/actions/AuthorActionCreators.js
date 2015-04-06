@@ -1,6 +1,7 @@
 "use strict";
 
 import alt from "../alt";
+import assign from "object-assign";
 import TumblrAPI from "../utils/TumblrAPI";
 
 class AuthorActionCreators {
@@ -15,8 +16,19 @@ class AuthorActionCreators {
     this.dispatch();
 
     try {
-      let response = await TumblrAPI.getAuthor(name);
-      this.actions.getAuthorSuccess(response);
+      let calls = [];
+      let data = { entities: {}, result: [] };
+      calls.push(TumblrAPI.getAuthor(name));
+      calls.push(TumblrAPI.getPostsByAuthor(name));
+
+      for (let call of calls) {
+        let response = await call;
+
+        data.entities = assign(data.entities, response.entities);
+        data.result = data.result.concat(response.result);
+      }
+
+      this.actions.getAuthorSuccess(data);
     }
     catch (err) {
       this.actions.getAuthorError(err);

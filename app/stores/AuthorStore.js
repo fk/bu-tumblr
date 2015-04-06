@@ -41,8 +41,6 @@ class AuthorStore {
 
     authors = sanitize(authors);
 
-    console.log(authors);
-
     this.loading = false;
     this.authors = this.authors.merge(authors);
   }
