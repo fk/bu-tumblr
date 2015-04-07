@@ -41,17 +41,17 @@ class Navigation extends React.Component {
           children="Close"
           onClick={this.handleClickClose} />
         <nav>
-          <a href={`${homeUrl}`}>
-            <h2>Home<span className="highlight">Home</span></h2>
-          </a>
-          <a href={`${homeUrl}/approach`}>
-            <h2>Approach<span className="highlight">Approach</span></h2>
-          </a>
           <a href={`${homeUrl}/work`}>
             <h2>Work<span className="highlight">Work</span></h2>
           </a>
+          <a href={`${homeUrl}/services`}>
+            <h2>Services<span className="highlight">Services</span></h2>
+          </a>
           <a href={`${homeUrl}/people`}>
             <h2>People<span className="highlight">People</span></h2>
+          </a>
+          <a href={`${homeUrl}/careers`}>
+            <h2>Careers<span className="highlight">Careers</span></h2>
           </a>
         </nav>
       </div>
