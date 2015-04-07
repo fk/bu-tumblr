@@ -10,25 +10,25 @@ import Lightbox from "../Lightbox";
 import AppActionCreators from "../../actions/AppActionCreators";
 import AppStore from "../../stores/AppStore";
 import LightboxStore from "../../stores/LightboxStore";
-import storeComponent from "../../utils/storeComponent";
-import { getViewport } from "../../utils/viewport";
 import PureRender from "../../decorators/PureRender";
 import StoreComponent from "../../decorators/StoreComponent";
+import { getViewport } from "../../utils/viewport";
 
 const { CSSTransitionGroup } = React.addons;
-const getStateFromStores = (props) => {
-  let { app } = AppStore.getState();
-  let { lightbox } = LightboxStore.getState();
-
-  return { app, lightbox };
-};
-
 
 @PureRender
-class App extends React.Component {
+@StoreComponent(AppStore, LightboxStore)
+export default class App extends React.Component {
   static propTypes = { env: PropTypes.string }
 
   static defaultProps = { env: "development" }
+
+  static getStateFromStores(props) {
+    let { app } = AppStore.getState();
+    let { lightbox } = LightboxStore.getState();
+
+    return { app, lightbox };
+  }
 
   componentDidMount() {
     document.addEventListener("scroll", this.updateScrollState, false);
@@ -85,12 +85,3 @@ class App extends React.Component {
     );
   }
 }
-
-const getState = (props) => {
-  let { app } = AppStore.getState();
-  let { lightbox } = LightboxStore.getState();
-
-  return { app, lightbox };
-};
-
-export default storeComponent(App, [AppStore, LightboxStore], getState);

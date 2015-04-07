@@ -5,10 +5,11 @@ import autobind from "./autobind";
 import PureRender from "./PureRender";
 
 @PureRender
-export default function subscribeTo(...stores) {
-  let getStateFromStores = stores.pop();
-
+export default function StoreComponent(...stores) {
   return function decorator(Component) {
+    let { getStateFromStores } = Component;
+    delete Component.getStateFromStores;
+
     return class SubscriptionComponent extends React.Component {
       state = getStateFromStores()
 
@@ -27,7 +28,9 @@ export default function subscribeTo(...stores) {
 
       render() {
         return (
-          <Component />
+          <Component
+            { ...this.state }
+            { ...this.props } />
         );
       }
     };

@@ -9,6 +9,8 @@ import AuthorActionCreators from "../../actions/AuthorActionCreators";
 import AuthorStore from "../../stores/AuthorStore";
 import PostStore from "../../stores/PostStore";
 import RouterStore from "../../stores/RouterStore";
+import PureRender from "../../decorators/PureRender";
+import StoreComponent from "../../decorators/StoreComponent";
 import { uriToName } from "../../utils/uri";
 import storeComponent from "../../utils/storeComponent";
 
