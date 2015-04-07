@@ -11,7 +11,7 @@ const autobind = (target, key, descriptor) => {
 
   descriptor.set = function() {};
   descriptor.get = function() {
-    return this[key] = fn.bind(this);
+    return this[fnId] = fn.bind(this);
   };
 
   return descriptor;

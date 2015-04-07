@@ -53,6 +53,9 @@ class Navigation extends React.Component {
           <a href={`${homeUrl}/careers`}>
             <h2>Careers<span className="highlight">Careers</span></h2>
           </a>
+          <a href="http://blog.brooklynunited.com">
+            <h2>Blog<span className="highlight">Blog</span></h2>
+          </a>
         </nav>
       </div>
     );
