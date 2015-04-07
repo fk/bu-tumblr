@@ -12,8 +12,8 @@ import AppStore from "../../stores/AppStore";
 import LightboxStore from "../../stores/LightboxStore";
 import storeComponent from "../../utils/storeComponent";
 import { getViewport } from "../../utils/viewport";
-import purerender from "../../decorators/purerender";
-import subscribeTo from "../../decorators/subscribeTo";
+import PureRender from "../../decorators/PureRender";
+import StoreComponent from "../../decorators/StoreComponent";
 
 const { CSSTransitionGroup } = React.addons;
 const getStateFromStores = (props) => {
@@ -24,8 +24,7 @@ const getStateFromStores = (props) => {
 };
 
 
-@purerender
-// @subscribeTo(AppStore, LightboxStore, getStateFromStores)
+@PureRender
 class App extends React.Component {
   static propTypes = { env: PropTypes.string }
 

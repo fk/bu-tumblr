@@ -14,10 +14,10 @@ import ShareBox from "../ShareBox";
 import AppStore from "../../stores/AppStore";
 import storeComponent from "../../utils/storeComponent";
 import autobind from "../../decorators/autobind";
-import purerender from "../../decorators/purerender";
+import PureRender from "../../decorators/PureRender";
 import { getInViewport } from "../../utils/viewport";
 
-@purerender
+@PureRender
 class Post extends React.Component {
   static propTypes = {
     thumbnail: PropTypes.bool,

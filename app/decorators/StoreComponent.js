@@ -2,9 +2,9 @@
 
 import React from "react";
 import autobind from "./autobind";
-import purerender from "./purerender";
+import PureRender from "./PureRender";
 
-@purerender
+@PureRender
 export default function subscribeTo(...stores) {
   let getStateFromStores = stores.pop();
 

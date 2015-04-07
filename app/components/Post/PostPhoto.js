@@ -7,10 +7,10 @@ import { Map } from "immutable";
 import classNames from "classnames";
 import LightboxActionCreators from "../../actions/LightboxActionCreators";
 import autobind from "../../decorators/autobind";
-import purerender from "../../decorators/purerender";
+import PureRender from "../../decorators/PureRender";
 
-@purerender
-export default class PostPhoto extends React.Component {
+@PureRender
+class PostPhoto extends React.Component {
   static propTypes = {
     post(props, propName, component) {
       let post = props[propName];
@@ -88,3 +88,5 @@ export default class PostPhoto extends React.Component {
     );
   }
 };
+
+export default PostPhoto;
