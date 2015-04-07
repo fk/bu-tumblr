@@ -1,0 +1,45 @@
+@import "nib"
+@import "jeet"
+@import "rupture"
+
+.footer
+  display flex
+  align-items center
+  height 11.125rem
+
+  .made-in, nav
+    cf()
+
+  nav ul
+    cf()
+
+    li
+      float left
+
+      & + li
+        margin-left 15px
+
+  .address, .phone, .contact
+    display block
+    font-size 0.915rem
+
+  .address
+    font-style normal
+
+  .phone
+    color #333
+
+  .connect > *
+    float left
+    padding 6px
+    margin 0 0.25rem
+
+  .footer-column
+    width 100% * (1/3)
+    text-align center
+
+    &:first-child
+      text-align left
+
+    &:last-child
+      text-align right

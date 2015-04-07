@@ -20,6 +20,8 @@ import { getInViewport } from "../../utils/viewport";
 @purerender
 class Post extends React.Component {
   static propTypes = {
+    thumbnail: PropTypes.bool,
+    single: PropTypes.bool,
     post: PropTypes.shape({
       type(props, propName, componentName) {
         warning(
@@ -31,6 +33,11 @@ class Post extends React.Component {
         return null;
       }
     })
+  }
+
+  defaultProps = {
+    thumbnail: false,
+    single: false
   }
 
   constructor(props) {
@@ -67,7 +74,7 @@ class Post extends React.Component {
 
   render() {
     const { inViewport } = this.state;
-    const { post, viewport, single, ...otherProps } = this.props;
+    const { post, viewport, thumbnail, single, ...otherProps } = this.props;
     const Component = getPostComponent(post);
     const cx = classNames({
       "post": true,
@@ -79,8 +86,8 @@ class Post extends React.Component {
     );
 
     return (
-      <div className="post-wrapper">
-        { !single && hasTitle &&
+      <div className={ classNames(["post-wrapper", { thumbnail, single }]) }>
+        { !(single || thumbnail) && hasTitle &&
           <TitleBox post={ post } />
         }
         <Component
@@ -88,7 +95,7 @@ class Post extends React.Component {
           { ...this.state }
           post={ post }
           className={ cx } />
-        { !single &&
+        { !(single || thumbnail) &&
           <ShareBox post={ post } />
         }
       </div>

@@ -4,6 +4,7 @@ import React, { PropTypes } from "react/addons";
 import { RouteHandler } from "react-router";
 import classNames from "classnames";
 import Header from "../Header";
+import Footer from "../Footer";
 import Navigation from "../Navigation";
 import Lightbox from "../Lightbox";
 import AppActionCreators from "../../actions/AppActionCreators";
@@ -79,6 +80,7 @@ class App extends React.Component {
             photos={ lightbox.get("photos") }
             index={ lightbox.get("index")} />
         }
+        <Footer />
       </body>
       </html>
     );

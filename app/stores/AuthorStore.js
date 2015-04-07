@@ -28,7 +28,7 @@ class AuthorStore {
 
   static getByName(name) {
     let { authors } = this.getState();
-
+    console.log(name);
     return authors.find(author => author.get("name") === name);
   }
 

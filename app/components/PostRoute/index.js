@@ -1,15 +1,18 @@
 "use strict";
 
 import React, { PropTypes } from "react/addons";
+import warning from "react/lib/warning";
 import { Link } from "react-router";
 import { OrderedMap } from "immutable";
 import moment from "moment";
 import Post from "../Post";
+import Backer from "../Backer";
 import NoteBox from "../NoteBox";
 import ShareBox from "../ShareBox";
-import warning from "react/lib/warning";
+import BackButton from "../BackButton";
 import PostStore from "../../stores/PostStore";
 import RouterStore from "../../stores/RouterStore";
+import { nameToURI } from "../../utils/uri";
 import storeComponent from "../../utils/storeComponent";
 import PostActionCreators from "../../actions/PostActionCreators";
 
@@ -39,21 +42,8 @@ class PostRoute extends React.Component {
 
     return (
       <div className="post-route">
-        <Link
-          className="go-back"
-          to="/">
-          <i className="fa fa-angle-left" />&nbsp;
-          Back
-        </Link>
-        <div className="backer">
-          <svg
-            preserveAspectRatio="none"
-            viewBox="0 0 100 100">
-            <g>
-              <path d="M0,0 L0,100 L100,100" />
-            </g>
-          </svg>
-        </div>
+        <BackButton />
+        <Backer />
         <div className="post-column">
           { post.has("title") &&
             <h2>{ post.get("title") }</h2>
@@ -70,7 +60,7 @@ class PostRoute extends React.Component {
             <div className="author">
               By <Link
                 to="author"
-                params={{ authorName: author }}>
+                params={{ authorName: nameToURI(author) }}>
                 { author }
               </Link> on { date }
             </div>
@@ -98,6 +88,7 @@ class PostRoute extends React.Component {
         { noteCount > 0 &&
           <NoteBox notes={ post.get("notes") } />
         }
+        <BackButton />
       </div>
     );
   }

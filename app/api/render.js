@@ -18,15 +18,18 @@ export default function render() {
   return function *(next) {
     let { url } = this.req;
     let router = createRouter(url);
-    let { Handler, state } = yield getMarkup(router);
-    let markup = getMarkup(Handler, state);
+    let { Handler, state } = yield getResolvedRoute(router);
+    let markup = React.renderToString(<Handler { ...state } />);
     let appState = serialize(alt.flush());
-    let html = React.renderToStaticMarkup(
-      <HTMLDocument
-        { ...state }
-        markup={ markup }
-        appState={ appState } />
-    );
+
+    // let html = React.renderToStaticMarkup(
+    //   <HTMLDocument
+    //     { ...state }
+    //     markup={ markup }
+    //     appState={ appState } />
+    // );
+
+    // this.body = doctype + html;
   };
 };
 
@@ -41,16 +44,29 @@ const onAbort = (aborted) => {
 const createRouter = (location = "") => {
   if (process.env.NODE_ENV !== "production") {
     routes = require("../routes");
-    delete require.cache(require.resolve("../routes"));
+    delete require.cache[require.resolve("../routes")];
   }
 
-  return Router.createRouter({ location, onAbort, routes });
+  return Router.create({ location, onAbort, routes });
 };
 
 const getState = (router) => {
   return new Promise((resolve, reject) => {
     try {
       router.run((Handler, state) => resolve({ Handler, state }));
+    }
+    catch (err) {
+      reject(err);
+    }
+  });
+};
+
+const getResolvedRoute = (router) => {
+  return new Promise((resolve, reject) => {
+    try {
+      router.run((Handler, state) => {
+        resolve({ Handler, state });
+      });
     }
     catch (err) {
       reject(err);

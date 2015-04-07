@@ -30,10 +30,7 @@ class PostStore {
   static getPostsByAuthor(authorName) {
     let { posts } = this.getState();
 
-    return posts
-      .filter(post => {
-        return post.get("tags").indexOf(`_post.author:${authorName}`) > -1;
-      });
+    return posts.filter(post => post.get("author") === authorName);
   }
 
   static getById(id) {
@@ -48,11 +45,21 @@ class PostStore {
 
   onGetAuthorSuccess(resp = {}) {
     this.onGetPostsSuccess.call(this, resp);
-    console.log(this.posts);
   }
 
   onGetPostsSuccess(resp = {}) {
     let { posts } = resp.entities;
+
+    Object.keys(posts).forEach((id, key) => {
+      let post = posts[id];
+      let { tags } = post;
+
+      tags.forEach(tag => {
+        if (/^_people\:/.test(tag)) {
+          delete posts[id];
+        }
+      });
+    });
 
     posts = sanitize(posts);
 
