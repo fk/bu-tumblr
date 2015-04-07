@@ -9,6 +9,8 @@ export let nameToURI = (name) => {
 };
 
 export let uriToName = (uri) => {
+  if (!uri) return "";
+
   return uri.split("-")
     .map(capitalize)
     .join(" ");
