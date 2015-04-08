@@ -4,7 +4,6 @@ import React, { PropTypes } from "react/addons";
 import { RouteHandler } from "react-router";
 import classNames from "classnames";
 import Header from "../Header";
-import Footer from "../Footer";
 import Navigation from "../Navigation";
 import Lightbox from "../Lightbox";
 import AppActionCreators from "../../actions/AppActionCreators";
@@ -45,33 +44,21 @@ export default class App extends React.Component {
   }
 
   render() {
-    const { env, app, lightbox } = this.props;
+    const { app, lightbox } = this.props;
     const { fixedHeader, navOpen } = app.toJS();
-    const css = env === "production" ? "app.min" : "app";
-    const bundle = env === "production" ?
-      "/bundle.min" : "http://localhost:9000/dist/bundle";
 
-    const cx = classNames({
+    const cx = classNames("app", {
       "fixed-header": fixedHeader,
       "navigation-open": navOpen
     });
 
-    const fonts = "http://fonts.googleapis.com/css?family=Montserrat:700";
-    const TYPE_KIT_EXEC = "try{Typekit.load();}catch(e){}";
-
     return (
-      <html lang="en">
-      <head>
-        <title>Brooklyn United</title>
-        <script src="//use.typekit.net/iey8vjp.js"></script>
-        <script dangerouslySetInnerHTML={{__html: TYPE_KIT_EXEC }} />
-        <link href={fonts} rel="stylesheet" />
-        <link rel="stylesheet" href={`/stylesheets/${css}.css`} />
-      </head>
-      <body className={cx}>
+      <div className={ cx }>
         <div className="container">
           <Header />
-          <CSSTransitionGroup transitionName="route" transitionEnter transitionLeave>
+          <CSSTransitionGroup
+            component="div"
+            transitionName="route">
             <RouteHandler key={ this.context.router.getCurrentPath() } />
           </CSSTransitionGroup>
         </div>
@@ -85,9 +72,7 @@ export default class App extends React.Component {
             photos={ lightbox.get("photos") }
             index={ lightbox.get("index")} />
         }
-        <Footer />
-      </body>
-      </html>
+      </div>
     );
   }
 }

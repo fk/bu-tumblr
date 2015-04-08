@@ -8,14 +8,14 @@ import router from "./router";
 import RouterActionCreators from "./actions/RouterActionCreators";
 
 let bootstrapping = true;
-let { snapshot } = window;
-alt.bootstrap(snapshot);
+let { payload } = window;
+alt.bootstrap(payload);
 
 router.run((Handler, state) => {
   fetchData(state);
 
   RouterActionCreators.routeChange(state);
-  React.render(<Handler { ...state } />, document);
+  React.render(<Handler { ...state } />, document.getElementById("root"));
 });
 
 async function fetchData(state) {

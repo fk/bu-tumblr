@@ -9,6 +9,7 @@ import Post from "../Post";
 import Backer from "../Backer";
 import Spinner from "../Spinner";
 import NoteBox from "../NoteBox";
+import Footer from "../Footer";
 import ShareBox from "../ShareBox";
 import BackButton from "../BackButton";
 import PostStore from "../../stores/PostStore";
