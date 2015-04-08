@@ -12,13 +12,14 @@ import PostVideo from "./PostVideo";
 import TitleBox from "../TitleBox";
 import ShareBox from "../ShareBox";
 import AppStore from "../../stores/AppStore";
-import storeComponent from "../../utils/storeComponent";
 import autobind from "../../decorators/autobind";
+import StoreComponent from "../../decorators/StoreComponent";
 import PureRender from "../../decorators/PureRender";
 import { getInViewport } from "../../utils/viewport";
 
 @PureRender
-class Post extends React.Component {
+@StoreComponent(AppStore)
+export default class Post extends React.Component {
   static propTypes = {
     thumbnail: PropTypes.bool,
     single: PropTypes.bool,
@@ -38,6 +39,13 @@ class Post extends React.Component {
   defaultProps = {
     thumbnail: false,
     single: false
+  }
+
+  static getStateFromStores(props) {
+    const { app } = AppStore.getState();
+    const viewport = app.get("viewport");
+
+    return { viewport };
   }
 
   constructor(props) {
@@ -103,13 +111,6 @@ class Post extends React.Component {
   }
 };
 
-const getStoreStates = (params) => {
-  const { app } = AppStore.getState();
-  const viewport = app.get("viewport");
-
-  return { viewport };
-};
-
 const getPostComponent = (post) => {
   const postType = post.get("type");
 
@@ -129,5 +130,3 @@ const getPostComponent = (post) => {
       return false;
   }
 };
-
-export default storeComponent(Post, [AppStore], getStoreStates);

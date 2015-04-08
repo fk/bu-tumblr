@@ -9,20 +9,31 @@ import AuthorActionCreators from "../../actions/AuthorActionCreators";
 import AuthorStore from "../../stores/AuthorStore";
 import PostStore from "../../stores/PostStore";
 import RouterStore from "../../stores/RouterStore";
-import PureRender from "../../decorators/PureRender";
 import StoreComponent from "../../decorators/StoreComponent";
+import PureRender from "../../decorators/PureRender";
 import { uriToName } from "../../utils/uri";
-import storeComponent from "../../utils/storeComponent";
 
-const { PureRenderMixin } = React.addons;
-
-class BioRoute extends React.Component {
+@PureRender
+@StoreComponent(AuthorStore, PostStore, RouterStore)
+export default class BioRoute extends React.Component {
   static async fetchData({ params }) {
     let { authorName } = params;
 
     authorName = uriToName(authorName);
 
     return AuthorActionCreators.getAuthor(authorName);
+  }
+
+  static getStateFromStores(props) {
+    let { router } = RouterStore.getState();
+    let { loading } = AuthorStore.getState();
+
+    let authorName = router.getIn(["params", "authorName"]);
+    authorName = uriToName(authorName);
+    let author = AuthorStore.getByName(authorName);
+    let posts = PostStore.getPostsByAuthor(authorName);
+
+    return { author, loading, posts };
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -73,22 +84,4 @@ class BioRoute extends React.Component {
       </div>
     );
   }
-}
-
-const getState = (props) => {
-  let { router } = RouterStore.getState();
-  let { loading } = AuthorStore.getState();
-
-  let authorName = router.getIn(["params", "authorName"]);
-  authorName = uriToName(authorName);
-  let author = AuthorStore.getByName(authorName);
-  let posts = PostStore.getPostsByAuthor(authorName);
-
-  return { author, loading, posts };
 };
-
-export default storeComponent(
-  BioRoute,
-  [AuthorStore, RouterStore, PostStore],
-  getState
-);

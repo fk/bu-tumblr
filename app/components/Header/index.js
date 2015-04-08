@@ -1,24 +1,25 @@
 "use strict";
 
-import React from "react/addons";
+import React from "react";
 import classNames from "classnames";
 import AppStore from "../../stores/AppStore";
 import AppActionCreators from "../../actions/AppActionCreators";
-import storeComponent from "../../utils/storeComponent";
+import StoreComponent from "../../decorators/StoreComponent";
+import PureRender from "../../decorators/PureRender";
 
-const { PureRenderMixin } = React.addons;
-
-const getState = (props) => {
-  let { app } = AppStore.getState();
-
-  return { app };
-};
-
-class Header extends React.Component {
+@PureRender
+@StoreComponent(AppStore)
+export default class Header extends React.Component {
   constructor(props) {
     super(props);
 
     this.handleNavToggle = this.handleNavToggle.bind(this);
+  }
+
+  static getStateFromStores(props) {
+    let { app } = AppStore.getState();
+
+    return { app };
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -74,6 +75,4 @@ class Header extends React.Component {
       </header>
     );
   }
-}
-
-export default storeComponent(Header, [AppStore], getState);
+};

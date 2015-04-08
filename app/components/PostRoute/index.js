@@ -1,28 +1,38 @@
 "use strict";
 
-import React, { PropTypes } from "react/addons";
+import React, { PropTypes } from "react";
 import warning from "react/lib/warning";
 import { Link } from "react-router";
 import { OrderedMap } from "immutable";
 import moment from "moment";
 import Post from "../Post";
 import Backer from "../Backer";
+import Spinner from "../Spinner";
 import NoteBox from "../NoteBox";
 import ShareBox from "../ShareBox";
 import BackButton from "../BackButton";
 import PostStore from "../../stores/PostStore";
 import RouterStore from "../../stores/RouterStore";
-import { nameToURI } from "../../utils/uri";
-import storeComponent from "../../utils/storeComponent";
 import PostActionCreators from "../../actions/PostActionCreators";
+import PureRender from "../../decorators/PureRender";
+import StoreComponent from "../../decorators/StoreComponent";
+import { nameToURI } from "../../utils/uri";
 
-const { PureRenderMixin } = React.addons;
-
-class PostRoute extends React.Component {
+@PureRender
+@StoreComponent(PostStore, RouterStore)
+export default class PostRoute extends React.Component {
   static async fetchData(props) {
     let { postId } = props.params;
 
     return await PostActionCreators.getPost(postId);
+  }
+
+  static getStateFromStores(props) {
+    let { router } = RouterStore.getState();
+    let postId = router.getIn(["params", "postId"]);
+    let post = PostStore.getById(postId);
+
+    return { router, post };
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -34,10 +44,13 @@ class PostRoute extends React.Component {
 
   render() {
     let { router, post } = this.props;
-    let caption = post.get("caption");
-    let tags = post.get("tags");
-    let noteCount = post.get("noteCount");
-    let author = post.get("author");
+
+    if (!post) {
+      return (
+        <Spinner />
+      )
+    }
+
     let date = moment(new Date(post.get("date"))).format("MMMM DD, YYYY");
 
     return (
@@ -51,17 +64,17 @@ class PostRoute extends React.Component {
           <Post
             post={ post }
             single={ true } />
-          { !!caption && !!caption.trim() &&
+          { post.has("caption") && !!post.get("caption").trim() &&
             <span
               className="post-caption"
-              dangerouslySetInnerHTML={{ __html: caption }} />
+              dangerouslySetInnerHTML={{ __html: post.get("caption") }} />
           }
-          { author &&
+          { post.has("author") &&
             <div className="author">
               By <Link
                 to="author"
-                params={{ authorName: nameToURI(author) }}>
-                { author }
+                params={{ authorName: nameToURI(post.get("author")) }}>
+                { post.get("author") }
               </Link> on { date }
             </div>
           }
@@ -69,23 +82,23 @@ class PostRoute extends React.Component {
             post={ post }
             single={ true } />
         </div>
-        { (tags.size > 0 || noteCount > 0) &&
+        { (post.get("tags").size > 0 || post.get("noteCount") > 0) &&
           <div className="note-band">
-            { tags.size > 0 &&
+            { post.get("tags").size > 0 &&
               <span className="tag-list">
-                # { tags.map(tag => {
+                # { post.get("tags").map(tag => {
                   return (
                     <Link to="/">{ tag.toUpperCase() }</Link>
                   );
                 }) }
               </span>
             }
-            { noteCount > 0 &&
-              <span className="note-count">{ noteCount } notes</span>
+            { post.get("noteCount") > 0 &&
+              <span className="note-count">{ post.get("noteCount") } notes</span>
             }
           </div>
         }
-        { noteCount > 0 &&
+        { post.get("noteCount") > 0 &&
           <NoteBox notes={ post.get("notes") } />
         }
         <BackButton />
@@ -93,13 +106,3 @@ class PostRoute extends React.Component {
     );
   }
 };
-
-const getState = () => {
-  let { router } = RouterStore.getState();
-  let postId = router.getIn(["params", "postId"]);
-  let post = PostStore.getById(postId);
-
-  return { router, post };
-};
-
-export default storeComponent(PostRoute, [PostStore, RouterStore], getState);

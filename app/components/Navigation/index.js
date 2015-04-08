@@ -1,23 +1,26 @@
 "use strict";
 
-import React from "react/addons";
-import AppStore from "../../stores/AppStore";
-import storeComponent from "../../utils/storeComponent";
+import React from "react";
 import AppActionCreators from "../../actions/AppActionCreators";
+import AppStore from "../../stores/AppStore";
+import StoreComponent from "../../decorators/StoreComponent";
+import PureRender from "../../decorators/PureRender";
 
-const { PureRenderMixin, CSSTransitionGroup } = React.addons;
+const { CSSTransitionGroup } = React.addons;
 
-const getState = (props) => {
-  let { app } = AppStore.getState();
-
-  return { app };
-};
-
-class Navigation extends React.Component {
+@PureRender
+@StoreComponent(AppStore)
+export default class Navigation extends React.Component {
   constructor(props) {
     super(props);
 
     this.handleClickClose = this.handleClickClose.bind(this);
+  }
+
+  static getStateFromStores(props) {
+    let { app } = AppStore.getState();
+
+    return { app };
   }
 
   handleClickClose(event) {
@@ -60,6 +63,4 @@ class Navigation extends React.Component {
       </div>
     );
   }
-}
-
-export default storeComponent(Navigation, [AppStore], getState);
+};

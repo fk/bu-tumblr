@@ -2,11 +2,18 @@
 
 import React, { PropTypes } from "react/addons";
 import LightboxStore from "../../stores/LightboxStore";
-import storeComponent from "../../utils/storeComponent";
+import StoreComponent from "../../decorators/StoreComponent";
+import PureRender from "../../decorators/PureRender";
 
-const { PureRenderMixin } = React.addons;
+@PureRender
+@StoreComponent(LightboxStore)
+export default class Lightbox extends React.Component {
+  static getStateFromStores(props) {
+    let { lightbox } = LightboxStore.getState();
 
-class Lightbox extends React.Component {
+    return { lightbox };
+  }
+
   render() {
     let { lightbox } = this.props;
     let { photos, index } = lightbox.toJS();
@@ -18,12 +25,4 @@ class Lightbox extends React.Component {
       </div>
     );
   }
-}
-
-const getStoreState = props => {
-  let { lightbox } = LightboxStore.getState();
-
-  return { lightbox };
 };
-
-export default storeComponent(Lightbox, [LightboxStore], getStoreState);

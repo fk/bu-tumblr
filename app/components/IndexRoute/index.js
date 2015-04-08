@@ -6,13 +6,20 @@ import HeroUnit from "../HeroUnit";
 import LeadingQuote from "../LeadingQuote";
 import PostActionCreators from "../../actions/PostActionCreators";
 import PostStore from "../../stores/PostStore";
-import storeComponent from "../../utils/storeComponent";
+import StoreComponent from "../../decorators/StoreComponent";
 
 const { PureRenderMixin } = React.addons;
 
-class IndexRoute extends React.Component {
+@StoreComponent(PostStore)
+export default class IndexRoute extends React.Component {
   static async fetchData() {
     return await PostActionCreators.getPosts();
+  }
+
+  static getStateFromStores(props) {
+    let { posts } = PostStore.getState();
+    posts = posts.sort((a, b) => a.get("id") < b.get("id") ? 1 : -1);
+    return { posts };
   }
 
   render() {
@@ -29,13 +36,3 @@ class IndexRoute extends React.Component {
     );
   }
 };
-
-const getState = () => {
-  let { posts } = PostStore.getState();
-
-  posts = posts.sort((a, b) => a.get("id") < b.get("id") ? 1 : -1);
-
-  return { posts };
-};
-
-export default storeComponent(IndexRoute, [PostStore], getState);

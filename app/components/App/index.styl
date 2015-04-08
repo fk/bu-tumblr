@@ -11,3 +11,18 @@
     transform scale(0.925)
     opacity 0.75
     perspective 1000px
+
+.route-enter, .route-leave
+  transition opacity 175ms ease-in-out
+
+.route-enter
+  opacity 0
+
+  &.route-enter-active
+    opacity 1
+
+.route-leave
+  opacity 1
+
+  &.route-leave-active
+    opacity 0

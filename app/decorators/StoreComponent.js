@@ -2,16 +2,25 @@
 
 import React from "react";
 import autobind from "./autobind";
-import PureRender from "./PureRender";
 
-@PureRender
 export default function StoreComponent(...stores) {
-  return function decorator(Component) {
-    let { getStateFromStores } = Component;
-    delete Component.getStateFromStores;
+  return function decorator(Target) {
+    let { getStateFromStores, fetchData } = Target;
+    delete Target.getStateFromStores;
+    delete Target.fetchData;
 
     return class SubscriptionComponent extends React.Component {
-      state = getStateFromStores()
+      static async fetchData(params, query) {
+        if (fetchData) {
+          return fetchData.call(Target, params, query);
+        }
+      }
+
+      constructor(props) {
+        super(props);
+        this.state = getStateFromStores(props)
+        this.handleChange = this.handleChange.bind(this);
+      }
 
       componentDidMount() {
         stores.forEach(store => store.listen(this.handleChange));
@@ -21,16 +30,16 @@ export default function StoreComponent(...stores) {
         stores.forEach(store => store.unlisten(this.handleChange));
       }
 
-      @autobind
+
       handleChange() {
         this.setState(getStateFromStores(this.props));
       }
 
       render() {
         return (
-          <Component
-            { ...this.state }
-            { ...this.props } />
+          <Target
+            { ...this.props }
+            { ...this.state } />
         );
       }
     };

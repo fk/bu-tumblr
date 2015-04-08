@@ -30,6 +30,10 @@ export default class App extends React.Component {
     return { app, lightbox };
   }
 
+  static contextTypes = {
+    router: PropTypes.func.isRequired
+  }
+
   componentDidMount() {
     document.addEventListener("scroll", this.updateScrollState, false);
     document.addEventListener("resize", this.updateScrollState, false);
@@ -67,7 +71,9 @@ export default class App extends React.Component {
       <body className={cx}>
         <div className="container">
           <Header />
-          <RouteHandler />
+          <CSSTransitionGroup transitionName="route" transitionEnter transitionLeave>
+            <RouteHandler key={ this.context.router.getCurrentPath() } />
+          </CSSTransitionGroup>
         </div>
         <CSSTransitionGroup transitionName="navigation">
           { navOpen &&
