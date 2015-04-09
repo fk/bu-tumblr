@@ -13,7 +13,7 @@ import PureRender from "../../decorators/PureRender";
 import StoreComponent from "../../decorators/StoreComponent";
 import { getViewport } from "../../utils/viewport";
 
-const { CSSTransitionGroup } = React.addons;
+const { TransitionGroup, CSSTransitionGroup } = React.addons;
 
 @PureRender
 @StoreComponent(AppStore, LightboxStore)
@@ -46,7 +46,7 @@ export default class App extends React.Component {
   render() {
     const { app, lightbox } = this.props;
     const { fixedHeader, navOpen } = app.toJS();
-
+    const name = this.context.router.getCurrentPath();
     const cx = classNames("app", {
       "fixed-header": fixedHeader,
       "navigation-open": navOpen
@@ -56,11 +56,12 @@ export default class App extends React.Component {
       <div className={ cx }>
         <div className="container">
           <Header />
-          <CSSTransitionGroup
+          <TransitionGroup
             component="div"
+            className="route-transition-group"
             transitionName="route">
-            <RouteHandler key={ this.context.router.getCurrentPath() } />
-          </CSSTransitionGroup>
+            <RouteHandler key={ name } />
+          </TransitionGroup>
         </div>
         <CSSTransitionGroup transitionName="navigation">
           { navOpen &&

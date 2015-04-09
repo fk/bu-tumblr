@@ -3,6 +3,7 @@ import ReactRouter from "react-router";
 import HTMLDocument from "./HTMLDocument";
 import alt from "../alt";
 import routes from "../routes";
+import RouterActionCreators from "../actions/RouterActionCreators";
 
 class RedirectError extends Error {
   TYPE = Symbol("redirect error")
@@ -51,13 +52,15 @@ export default () => {
         }
       });
 
+      RouterActionCreators.routeChange(state);
+
       let data = yield new Promise((resolve, reject) => {
         try {
           let { routes } = state;
           let asyncData = routes.filter(route => route.handler.fetchData)
-            .map(route => route.handler.fetchData(state));
+            .map(route => route.handler.fetchData(state.params, state.query));
 
-          return Promise.all(asyncData)
+          Promise.all(asyncData)
             .then(data => resolve(data))
             .catch(err => reject(err));
         }

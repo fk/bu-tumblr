@@ -24,7 +24,6 @@ class PostActionCreators {
 
   getPost(id = null) {
     let type = Object.prototype.toString.call(id);
-
     invariant(
       type === "[object String]",
       "PostActionCreators.getPost(...): Please provide a valid number id. " +
@@ -35,8 +34,15 @@ class PostActionCreators {
     this.dispatch(id);
 
     return TumblrAPI.getPost(id)
-      .then(this.actions.getPostSuccess)
-      .catch(this.actions.getPostError);
+      .then(data => {
+        this.actions.getPostSuccess(data);
+
+        return data;
+      })
+      .catch(err => {
+        this.actions.getPostError(err);
+        return err;
+      });
   }
 }
 

@@ -22,8 +22,8 @@ import { nameToURI } from "../../utils/uri";
 @PureRender
 @StoreComponent(PostStore, RouterStore)
 export default class PostRoute extends React.Component {
-  static async fetchData(props) {
-    let { postId } = props.params;
+  static async fetchData(params) {
+    let { postId } = params;
 
     return await PostActionCreators.getPost(postId);
   }
@@ -49,7 +49,7 @@ export default class PostRoute extends React.Component {
     if (!post) {
       return (
         <Spinner />
-      )
+      );
     }
 
     let date = moment(new Date(post.get("date"))).format("MMMM DD, YYYY");
