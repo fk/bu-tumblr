@@ -1,31 +1,23 @@
 "use strict";
 
 export const getViewport = () => {
-  let y = window.pageYOffset !== undefined ?
-    window.pageYOffset :
-    (
-      document.documentElement ||
-      document.body.parentNode ||
-      document.body
-    ).scrollTop;
+  let doc = (
+    document.documentElement ||
+    document.body.parentNode ||
+    document.body
+  );
 
   let x = window.pageXOffset !== undefined ?
-    window.pageYOffset :
-    (
-      document.documentElement ||
-      document.body.parentNode ||
-      document.body
-    ).scrollLeft;
+    window.pageXOffset : doc.scrollLeft;
 
-    var w = window.innerWidth ||
-      document.documentElement.clientWidth ||
-      document.body.clientWidth;
+  let y = window.pageYOffset !== undefined ?
+    window.pageYOffset : doc.scrollTop;
 
-    var h = window.innerHeight ||
-      document.documentElement.clientHeight ||
-      document.body.clientHeight;
+  let w = window.innerWidth || doc.clientWidth;
 
-    return { x, y, w, h };
+  let h = window.innerHeight || doc.clientHeight;
+
+  return { x, y, w, h };
 };
 
 export const getInViewport = (node) => {

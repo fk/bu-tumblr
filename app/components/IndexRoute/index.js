@@ -7,13 +7,23 @@ import LeadingQuote from "../LeadingQuote";
 import PostActionCreators from "../../actions/PostActionCreators";
 import PostStore from "../../stores/PostStore";
 import StoreComponent from "../../decorators/StoreComponent";
+import InfiniteComponent from "../../decorators/InfiniteComponent";
+import PureRender from "../../decorators/PureRender";
 
-const { PureRenderMixin } = React.addons;
-
+@PureRender
+@InfiniteComponent
 @StoreComponent(PostStore)
 export default class IndexRoute extends React.Component {
   static async fetchData() {
     return await PostActionCreators.getPosts();
+  }
+
+  static async onInfiniteScroll(params) {
+    const { page, itemsPerPage } = params;
+
+    return PostActionCreators.getPosts({
+      offset: page * itemsPerPage
+    });
   }
 
   static getStateFromStores(props) {
@@ -22,23 +32,8 @@ export default class IndexRoute extends React.Component {
     return { posts };
   }
 
-  componentWillEnter() {
-    console.log("Will enter");
-  }
-
-  componentDidEnter() {
-    console.log("Did enter");
-
-  }
-
-  componentWillLeave() {
-    console.log("Will leave");
-
-  }
-
-  componentDidLeave() {
-    console.log("Did leave");
-
+  componentWillReceiveProps(nextProps, nextState) {
+    let { viewport } = nextProps;
   }
 
   render() {

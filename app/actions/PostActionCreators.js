@@ -14,10 +14,10 @@ class PostActionCreators {
     );
   }
 
-  getPosts() {
-    this.dispatch();
+  getPosts(params = {}) {
+    this.dispatch(params);
 
-    return TumblrAPI.getPosts()
+    return TumblrAPI.getPosts(params)
       .then(this.actions.getPostsSuccess)
       .catch(this.actions.getPostsError);
   }

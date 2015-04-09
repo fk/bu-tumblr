@@ -39,6 +39,26 @@ class PostStore {
     return posts.get(id);
   }
 
+  componentWillEnter() {
+    console.log("Will enter");
+  }
+
+  componentDidEnter() {
+    console.log("Did enter");
+
+  }
+
+  componentWillLeave() {
+    console.log("Will leave");
+
+  }
+
+  componentDidLeave() {
+    console.log("Did leave");
+
+  }
+
+
   onGetPosts() {
 
   }

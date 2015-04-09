@@ -36,11 +36,8 @@ export default class PostRoute extends React.Component {
     return { router, post };
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (!nextProps.post) return false;
-
-    return PureRenderMixin.shouldComponentUpdate
-      .call(this, nextProps, nextState);
+  componentWillLeave() {
+    console.log("!!!");
   }
 
   render() {
@@ -48,7 +45,10 @@ export default class PostRoute extends React.Component {
 
     if (!post) {
       return (
-        <Spinner />
+        <div className="post-route">
+          <BackButton />
+          <Spinner />
+        </div>
       );
     }
 

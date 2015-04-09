@@ -54,7 +54,7 @@ export default () => {
 
       RouterActionCreators.routeChange(state);
 
-      let data = yield new Promise((resolve, reject) => {
+      yield new Promise((resolve, reject) => {
         try {
           let { routes } = state;
           let asyncData = routes.filter(route => route.handler.fetchData)

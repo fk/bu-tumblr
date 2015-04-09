@@ -56,10 +56,7 @@ export default class App extends React.Component {
       <div className={ cx }>
         <div className="container">
           <Header />
-          <TransitionGroup
-            component="div"
-            className="route-transition-group"
-            transitionName="route">
+          <TransitionGroup>
             <RouteHandler key={ name } />
           </TransitionGroup>
         </div>

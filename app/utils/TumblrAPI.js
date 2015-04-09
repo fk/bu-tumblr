@@ -1,6 +1,7 @@
 "use strict";
 
 import path from "path";
+import assign from "object-assign";
 import jsonp from "./jsonp";
 import { arrayOf, normalize, Schema } from "normalizr";
 
@@ -8,13 +9,13 @@ const Post = new Schema("posts");
 const Author = new Schema("authors");
 
 const ENDPOINT_ROOT = "http://api.tumblr.com/v2/blog";
-const TUMBLR = "flux-api.tumblr.com";
+const TUMBLR = "cbotzzz.tumblr.com";
 const API_KEY = "fuiKNFp9vQFvjLNvx4sUwti4Yb5yGutBN4Xh10LXZhhRKjWlV4";
 
 export default {
-  async getPosts() {
+  async getPosts(params = {}) {
     let url = makeUrl("posts");
-    let data = await jsonp(url, { apiKey: API_KEY });
+    let data = await jsonp(url, assign({ apiKey: API_KEY }, params));
     const posts = camelify(data.response.posts);
 
     return normalize(posts, arrayOf(Post));
