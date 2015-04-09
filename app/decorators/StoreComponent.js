@@ -2,6 +2,7 @@
 
 import React from "react";
 import autobind from "./autobind";
+import copyStaticMethods from "../utils/copyStaticMethods";
 
 export default function StoreComponent(...stores) {
   return function decorator(Target) {
@@ -9,13 +10,7 @@ export default function StoreComponent(...stores) {
     delete Target.getStateFromStores;
     delete Target.fetchData;
 
-    return class SubscriptionComponent extends React.Component {
-      static async fetchData(params, query) {
-        if (fetchData) {
-          return fetchData.call(Target, params, query);
-        }
-      }
-
+    class SubscriptionComponent extends React.Component {
       constructor(props) {
         super(props);
         this.state = getStateFromStores(props)
@@ -43,5 +38,7 @@ export default function StoreComponent(...stores) {
         );
       }
     };
+
+    return copyStaticMethods(SubscriptionComponent, Target);
   };
 };
