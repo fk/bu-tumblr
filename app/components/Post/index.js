@@ -125,10 +125,8 @@ const getPostComponent = (post) => {
       return PostQuote;
     case "photo":
       return PostPhoto;
-    // case "chat":
-    //   return PostText;
     default:
       console.warn(post.get("type"), "is unhandled.");
-      return false;
+      return PostText;
   }
 };

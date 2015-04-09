@@ -7,8 +7,6 @@ import copyStaticMethods from "../utils/copyStaticMethods";
 export default function StoreComponent(...stores) {
   return function decorator(Target) {
     let { getStateFromStores, fetchData } = Target;
-    delete Target.getStateFromStores;
-    delete Target.fetchData;
 
     class SubscriptionComponent extends React.Component {
       constructor(props) {

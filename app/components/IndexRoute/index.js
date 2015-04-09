@@ -11,8 +11,8 @@ import InfiniteComponent from "../../decorators/InfiniteComponent";
 import PureRender from "../../decorators/PureRender";
 
 @PureRender
-@InfiniteComponent
 @StoreComponent(PostStore)
+@InfiniteComponent
 export default class IndexRoute extends React.Component {
   static async fetchData() {
     return await PostActionCreators.getPosts();
