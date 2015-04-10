@@ -65,13 +65,6 @@ class PostPhoto extends React.Component {
     if (i === 4) {
       // console.log(transition);
       let t = (i * (1 - transition));
-      if (t < (i - 1)) {
-        t = 0;
-      }
-      else if (t  > i) {
-        t = 0;
-      }
-
       t = t / i;
 
       console.log(t);
