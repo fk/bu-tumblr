@@ -45,7 +45,7 @@ class PostPhoto extends React.Component {
 
   @autobind
   renderPhoto(photo, key, array) {
-    const { post, single } = this.props;
+    const { post, single, inViewport } = this.props;
     const { photosetLayout } = post.toJS();
     let flex = 1;
     let height = 1;

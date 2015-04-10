@@ -15,7 +15,7 @@ import AppStore from "../../stores/AppStore";
 import autobind from "../../decorators/autobind";
 import StoreComponent from "../../decorators/StoreComponent";
 import PureRender from "../../decorators/PureRender";
-import { getInViewport } from "../../utils/viewport";
+import { getInViewport, getViewPort } from "../../utils/viewport";
 
 @PureRender
 @StoreComponent(AppStore)
@@ -52,12 +52,15 @@ export default class Post extends React.Component {
     super(props);
 
     this.animation = false;
-    this.state = { inViewport: false };
+    this.state = { inViewport: false, height: 0 };
   }
 
   componentDidMount() {
+    let node = React.findDOMNode(this);
+    let height = node.clientHeight;
+
+    this.setState({ height });
     this.onAdjust();
-    this.animation = requestAnimationFrame(this.onAdjust);
   }
 
   componentWillUnmount() {
@@ -67,11 +70,19 @@ export default class Post extends React.Component {
   @autobind
   onAdjust() {
     try {
-      const { viewport } = this.props;
+      const { viewport, index } = this.props;
       const node = React.findDOMNode(this);
       const inViewport = getInViewport(node);
 
-      this.setState({ inViewport }, () => {
+      let rect  = node.getBoundingClientRect();
+      let y = viewport.get(3);
+      let transformX = (parseFloat(
+        500 - Math.abs(
+          Math.max(Math.min(rect.top - y, 0), -500)
+      ), 10) / 500).toFixed(10);
+
+
+      this.setState({ inViewport, transformX }, () => {
         this.animation = requestAnimationFrame(this.onAdjust);
       });
     }
@@ -81,7 +92,7 @@ export default class Post extends React.Component {
   }
 
   render() {
-    const { inViewport } = this.state;
+    const { inViewport, height, transformX } = this.state;
     const { post, viewport, thumbnail, single, ...otherProps } = this.props;
     const Component = getPostComponent(post);
     const cx = classNames({
@@ -89,18 +100,28 @@ export default class Post extends React.Component {
       [`post-${post.get("type")}`]: true,
       "in-viewport": inViewport
     });
+    const styles = {
+      WebkitTransform: `translate3d(0, ${(transformX || 0) * 100}px, 0) scale(${(0.2 * transformX ) + 1})`,
+      opacity: 1 - transformX
+    };
     const hasTitle = (
       ["text"].indexOf(post.get("type")) === -1
     );
 
     return (
-      <div className={ classNames(["post-wrapper", { thumbnail, single }]) }>
+      <div
+        className={ classNames(["post-wrapper", {
+          thumbnail,
+          single
+        }]) }
+        style={ styles }>
         { !(single || thumbnail) && hasTitle &&
           <TitleBox post={ post } />
         }
         <Component
           { ...otherProps }
           { ...this.state }
+          inViewport={ inViewport }
           post={ post }
           className={ cx } />
         { !(single || thumbnail) &&

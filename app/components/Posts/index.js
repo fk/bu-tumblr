@@ -26,6 +26,7 @@ export default class Posts extends React.Component {
             <Post
               className={ `post post-${post.get("type")}` }
               key={ key }
+              index={ key }
               post={ post } />
           );
         }) }
