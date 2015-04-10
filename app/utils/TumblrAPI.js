@@ -9,7 +9,7 @@ const Post = new Schema("posts");
 const Author = new Schema("authors");
 
 const ENDPOINT_ROOT = "http://api.tumblr.com/v2/blog";
-const TUMBLR = "flux-api.tumblr.com";
+const TUMBLR = "cbotzzz.tumblr.com";
 const API_KEY = "fuiKNFp9vQFvjLNvx4sUwti4Yb5yGutBN4Xh10LXZhhRKjWlV4";
 
 export default {

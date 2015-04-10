@@ -74,25 +74,44 @@ export default class Post extends React.Component {
       const node = React.findDOMNode(this);
       const inViewport = getInViewport(node);
 
-      let rect  = node.getBoundingClientRect();
-      let y = viewport.get(3);
-      let transformX = (parseFloat(
-        500 - Math.abs(
-          Math.max(Math.min(rect.top - y, 0), -500)
-      ), 10) / 500).toFixed(10);
+      // let y = viewport.get(3);
+      // let transition = (parseFloat(
+      //   500 - Math.abs(
+      //     Math.max(Math.min(rect.top - y, 0), -500)
+      // ), 10) / 500).toFixed(10);
 
+      let [
+        viewportX,
+        viewportY,
+        viewportWidth,
+        viewportHeight
+      ] = viewport.toArray();
 
-      this.setState({ inViewport, transformX }, () => {
+      let {
+        top: postTop,
+        height: postHeight
+      } = node.getBoundingClientRect();
+
+      let transition = 1 - Math.min(
+        Math.abs(
+          Math.min(
+            0, postTop - viewportHeight
+          )
+        ), postHeight
+      ) / postHeight;
+
+      this.setState({ inViewport, transition }, () => {
         this.animation = requestAnimationFrame(this.onAdjust);
       });
     }
     catch (err) {
+      console.log(err);
       return false;
     }
   }
 
   render() {
-    const { inViewport, height, transformX } = this.state;
+    const { inViewport, height, transition } = this.state;
     const { post, viewport, thumbnail, single, ...otherProps } = this.props;
     const Component = getPostComponent(post);
     const cx = classNames({
@@ -101,8 +120,9 @@ export default class Post extends React.Component {
       "in-viewport": inViewport
     });
     const styles = {
-      WebkitTransform: `translate3d(0, ${(transformX || 0) * 100}px, 0) scale(${(0.2 * transformX ) + 1})`,
-      opacity: 1 - transformX
+      WebkitTransform: `translate3d(0, ${(transition || 0) * 100}px, 0) ` +
+        `scale(${(0.2 * transition ) + 1})`,
+      opacity: 1 - transition
     };
     const hasTitle = (
       ["text"].indexOf(post.get("type")) === -1
@@ -122,6 +142,7 @@ export default class Post extends React.Component {
           { ...otherProps }
           { ...this.state }
           inViewport={ inViewport }
+          transition={ transition }
           post={ post }
           className={ cx } />
         { !(single || thumbnail) &&

@@ -45,7 +45,7 @@ class PostPhoto extends React.Component {
 
   @autobind
   renderPhoto(photo, key, array) {
-    const { post, single, inViewport } = this.props;
+    const { post, single, inViewport, transition } = this.props;
     const { photosetLayout } = post.toJS();
     let flex = 1;
     let height = 1;
@@ -61,8 +61,25 @@ class PostPhoto extends React.Component {
       flex = flexList[key];
     }
 
+    let i = 1 + key;
+    if (i === 4) {
+      // console.log(transition);
+      let t = (i * (1 - transition));
+      if (t < (i - 1)) {
+        t = 0;
+      }
+      else if (t  > i) {
+        t = 0;
+      }
+
+      t = t / i;
+
+      console.log(t);
+    }
+
     let styles = {
-      backgroundImage: `url("${photo.getIn(["alt_sizes", 0, "url"])}")`
+      backgroundImage: `url("${photo.getIn(["alt_sizes", 0, "url"])}")`,
+      // WebkitTransform: `scale(${t})`
     };
 
     return (
