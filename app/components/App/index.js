@@ -4,6 +4,7 @@ import React, { PropTypes } from "react/addons";
 import { RouteHandler } from "react-router";
 import classNames from "classnames";
 import Header from "../Header";
+import Footer from "../Footer";
 import Navigation from "../Navigation";
 import Lightbox from "../Lightbox";
 import AppActionCreators from "../../actions/AppActionCreators";
@@ -72,6 +73,7 @@ export default class App extends React.Component {
               index={ lightbox.get("index")} />
           }
         </CSSTransitionGroup>
+        <Footer />
       </div>
     );
   }

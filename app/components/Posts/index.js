@@ -20,7 +20,6 @@ export default class Posts extends React.Component {
 
     return (
       <div className="posts">
-        <h3 style={{ position: "fixed", top: 10, right: 10, zIndex: 10000 }}>{ posts.size }</h3>
         { posts.map((post, key) => {
           return (
             <Post

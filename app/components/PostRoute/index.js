@@ -24,7 +24,7 @@ import { nameToURI } from "../../utils/uri";
 export default class PostRoute extends React.Component {
   static async fetchData(params) {
     let { postId } = params;
-    console.log(postId);
+
     return await PostActionCreators.getPost(postId);
   }
 
