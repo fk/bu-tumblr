@@ -49,7 +49,7 @@ export default class App extends React.Component {
     const name = this.context.router.getCurrentPath();
     const cx = classNames("app", {
       "fixed-header": fixedHeader,
-      "navigation-open": navOpen
+      "navigation-open": navOpen || lightbox.get("photos").size > 0
     });
 
     return (
@@ -65,11 +65,13 @@ export default class App extends React.Component {
             <Navigation key="nav" />
           }
         </CSSTransitionGroup>
-        { lightbox.get("photos").size > 0 &&
-          <Lightbox
-            photos={ lightbox.get("photos") }
-            index={ lightbox.get("index")} />
-        }
+        <CSSTransitionGroup transitionName="lightbox">
+          { lightbox.get("photos").size > 0 &&
+            <Lightbox
+              photos={ lightbox.get("photos") }
+              index={ lightbox.get("index")} />
+          }
+        </CSSTransitionGroup>
       </div>
     );
   }

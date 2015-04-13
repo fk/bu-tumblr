@@ -1,6 +1,8 @@
 "use strict";
 
 import React, { PropTypes } from "react/addons";
+import LightboxThumb from "./LightboxThumb";
+import LightboxActionCreators from "../../actions/LightboxActionCreators";
 import LightboxStore from "../../stores/LightboxStore";
 import StoreComponent from "../../decorators/StoreComponent";
 import PureRender from "../../decorators/PureRender";
@@ -14,29 +16,33 @@ export default class Lightbox extends React.Component {
     return { lightbox };
   }
 
+  handleClose(event) {
+    LightboxActionCreators.closeLightbox();
+  }
+
   render() {
     let { lightbox } = this.props;
     let { photos, index } = lightbox.toJS();
     let photo = photos[index].alt_sizes[0];
 
     return (
-      <div className="lightbox">
-        <h2></h2>
-        <img
-          className="image-large"
-          width={ photo.width }
-          height={ photo.height }
-          src={ photo.url } />
+      <div
+        onClick={ this.handleClose }
+        className="lightbox">
+        <div className="image-large-container">
+          <img
+            className="image-large"
+            width={ photo.width }
+            height={ photo.height }
+            src={ photo.url } />
+        </div>
         <nav className="image-thumbs">
           { photos.map((photo, key) => {
-            let thumb = photo.alt_sizes[photo.alt_sizes.length - 1];
-
             return (
-              <img
-                className="thumb"
-                src={ thumb.url }
-                width={ photo.width }
-                height={ photo.height } />
+              <LightboxThumb
+                key={ key }
+                index={ key }
+                photo={ photo } />
             );
           }) }
         </nav>

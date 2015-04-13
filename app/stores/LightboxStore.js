@@ -28,6 +28,19 @@ class LightboxStore {
   onOpenLightboxWithPhotosAtIndex({ photos, index }) {
     this.lightbox = this.lightbox.merge({ photos, index });
   }
+
+  onCloseLightbox() {
+    this.lightbox = this.lightbox.merge({
+      photos: new List(),
+      index: 0
+    });
+  }
+
+  onSetIndex(index) {
+    this.lightbox = this.lightbox.merge({
+      index: index
+    });
+  }
 }
 
 export default alt.createStore(LightboxStore, "LightboxStore");

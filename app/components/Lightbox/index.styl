@@ -1,22 +1,72 @@
+@import "nib"
+@import "jeet"
+@import "rupture"
+
+@keyframes fadeInUpLightbox
+  from
+    opacity 0
+    transform translateY(30%) translateZ(0)
+  to
+    opacity 1
+    transform translateY(0) translateZ(0)
+
 .lightbox
   display flex
+  flex-flow row wrap
   align-items center
   justify-content center
   position fixed
   top 0
   left 0
-  width 100vw
-  height 100vh
+  width 100%
+  height 100%
   z-index 1000
   background-color rgba(79,164,218,0.85)
+  overflow scroll
+  &.lightbox-enter, &.lightbox-leave
+    transition transform 400ms ease, opacity 400ms ease
 
-  .image-large
-    flex-grow 2
-    height auto
-    align-self center
+  &.lightbox-enter
+    transform scale(1.1)
+    opacity 0
+
+    &.lightbox-enter-active
+      transform scale(1)
+      opacity 1
+
+  &.lightbox-leave
+    transform scale(1)
+    opacity 1
+
+    &.lightbox-leave-active
+      transform scale(1.1)
+      opacity 0
+
+  .image-large-container
+    width 100vw
+    display flex
+    align-self flex-end
+    justify-content center
+    align-content center
+
+    .image-large
+      max-height 75vh
+      width auto
+      animation fadeInUpLightbox 600ms ease
+      animation-fill-mode both
 
   .image-thumbs
-    flex-grow 1
+    height 10rem
+    margin 1rem
+    align-self flex-start
 
     .thumb
       width 100px
+      margin 0 1rem
+      cursor pointer
+      animation fadeInUpLightbox 600ms ease
+      animation-fill-mode both
+
+      for n in 1..10
+        &:nth-child({n})
+          animation-delay 100ms * n
