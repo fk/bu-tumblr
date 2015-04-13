@@ -32,10 +32,6 @@ export default class IndexRoute extends React.Component {
     return { posts };
   }
 
-  componentWillReceiveProps(nextProps, nextState) {
-    let { viewport } = nextProps;
-  }
-
   render() {
     let postsArr = this.props.posts.toList();
     let leadingPost = postsArr.first();

@@ -36,10 +36,6 @@ export default class PostRoute extends React.Component {
     return { router, post };
   }
 
-  componentWillLeave() {
-    console.log("!!!");
-  }
-
   render() {
     let { router, post } = this.props;
 

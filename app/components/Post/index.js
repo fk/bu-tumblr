@@ -73,32 +73,14 @@ export default class Post extends React.Component {
       const { viewport, index } = this.props;
       const node = React.findDOMNode(this);
       const inViewport = getInViewport(node);
+      const drag = 250;
 
-      // let y = viewport.get(3);
-      // let transition = (parseFloat(
-      //   500 - Math.abs(
-      //     Math.max(Math.min(rect.top - y, 0), -500)
-      // ), 10) / 500).toFixed(10);
-
-      let [
-        viewportX,
-        viewportY,
-        viewportWidth,
-        viewportHeight
-      ] = viewport.toArray();
-
-      let {
-        top: postTop,
-        height: postHeight
-      } = node.getBoundingClientRect();
-
-      let transition = 1 - Math.min(
-        Math.abs(
-          Math.min(
-            0, postTop - viewportHeight
-          )
-        ), postHeight
-      ) / postHeight;
+      let [viewportX, viewportY, viewportWidth, viewportHeight] = viewport
+        .toArray();
+      let { top: postTop, height: postHeight } = node
+        .getBoundingClientRect();
+      let start = postTop - viewportHeight + 75;
+      let transition = 1 - Math.min(Math.abs(Math.min(0, start)), drag) / drag;
 
       this.setState({ inViewport, transition }, () => {
         this.animation = requestAnimationFrame(this.onAdjust);

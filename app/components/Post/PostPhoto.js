@@ -62,17 +62,9 @@ class PostPhoto extends React.Component {
     }
 
     let i = 1 + key;
-    if (i === 4) {
-      // console.log(transition);
-      let t = (i * (1 - transition));
-      t = t / i;
-
-      console.log(t);
-    }
 
     let styles = {
-      backgroundImage: `url("${photo.getIn(["alt_sizes", 0, "url"])}")`,
-      // WebkitTransform: `scale(${t})`
+      backgroundImage: `url("${photo.getIn(["alt_sizes", 0, "url"])}")`
     };
 
     return (
