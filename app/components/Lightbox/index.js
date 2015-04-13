@@ -1,12 +1,15 @@
 "use strict";
 
 import React, { PropTypes } from "react/addons";
+import classNames from "classnames";
 import LightboxThumb from "./LightboxThumb";
 import Spinner from "../Spinner";
 import LightboxActionCreators from "../../actions/LightboxActionCreators";
 import LightboxStore from "../../stores/LightboxStore";
 import StoreComponent from "../../decorators/StoreComponent";
 import PureRender from "../../decorators/PureRender";
+
+const { CSSTransitionGroup } = React.addons;
 
 @PureRender
 @StoreComponent(LightboxStore)
@@ -64,6 +67,9 @@ export default class Lightbox extends React.Component {
     let { lightbox } = this.props;
     let { photos, index } = lightbox.toJS();
     let photo = photos[index];
+    let cx = classNames(["image-large-container", {
+      "center": photos.length === 1
+    }]);
     let image;
     if (photo) {
       image = photo.alt_sizes[0];
@@ -77,15 +83,16 @@ export default class Lightbox extends React.Component {
           <Spinner />
         }
         { image &&
-          <div className="image-large-container">
+          <div className={ cx }>
             <img
               className="image-large"
+              key={ image.url }
               width={ image.width }
               height={ image.height }
               src={ image.url } />
           </div>
         }
-        { image &&
+        { photos && photos.length > 1 &&
           <nav className="image-thumbs">
             <button
               className="lightbox-arrow left"

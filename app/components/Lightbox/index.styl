@@ -49,12 +49,28 @@
     justify-content center
     align-content center
 
+    &.center
+      align-self center
+
     .image-large
       max-height 75vh
       width auto
       animation fadeInUpLightbox 600ms ease
       animation-fill-mode both
       border 2px solid #fff
+
+      &.lightbox-photo-enter, &.lightbox-photo-leave
+        transition all 175ms ease-in-out
+
+      &.lightbox-photo-enter
+        opacity 0
+        &.lightbox-photo-enter-active
+          opacity 1
+
+      &.lightbox-photo-leave
+        opacity 1
+        &.lightbox-photo-leave-active
+          opacity 0
 
   .image-thumbs
     display flex
