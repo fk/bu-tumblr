@@ -33,7 +33,7 @@ async function fetchData(state) {
     let { displayName } = handler;
 
     try {
-      data[displayName] = await handler.fetchData(state);
+      data[displayName] = await handler.fetchData(state.params, state.query);
     }
     catch (err) { }
   }

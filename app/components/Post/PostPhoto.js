@@ -5,12 +5,25 @@ import { Link } from "react-router";
 import warning from "react/lib/warning";
 import { Map } from "immutable";
 import classNames from "classnames";
+import LightboxStore from "../../stores/LightboxStore";
 import LightboxActionCreators from "../../actions/LightboxActionCreators";
+import StoreComponent from "../../decorators/StoreComponent";
 import autobind from "../../decorators/autobind";
 import PureRender from "../../decorators/PureRender";
 
 @PureRender
+@StoreComponent(LightboxStore)
 class PostPhoto extends React.Component {
+  state = {
+    hovered: null
+  }
+
+  static getStateFromStores(props) {
+    let { lightbox } = LightboxStore.getState();
+
+    return { lightbox };
+  }
+
   static propTypes = {
     post(props, propName, component) {
       let post = props[propName];
@@ -44,8 +57,16 @@ class PostPhoto extends React.Component {
   }
 
   @autobind
+  handleHover(index) {
+    return (event) => {
+      this.setState({ hovered: index });
+    }
+  }
+
+  @autobind
   renderPhoto(photo, key, array) {
-    const { post, single, inViewport, transition } = this.props;
+    const { hovered } = this.state;
+    const { post, single, inViewport, transition, lightbox } = this.props;
     const { photosetLayout } = post.toJS();
     let flex = 1;
     let height = 1;
@@ -63,6 +84,14 @@ class PostPhoto extends React.Component {
 
     let i = 1 + key;
 
+    let cx = classNames(["photo", `flex-${flex}`, `height-${height}`, {
+      "dimmed": (hovered !== null) &&
+        (hovered !== key) &&
+        lightbox.get("photos").size === 0,
+      "scaled": hovered === key &&
+        lightbox.get("photos").size === 0
+    }]);
+
     let styles = {
       backgroundImage: `url("${photo.getIn(["alt_sizes", 0, "url"])}")`
     };
@@ -70,8 +99,10 @@ class PostPhoto extends React.Component {
     return (
       <li
         key={ key }
+        onMouseEnter={ this.handleHover(key) }
+        onMouseLeave={ this.handleHover(null) }
         onClick={ this.handlePhotoClick(photo) }
-        className={ `photo flex-${flex} height-${height}` }
+        className={ cx }
         style={ styles } />
     );
   }

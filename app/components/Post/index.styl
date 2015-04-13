@@ -79,11 +79,21 @@
     cf()
 
     .photo
+      position relative
       height 30rem
       width 30rem
       background-repeat no-repeat
       background-size cover
       background-position center center
+      cursor pointer
+      transition all 175ms ease-in-out
+
+      &.dimmed
+        opacity 0.5
+
+      &.scaled
+        transform scale(1.1)
+        z-index 1000
 
       for n in 1..4
         &.flex-{n}

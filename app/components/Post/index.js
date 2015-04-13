@@ -52,7 +52,7 @@ export default class Post extends React.Component {
     super(props);
 
     this.animation = false;
-    this.state = { inViewport: false, height: 0 };
+    this.state = { inViewport: false, height: 0, viewed: false };
   }
 
   componentDidMount() {
@@ -70,6 +70,7 @@ export default class Post extends React.Component {
   @autobind
   onAdjust() {
     try {
+      let { viewed } = this.state;
       const { viewport, index } = this.props;
       const node = React.findDOMNode(this);
       const inViewport = getInViewport(node);
@@ -80,9 +81,15 @@ export default class Post extends React.Component {
       let { top: postTop, height: postHeight } = node
         .getBoundingClientRect();
       let start = postTop - viewportHeight + 75;
-      let transition = 1 - Math.min(Math.abs(Math.min(0, start)), drag) / drag;
+      let transition = viewed ?
+        0 :
+        1 - Math.min(Math.abs(Math.min(0, start)), drag) / drag;
 
-      this.setState({ inViewport, transition }, () => {
+      if (transition === 0) {
+        viewed = true;
+      }
+
+      this.setState({ inViewport, transition, viewed }, () => {
         this.animation = requestAnimationFrame(this.onAdjust);
       });
     }

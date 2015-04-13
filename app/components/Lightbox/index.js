@@ -2,6 +2,7 @@
 
 import React, { PropTypes } from "react/addons";
 import LightboxThumb from "./LightboxThumb";
+import Spinner from "../Spinner";
 import LightboxActionCreators from "../../actions/LightboxActionCreators";
 import LightboxStore from "../../stores/LightboxStore";
 import StoreComponent from "../../decorators/StoreComponent";
@@ -62,39 +63,50 @@ export default class Lightbox extends React.Component {
   render() {
     let { lightbox } = this.props;
     let { photos, index } = lightbox.toJS();
-    let photo = photos[index].alt_sizes[0];
+    let photo = photos[index];
+    let image;
+    if (photo) {
+      image = photo.alt_sizes[0];
+    }
 
     return (
       <div
         onClick={ this.handleClose }
         className="lightbox">
-        <div className="image-large-container">
-          <img
-            className="image-large"
-            width={ photo.width }
-            height={ photo.height }
-            src={ photo.url } />
-        </div>
-        <nav className="image-thumbs">
-          <button
-            className="lightbox-arrow left"
-            onClick={ this.handleMoveBack }>
-            <i className="fa fa-angle-left" />
-          </button>
-          { photos.map((photo, key) => {
-            return (
-              <LightboxThumb
-                key={ key }
-                index={ key }
-                photo={ photo } />
-            );
-          }) }
-          <button
-            className="lightbox-arrow right"
-            onClick={ this.handleMoveForward }>
-            <i className="fa fa-angle-right" />
-          </button>
-        </nav>
+        { !image &&
+          <Spinner />
+        }
+        { image &&
+          <div className="image-large-container">
+            <img
+              className="image-large"
+              width={ image.width }
+              height={ image.height }
+              src={ image.url } />
+          </div>
+        }
+        { image &&
+          <nav className="image-thumbs">
+            <button
+              className="lightbox-arrow left"
+              onClick={ this.handleMoveBack }>
+              <i className="fa fa-angle-left" />
+            </button>
+            { photos.map((thumb, key) => {
+              return (
+                <LightboxThumb
+                  key={ key }
+                  index={ key }
+                  photo={ thumb } />
+              );
+            }) }
+            <button
+              className="lightbox-arrow right"
+              onClick={ this.handleMoveForward }>
+              <i className="fa fa-angle-right" />
+            </button>
+          </nav>
+        }
       </div>
     );
   }
