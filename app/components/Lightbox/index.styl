@@ -54,18 +54,37 @@
       width auto
       animation fadeInUpLightbox 600ms ease
       animation-fill-mode both
+      border 2px solid #fff
 
   .image-thumbs
+    display flex
     height 10rem
     margin 1rem
     align-self flex-start
 
-    .thumb
+    .lightbox-arrow
+      align-self flex-start
+      height 100px
       width 100px
+      line-height 100px
+      background none
+      color #fff
+      border none
+      font-size 2rem
+
+      &.left
+        text-align right
+
+      &.right
+        text-align left
+
+    .thumb
+      height 100px
       margin 0 1rem
       cursor pointer
       animation fadeInUpLightbox 600ms ease
       animation-fill-mode both
+      border 2px solid #fff
 
       for n in 1..10
         &:nth-child({n})

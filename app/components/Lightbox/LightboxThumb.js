@@ -13,7 +13,7 @@ export default class LightboxThumb extends React.Component {
 
   render() {
     let { photo } = this.props;
-    let thumb = photo.alt_sizes[photo.alt_sizes.length - 1];
+    let thumb = photo.alt_sizes[1];
 
     return (
       <img

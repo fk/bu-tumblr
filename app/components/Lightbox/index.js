@@ -16,8 +16,47 @@ export default class Lightbox extends React.Component {
     return { lightbox };
   }
 
+  handleKeyPress(event) {
+    switch (event.keyIdentifier) {
+      case "Left":
+        LightboxActionCreators.moveBack();
+        event.preventDefault();
+        return false;
+        break;
+      case "Right":
+        LightboxActionCreators.moveForward();
+        event.preventDefault();
+        return false;
+        break;
+      case "Esc":
+      case "Escape":
+      case "U+001B":
+        LightboxActionCreators.closeLightbox();
+        event.preventDefault();
+        break;
+    }
+  }
+
+  componentDidMount() {
+    document.addEventListener("keyup", this.handleKeyPress);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("keyup", this.handleKeyPress);
+  }
+
   handleClose(event) {
     LightboxActionCreators.closeLightbox();
+  }
+
+  handleMoveBack(event) {
+    event.stopPropagation();
+    LightboxActionCreators.moveBack();
+  }
+
+  handleMoveForward(event) {
+    event.stopPropagation();
+    LightboxActionCreators.moveForward();
   }
 
   render() {
@@ -37,6 +76,11 @@ export default class Lightbox extends React.Component {
             src={ photo.url } />
         </div>
         <nav className="image-thumbs">
+          <button
+            className="lightbox-arrow left"
+            onClick={ this.handleMoveBack }>
+            <i className="fa fa-angle-left" />
+          </button>
           { photos.map((photo, key) => {
             return (
               <LightboxThumb
@@ -45,6 +89,11 @@ export default class Lightbox extends React.Component {
                 photo={ photo } />
             );
           }) }
+          <button
+            className="lightbox-arrow right"
+            onClick={ this.handleMoveForward }>
+            <i className="fa fa-angle-right" />
+          </button>
         </nav>
       </div>
     );

@@ -7,7 +7,9 @@ class LightboxActionCreators {
     this.generateActions(
       "openLightboxWithPhotosAtIndex",
       "closeLightbox",
-      "setIndex"
+      "setIndex",
+      "moveBack",
+      "moveForward"
     );
   }
 }
