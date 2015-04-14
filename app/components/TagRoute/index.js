@@ -31,13 +31,17 @@ export default class TagRoute extends React.Component {
   }
 
   static getStateFromStores(params) {
-
+    let { posts } = PostStore.getState();
+    posts = posts.sort((a, b) => a.get("id") < b.get("id") ? 1 : -1);
+    return { posts };
   }
 
   render() {
-    return (
-      <div className="tag-route">
+    let posts = this.props.posts.toList();
 
+    return (
+      <div className="index-route">
+        <Posts posts={ posts } />
       </div>
     );
   }
