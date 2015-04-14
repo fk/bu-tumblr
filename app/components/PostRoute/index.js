@@ -85,7 +85,11 @@ export default class PostRoute extends React.Component {
               <span className="tag-list">
                 # { post.get("tags").map(tag => {
                   return (
-                    <Link to="/">{ tag.toUpperCase() }</Link>
+                    <Link
+                      to="tag"
+                      params={{ tagName: tag }}>
+                      { tag.toUpperCase() }
+                    </Link>
                   );
                 }) }
               </span>

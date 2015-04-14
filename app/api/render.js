@@ -77,6 +77,10 @@ export default () => {
         <HTMLDocument
           markup={ markup }
           payload={ alt.flush() }
+          styles={ [
+            process.env.NODE_ENV === "production" ?
+              "/stylesheets/app.min.css" : "/stylesheets/app.css"
+          ] }
           scripts={ [
             process.env.NODE_ENV === "production" ?
               "/bundle.min.js" : "http://localhost:9000/dist/bundle.js"

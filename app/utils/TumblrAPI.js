@@ -74,7 +74,7 @@ export default {
     let data = await jsonp(url, params);
     const posts = camelify(data.response.posts);
 
-    return normalize(posts, arayOf(Post));
+    return normalize(posts, arrayOf(Post));
   }
 };
 

@@ -29,7 +29,7 @@ function cancel(script, _id) {
   if (window[_id]) cleanup(script, _id);
 }
 
-function request (url, params) {
+function request(url, params) {
   let _id = `jsonp${++ID_COUNTER}`;
   let callbackUrl = `${url}&callback=${_id}`;
 

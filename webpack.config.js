@@ -4,6 +4,8 @@ var webpack = require("webpack");
 var path = require("path");
 var assign = require("object-assign");
 
+function noop() {}
+
 var progressEvent = function(percentage, message) {
   var MOVE_LEFT = new Buffer("1b5b3130303044", "hex").toString();
   var CLEAR_LINE = new Buffer("1b5b304b", "hex").toString();
@@ -36,7 +38,8 @@ var base = {
     new webpack.ProgressPlugin(progressEvent),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({ comments: false })
+    (process.env.NODE_ENV === "production" ?
+      new webpack.optimize.UglifyJsPlugin({ comments: false }) : noop)
   ],
   module: {
     loaders: [

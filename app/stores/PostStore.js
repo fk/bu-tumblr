@@ -33,34 +33,24 @@ class PostStore {
     return posts.filter(post => post.get("author") === authorName);
   }
 
+  static getPostsByTagName(tagName) {
+    let { posts } = this.getState();
+
+    return posts.filter(post => post.get("tags").indexOf(tagName) > -1);
+  }
+
   static getById(id) {
     let { posts } = this.getState();
 
     return posts.get(id);
   }
 
-  componentWillEnter() {
-    console.log("Will enter");
-  }
-
-  componentDidEnter() {
-    console.log("Did enter");
-
-  }
-
-  componentWillLeave() {
-    console.log("Will leave");
-
-  }
-
-  componentDidLeave() {
-    console.log("Did leave");
-
-  }
-
-
   onGetPosts() {
 
+  }
+
+  onGetPostsByTagNameSuccess(resp = {}) {
+    this.onGetPostsSuccess.call(this, resp);
   }
 
   onGetAuthorSuccess(resp = {}) {
