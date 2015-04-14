@@ -28,4 +28,4 @@ class RouterStore {
   }
 }
 
-export default alt.createStore(RouterStore);
+export default alt.createStore(RouterStore, "RouterStore");
