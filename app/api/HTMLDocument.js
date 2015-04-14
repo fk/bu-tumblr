@@ -23,7 +23,7 @@ export default class App extends React.Component {
         <script src="//use.typekit.net/iey8vjp.js"></script>
         <script dangerouslySetInnerHTML={{__html: TYPE_KIT_EXEC }} />
         <link href={fonts} rel="stylesheet" />
-        <link rel="stylesheet" href={`/stylesheets/${css}.css`} />
+        <link rel="stylesheet" href={`/stylesheets/app.css`} />
       </head>
       <body>
         <div
