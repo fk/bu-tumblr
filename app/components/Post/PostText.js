@@ -13,6 +13,11 @@ class PostText extends React.Component {
 
   render() {
     const { className, post, single, ...otherProps } = this.props;
+    let body = post.get("body");
+
+    if (!single) {
+      body = body.replace(/(<([^>]+)>)/ig, "");
+    }
 
     return (
       <div className={ classNames([className, { "single": single }]) }>
@@ -21,7 +26,7 @@ class PostText extends React.Component {
         }
         <div
           className="text-body"
-          dangerouslySetInnerHTML={{ __html: post.get("body") }} />
+          dangerouslySetInnerHTML={{ __html: body }} />
       </div>
     );
   }

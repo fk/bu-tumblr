@@ -60,12 +60,20 @@
     margin 0
     padding 0 0 0.875rem
 
+  figure
+    padding 0
+    margin 1rem 0
+
+    img
+      width 100%
+      height auto
+
   .text-body
     column-count 3
     font-size 0.875rem
     line-height 1.5rem
 
-    +below(700px)
+    +below(990px)
       column-count 2
 
     +below(570px)
@@ -89,7 +97,7 @@
       transition all 175ms ease-in-out
 
       &.dimmed
-        opacity 0.5
+        opacity 0.85
 
       &.scaled
         transform scale(1.1)

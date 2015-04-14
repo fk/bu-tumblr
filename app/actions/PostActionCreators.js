@@ -10,39 +10,52 @@ class PostActionCreators {
       "getPostsSuccess",
       "getPostsError",
       "getPostSuccess",
-      "getPostError"
+      "getPostError",
+      "getPostsByTagNameSuccess",
+      "getPostsByTagNameError"
     );
   }
 
-  getPosts(params = {}) {
+  async getPosts(params = {}) {
     this.dispatch(params);
 
-    return TumblrAPI.getPosts(params)
-      .then(this.actions.getPostsSuccess)
-      .catch(this.actions.getPostsError);
+    try {
+      let response = await TumblrAPI.getPosts(params);
+      this.actions.getPostsSuccess(response);
+      return response;
+    }
+    catch (err) {
+      this.actions.getPostsError(err);
+      return err;
+    }
   }
 
-  getPost(id = null) {
-    let type = Object.prototype.toString.call(id);
-    invariant(
-      type === "[object String]",
-      "PostActionCreators.getPost(...): Please provide a valid number id. " +
-      "Received `%s`",
-      type
-    );
-
+  async getPost(id = null) {
     this.dispatch(id);
 
-    return TumblrAPI.getPost(id)
-      .then(data => {
-        this.actions.getPostSuccess(data);
+    try {
+      let response = await TumblrAPI.getPost(id);
+      this.actions.getPostSuccess(response);
+      return response;
+    }
+    catch (err) {
+      this.actions.getPostError(err);
+      return err;
+    }
+  }
 
-        return data;
-      })
-      .catch(err => {
-        this.actions.getPostError(err);
-        return err;
-      });
+  async getPostsByTagName(tagName = null) {
+    this.dispatch();
+
+    try {
+      let response = await TumblrAPI.getPostsByTagName(tagName);
+      this.actions.getPostsByTagNameSuccess(response);
+      return response;
+    }
+    catch (err) {
+      this.actions.getPostsByTagNameError(err);
+      return err;
+    }
   }
 }
 

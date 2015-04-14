@@ -34,15 +34,30 @@ export default function decorator(Target) {
     }
 
     checkScroll(event) {
-      let { request, page, itemsPerPage } = this.state;
+      let { request, page, itemsPerPage, complete } = this.state;
       let { clientHeight } = document.body;
+
+      if (complete) {
+        return cancelAnimationFrame(this.frame);
+      }
 
       viewport = viewport.merge(getViewport());
 
       const THRESHOLD = clientHeight - (viewport.get("h") / 2);
       const SCROLLED = viewport.get("y") + viewport.get("h");
       const LOAD_MORE = SCROLLED > THRESHOLD;
-      const CLEAR_LOAD_ACTION = () => this.setState({ request: false });
+      const CLEAR_LOAD_ACTION = (data) => {
+        let request = false;
+        let complete = false;
+
+        if (!data.result || data.result.length === 0) {
+          complete = true;
+        }
+
+        this.setState({ request, complete });
+
+        return data;
+      };
 
       if (LOAD_MORE && !request) {
         page += 1;

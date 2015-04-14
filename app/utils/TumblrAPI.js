@@ -9,7 +9,7 @@ const Post = new Schema("posts");
 const Author = new Schema("authors");
 
 const ENDPOINT_ROOT = "http://api.tumblr.com/v2/blog";
-const TUMBLR = "cbotzzz.tumblr.com";
+const TUMBLR = "brooklynunited.tumblr.com";
 const API_KEY = "iiXyRVDvsjEMOJV1Ick83wXNir0GsHsH3NbIctuRjbPvVjq65Q";
 
 export default {
@@ -61,6 +61,20 @@ export default {
     const posts = camelify(data.response.posts);
 
     return normalize(posts, arrayOf(Post));
+  },
+
+  async getPostsByTagName(tagName) {
+    let url = makeUrl("posts");
+    let params = {
+      apiKey: API_KEY,
+      tag: tagName,
+      reblogInfo: false,
+      notesInfo: false
+    };
+    let data = await jsonp(url, params);
+    const posts = camelify(data.response.posts);
+
+    return normalize(posts, arayOf(Post));
   }
 };
 

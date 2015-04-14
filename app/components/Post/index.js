@@ -130,6 +130,7 @@ export default class Post extends React.Component {
         <Component
           { ...otherProps }
           { ...this.state }
+          single={ single }
           inViewport={ inViewport }
           transition={ transition }
           post={ post }

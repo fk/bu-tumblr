@@ -35,13 +35,55 @@ export default class HeroUnit extends React.Component {
             <nav className="hashtags">
               <h4>Search by hashtag</h4>
               <ul>
-                <li><Link to="/">#people</Link></li>
-                <li><Link to="/">#design</Link></li>
-                <li><Link to="/">#strategy</Link></li>
-                <li><Link to="/">#business</Link></li>
-                <li><Link to="/">#technology</Link></li>
-                <li><Link to="/">#client services</Link></li>
-                <li><Link to="/">#random</Link></li>
+                <li>
+                  <Link
+                    to="tag"
+                    params={{ tagName: "people" }}>
+                    #people
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="tag"
+                    params={{ tagName: "design" }}>
+                    #design
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="tag"
+                    params={{ tagName: "strategy" }}>
+                    #strategy
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="tag"
+                    params={{ tagName: "business" }}>
+                    #business
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="tag"
+                    params={{ tagName: "technology" }}>
+                    #technology
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="tag"
+                    params={{ tagName: "client services" }}>
+                    #client services
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="tag"
+                    params={{ tagName: "random" }}>
+                    #random
+                  </Link>
+                </li>
               </ul>
             </nav>
           </div>

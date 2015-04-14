@@ -5,7 +5,7 @@
 @keyframes fadeInUpLightbox
   from
     opacity 0
-    transform translateY(30%) translateZ(0)
+    transform translateY(5%) translateZ(0)
   to
     opacity 1
     transform translateY(0) translateZ(0)
@@ -23,6 +23,7 @@
   z-index 1000
   background-color rgba(79,164,218,0.85)
   overflow scroll
+
   &.lightbox-enter, &.lightbox-leave
     transition transform 400ms ease, opacity 400ms ease
 
@@ -102,6 +103,6 @@
       animation-fill-mode both
       border 2px solid #fff
 
-      for n in 1..10
+      for n in 1..20
         &:nth-child({n})
           animation-delay 100ms * n
