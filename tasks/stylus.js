@@ -33,7 +33,11 @@ module.exports = {
       }));
 
 
-    stream.pipe(sourcemaps.init({ loadMaps: true }));
+    stream.pipe(gif(
+      !production,
+      sourcemaps.init({ loadMaps: true }),
+      gutil.noop()
+    ));
     stream.queue(normalize);
     stream.queue(fonts);
     stream.queue(styles);
@@ -42,7 +46,11 @@ module.exports = {
     return stream.done()
       .pipe(concat(gif(production, "app.min.css", "app.css")))
       .pipe(gif(production, minifyCSS(), gutil.noop()))
-      .pipe(sourcemaps.write())
+      .pipe(gif(
+        !production,
+        sourcemaps.write(),
+        gutil.noop()
+      ))
       .pipe(gulp.dest("./public/stylesheets"));
   },
 
