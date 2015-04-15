@@ -1,16 +1,12 @@
 "use strict";
 
-import React, { PropTypes } from "react/addons";
+import React, { PropTypes } from "react";
+import { Link } from "react-router";
 import classNames from "classnames";
+import PureRender from "../../decorators/PureRender";
 
-const { PureRenderMixin } = React.addons;
-
+@PureRender
 class TitleBox extends React.Component {
-  shouldComponentUpdate(nextProps, nextState) {
-    return PureRenderMixin.shouldComponentUpdate
-      .call(this, nextProps, nextState);
-  }
-
   render() {
     let { post } = this.props;
     let cx = classNames({
@@ -20,7 +16,14 @@ class TitleBox extends React.Component {
 
     return (
       <div className={ cx }>
-        <h3>{ post.get("title") }</h3>
+        <h3>
+          <Link
+            to="post"
+            title={ post.get("title") }
+            params={{ postId: post.get("id") }}>
+            { post.get("title") }
+          </Link>
+        </h3>
       </div>
     );
   }

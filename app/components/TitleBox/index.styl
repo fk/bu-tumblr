@@ -6,7 +6,6 @@ BREAKPOINT = 990px
 .title-box
   position absolute
   margin 0
-  padding 3.125rem 5.125rem 2.25rem 1.625rem
   min-width 5rem * 4
   top 0
   left 1.625rem
@@ -33,3 +32,36 @@ BREAKPOINT = 990px
     font-weight 400
     margin 0
     padding 0
+
+    a
+      display block
+      position relative
+      color #fff
+      overflow hidden
+      transition transform 275ms ease-in-out
+      transform rotateX(0deg)
+      transform-style preserve-3d
+      padding 3.125rem 5.125rem 2.25rem 1.625rem
+
+      &::after
+        box-sizing content-box
+        content attr(title)
+        padding 3.125rem 0 2.235rem
+        text-indent 1.625rem
+        position absolute
+        display block
+        top 0
+        left 0
+        height 100%
+        width 0%
+        color #333
+        background-color #fff
+        overflow hidden
+        transition all 400ms ease-in-out
+        word-wrap normal
+        word-break keep-all
+        white-space nowrap
+
+      &:hover::after
+        width 100%
+
