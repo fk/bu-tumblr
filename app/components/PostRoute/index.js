@@ -3,6 +3,7 @@
 import React, { PropTypes } from "react";
 import warning from "react/lib/warning";
 import { Link } from "react-router";
+import DocumentTitle from "react-document-title";
 import { OrderedMap } from "immutable";
 import moment from "moment";
 import Post from "../Post";
@@ -49,64 +50,69 @@ export default class PostRoute extends React.Component {
     }
 
     let date = moment(new Date(post.get("date"))).format("MMMM DD, YYYY");
+    let title = post.has("title") ?
+      post.get("title") :
+      post.get("type").charAt(0).toUpperCase() + post.get("type").slice(1);
 
     return (
-      <div className="post-route">
-        <BackButton />
-        <Backer />
-        <div className="post-column">
-          { post.has("title") &&
-            <h2>{ post.get("title") }</h2>
-          }
-          <Post
-            post={ post }
-            single={ true } />
-          { post.has("caption") && !!post.get("caption").trim() &&
-            <span
-              className="post-caption"
-              dangerouslySetInnerHTML={{ __html: post.get("caption") }} />
-          }
-          { post.has("author") &&
-            <div className="author">
-              By <Link
-                to="author"
-                params={{ authorName: nameToURI(post.get("author")) }}>
-                { post.get("author") }
-              </Link> on { date }
+      <DocumentTitle title={ `${title} - Brooklyn United` }>
+        <div className="post-route">
+          <BackButton />
+          <Backer />
+          <div className="post-column">
+            { post.has("title") &&
+              <h2>{ post.get("title") }</h2>
+            }
+            <Post
+              post={ post }
+              single={ true } />
+            { post.has("caption") && !!post.get("caption").trim() &&
+              <span
+                className="post-caption"
+                dangerouslySetInnerHTML={{ __html: post.get("caption") }} />
+            }
+            { post.has("author") &&
+              <div className="author">
+                By <Link
+                  to="author"
+                  params={{ authorName: nameToURI(post.get("author")) }}>
+                  { post.get("author") }
+                </Link> on { date }
+              </div>
+            }
+            <ShareBox
+              post={ post }
+              single={ true } />
+          </div>
+          { (post.get("tags").size > 0 || post.get("noteCount") > 0) &&
+            <div className="note-band">
+              { post.get("tags").size > 0 &&
+                <span className="tag-list">
+                  # { post.get("tags").map((tag, key) => {
+                    return (
+                      <Link
+                        key={ key }
+                        to="tag"
+                        params={{ tagName: tag }}>
+                        { tag.toUpperCase() }
+                      </Link>
+                    );
+                  }) }
+                </span>
+              }
+              { post.get("noteCount") > 0 &&
+                <span className="note-count">
+                  { post.get("noteCount") } notes
+                </span>
+              }
             </div>
           }
-          <ShareBox
-            post={ post }
-            single={ true } />
+          { post.get("noteCount") > 0 &&
+            <NoteBox notes={ post.get("notes") } />
+          }
+          <BackButton />
         </div>
-        { (post.get("tags").size > 0 || post.get("noteCount") > 0) &&
-          <div className="note-band">
-            { post.get("tags").size > 0 &&
-              <span className="tag-list">
-                # { post.get("tags").map((tag, key) => {
-                  return (
-                    <Link
-                      key={ key }
-                      to="tag"
-                      params={{ tagName: tag }}>
-                      { tag.toUpperCase() }
-                    </Link>
-                  );
-                }) }
-              </span>
-            }
-            { post.get("noteCount") > 0 &&
-              <span className="note-count">
-                { post.get("noteCount") } notes
-              </span>
-            }
-          </div>
-        }
-        { post.get("noteCount") > 0 &&
-          <NoteBox notes={ post.get("notes") } />
-        }
-        <BackButton />
-      </div>
+      </DocumentTitle>
     );
   }
 }

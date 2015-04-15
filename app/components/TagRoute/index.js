@@ -1,4 +1,5 @@
 import React, { PropTypes } from "react";
+import DocumentTitle from "react-document-title";
 import Posts from "../Posts";
 import Backer from "../Backer";
 import BackButton from "../BackButton";
@@ -14,7 +15,6 @@ import PureRender from "../../decorators/PureRender";
 @InfiniteComponent
 export default class TagRoute extends React.Component {
   static async fetchData(params, query) {
-    console.log("FETCH");
     return await PostActionCreators.getPostsByTagName(params.tagName);
   }
 
@@ -40,19 +40,22 @@ export default class TagRoute extends React.Component {
 
     posts = posts.sort((a, b) => a.get("id") < b.get("id") ? 1 : -1);
 
-    return { posts };
+    return { posts, router };
   }
 
   render() {
     let { posts } = this.props;
+    let tagName = this.props.router.getIn(["params", "tagName"]);
 
     return (
-      <div className="tag-route">
-        <Backer />
-        <BackButton />
-        <Posts posts={ posts } />
-        <BackButton />
-      </div>
+      <DocumentTitle title={ `Tag \`${tagName}\` - Brooklyn United` }>
+        <div className="tag-route">
+          <Backer />
+          <BackButton />
+          <Posts posts={ posts } />
+          <BackButton />
+        </div>
+      </DocumentTitle>
     );
   }
 }

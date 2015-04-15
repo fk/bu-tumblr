@@ -1,6 +1,7 @@
 "use strict";
 
 import React, { PropTypes } from "react/addons";
+import DocumentTitle from "react-document-title";
 import serialize from "serialize-javascript";
 import { RouteHandler } from "react-router";
 
@@ -24,7 +25,7 @@ export default class App extends React.Component {
     return (
       <html lang="en">
       <head>
-        <title>Brooklyn United</title>
+        <title>{ DocumentTitle.rewind() }</title>
         <link href={fonts} rel="stylesheet" />
         { styles.map((href, key) => (
           <link

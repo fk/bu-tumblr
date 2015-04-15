@@ -1,6 +1,7 @@
 "use strict";
 
 import React from "react";
+import DocumentTitle from "react-document-title";
 import Spinner from "../Spinner";
 import Backer from "../Backer";
 import Post from "../Post";
@@ -40,49 +41,53 @@ export default class BioRoute extends React.Component {
     let { author, posts, loading } = this.props;
 
     return (
-      <div className="bio-route">
-        { loading &&
-          <Spinner />
-        }
-        <BackButton />
-        <Backer />
-        { author &&
-          <div className="author-column">
-            { author && author.has("photos") &&
-              <img
-                className="author-photo"
-                src={
-                  author.getIn(["photos", 0, "alt_sizes", 2, "url"])
-                }
-                width={
-                  author.getIn(["photos", 0, "alt_sizes", 2, "width"])
-                }
-                height={
-                  author.getIn(["photos", 0, "alt_sizes", 2, "height"])
-                } />
-            }
-            <hgroup className="author-titles">
-              <h2>{ author.get("name") }</h2>
-              <h3>{ author.get("position") }</h3>
-            </hgroup>
-            <div dangerouslySetInnerHTML={{ __html: author.get("caption") }} />
-          </div>
-        }
-        { author && posts && posts.size > 0 &&
-          <div className="posts-by-author">
-            <h4>Posts from { author.get("name").split(" ").shift() }</h4>
-            { posts.toList().map((post, key) => {
-              return (
-                <Post
-                  thumbnail={ true }
-                  key={ key }
-                  post={ post } />
-              );
-            }) }
-          </div>
-        }
-        <BackButton />
-      </div>
+      <DocumentTitle title={ `${author.get("name")} - Brooklyn United` }>
+        <div className="bio-route">
+          { loading &&
+            <Spinner />
+          }
+          <BackButton />
+          <Backer />
+          { author &&
+            <div className="author-column">
+              { author && author.has("photos") &&
+                <img
+                  className="author-photo"
+                  src={
+                    author.getIn(["photos", 0, "alt_sizes", 2, "url"])
+                  }
+                  width={
+                    author.getIn(["photos", 0, "alt_sizes", 2, "width"])
+                  }
+                  height={
+                    author.getIn(["photos", 0, "alt_sizes", 2, "height"])
+                  } />
+              }
+              <hgroup className="author-titles">
+                <h2>{ author.get("name") }</h2>
+                <h3>{ author.get("position") }</h3>
+              </hgroup>
+              <div dangerouslySetInnerHTML={{
+                __html: author.get("caption")
+              }} />
+            </div>
+          }
+          { author && posts && posts.size > 0 &&
+            <div className="posts-by-author">
+              <h4>Posts from { author.get("name").split(" ").shift() }</h4>
+              { posts.toList().map((post, key) => {
+                return (
+                  <Post
+                    thumbnail={ true }
+                    key={ key }
+                    post={ post } />
+                );
+              }) }
+            </div>
+          }
+          <BackButton />
+        </div>
+      </DocumentTitle>
     );
   }
 }

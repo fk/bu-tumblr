@@ -1,6 +1,7 @@
 "use strict";
 
 import React from "react/addons";
+import DocumentTitle from "react-document-title";
 import Posts from "../Posts";
 import HeroUnit from "../HeroUnit";
 import LeadingQuote from "../LeadingQuote";
@@ -38,11 +39,13 @@ export default class IndexRoute extends React.Component {
     let posts = postsArr.shift();
 
     return (
-      <div className="index-route">
-        <LeadingQuote />
-        <HeroUnit post={ leadingPost } />
-        <Posts posts={ posts } />
-      </div>
+      <DocumentTitle title="Blog - Brooklyn United">
+        <div className="index-route">
+          <LeadingQuote />
+          <HeroUnit post={ leadingPost } />
+          <Posts posts={ posts } />
+        </div>
+      </DocumentTitle>
     );
   }
 }
