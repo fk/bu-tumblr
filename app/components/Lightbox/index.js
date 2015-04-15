@@ -54,7 +54,10 @@ export default class Lightbox extends React.Component {
 
   componentDidMount() {
     document.addEventListener("keyup", this.handleKeyPress);
-    this.getFrame();
+
+    if (this.navItems.size > 0) {
+      this.getFrame();
+    }
   }
 
   componentWillUnmount() {
@@ -65,6 +68,10 @@ export default class Lightbox extends React.Component {
 
   @autobind
   getFrame(frame) {
+    if (this.navitems.size === 0) {
+      this.componentWillUnmount.call(this);
+    }
+
     let { index } = this.props;
     let { active } = this.state;
     this.frame = requestAnimationFrame(this.getFrame);
