@@ -69,8 +69,6 @@ export default class Lightbox extends React.Component {
     this.frame = requestAnimationFrame(this.getFrame);
     let thumb = React.findDOMNode(this.navItems.get(index));
     let { left, width } = thumb.getBoundingClientRect();
-
-    console.log(left, width);
   }
 
   handleClose(event) {
