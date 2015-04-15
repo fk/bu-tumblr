@@ -45,4 +45,4 @@ export default class IndexRoute extends React.Component {
       </div>
     );
   }
-};
+}

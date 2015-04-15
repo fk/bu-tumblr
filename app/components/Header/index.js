@@ -22,11 +22,6 @@ export default class Header extends React.Component {
     return { app };
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return PureRenderMixin.shouldComponentUpdate
-      .call(this, nextProps, nextState);
-  }
-
   handleNavToggle(event) {
     event.preventDefault();
     AppActionCreators.toggleNavigation();
@@ -75,4 +70,4 @@ export default class Header extends React.Component {
       </header>
     );
   }
-};
+}

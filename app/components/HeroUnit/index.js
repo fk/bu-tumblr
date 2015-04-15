@@ -1,21 +1,22 @@
 "use strict";
 
-import Post from "../Post";
+import React, { PropTypes } from "react";
 import { Link } from "react-router";
 import warning from "react/lib/warning";
 import { OrderedMap, Map } from "immutable";
-import React, { PropTypes } from "react";
+import Post from "../Post";
+import PureRender from "../../decorators/PureRender";
 
-const { PureRenderMixin } = React.addons;
-
+@PureRender
 export default class HeroUnit extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return PureRenderMixin.shouldComponentUpdate
-      .call(this, nextProps, nextState);
+  static propTypes = {
+    post(props, propName, component) {
+      return Map.isMap(props);
+    }
   }
 
   render() {
@@ -103,10 +104,4 @@ export default class HeroUnit extends React.Component {
       </div>
     );
   }
-};
-
-HeroUnit.propTypes = {
-  post(props, propName, component) {
-    return Map.isMap(props);
-  }
-};
+}

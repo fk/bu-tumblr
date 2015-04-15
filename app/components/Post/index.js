@@ -141,7 +141,7 @@ export default class Post extends React.Component {
       </div>
     );
   }
-};
+}
 
 const getPostComponent = (post) => {
   const postType = post.get("type");

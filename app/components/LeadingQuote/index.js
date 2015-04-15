@@ -1,15 +1,10 @@
 "use strict";
 
 import React, { PropTypes } from "react";
+import PureRender from "../../decorators/PureRender";
 
-const { PureRenderMixin } = React.addons;
-
+@PureRender
 export default class LeadingQuote extends React.Component {
-  shouldComponentUpdate(nextProps, nextState) {
-    return PureRenderMixin.shouldComponentUpdate
-      .call(this, nextProps, nextState);
-  }
-
   render() {
     return (
       <div className="leading-quote">
@@ -19,4 +14,4 @@ export default class LeadingQuote extends React.Component {
       </div>
     );
   }
-};
+}

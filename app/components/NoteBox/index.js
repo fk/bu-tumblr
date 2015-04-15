@@ -45,7 +45,9 @@ class NoteBox extends React.Component {
               </a>
               <span className="action">{ action } this</span>
               { note.get("type") === "reblog" &&
-                <span className="from-statement">from <Link to="/">Brooklyn United</Link></span>
+                <span className="from-statement">
+                  from <Link to="/">Brooklyn United</Link>
+                </span>
               }
             </li>
           );

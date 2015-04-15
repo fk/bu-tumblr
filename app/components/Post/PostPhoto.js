@@ -60,7 +60,7 @@ class PostPhoto extends React.Component {
   handleHover(index) {
     return (event) => {
       this.setState({ hovered: index });
-    }
+    };
   }
 
   @autobind
@@ -120,6 +120,6 @@ class PostPhoto extends React.Component {
       </div>
     );
   }
-};
+}
 
 export default PostPhoto;

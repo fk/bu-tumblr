@@ -1,6 +1,6 @@
 "use strict";
 
-import React from "react/addons";
+import React from "react";
 import Spinner from "../Spinner";
 import Backer from "../Backer";
 import Post from "../Post";
@@ -36,11 +36,6 @@ export default class BioRoute extends React.Component {
     return { author, loading, posts };
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return PureRenderMixin.shouldComponentUpdate
-      .call(this, nextProps, nextState);
-  }
-
   render() {
     let { author, posts, loading } = this.props;
 
@@ -56,9 +51,15 @@ export default class BioRoute extends React.Component {
             { author && author.has("photos") &&
               <img
                 className="author-photo"
-                src={ author.getIn(["photos", 0, "alt_sizes", 2, "url"]) }
-                width={ author.getIn(["photos", 0, "alt_sizes", 2, "width"]) }
-                height={ author.getIn(["photos", 0, "alt_sizes", 2, "height"]) } />
+                src={
+                  author.getIn(["photos", 0, "alt_sizes", 2, "url"])
+                }
+                width={
+                  author.getIn(["photos", 0, "alt_sizes", 2, "width"])
+                }
+                height={
+                  author.getIn(["photos", 0, "alt_sizes", 2, "height"])
+                } />
             }
             <hgroup className="author-titles">
               <h2>{ author.get("name") }</h2>
@@ -84,4 +85,4 @@ export default class BioRoute extends React.Component {
       </div>
     );
   }
-};
+}

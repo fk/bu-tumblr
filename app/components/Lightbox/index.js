@@ -26,18 +26,16 @@ export default class Lightbox extends React.Component {
         LightboxActionCreators.moveBack();
         event.preventDefault();
         return false;
-        break;
       case "Right":
         LightboxActionCreators.moveForward();
         event.preventDefault();
         return false;
-        break;
       case "Esc":
       case "Escape":
       case "U+001B":
         LightboxActionCreators.closeLightbox();
         event.preventDefault();
-        break;
+        return false;
     }
   }
 
@@ -117,4 +115,4 @@ export default class Lightbox extends React.Component {
       </div>
     );
   }
-};
+}

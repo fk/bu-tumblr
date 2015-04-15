@@ -3,9 +3,18 @@
 import React, { PropTypes } from "react/addons";
 import { Link } from "react-router";
 
-class ShareBox extends React.Component {
+export default class ShareBox extends React.Component {
   constructor(props) {
     super(props);
+  }
+
+  static propTypes = {
+    post: PropTypes.object.isRequired,
+    single: PropTypes.bool
+  }
+
+  static defaultProps = {
+    single: false
   }
 
   render() {
@@ -71,15 +80,4 @@ class ShareBox extends React.Component {
       </nav>
     );
   }
-};
-
-ShareBox.propTypes = {
-  post: PropTypes.object.isRequired,
-  single: PropTypes.bool
-};
-
-ShareBox.defaultProps = {
-  single: false
-};
-
-export default ShareBox;
+}

@@ -11,7 +11,7 @@ export default function StoreComponent(...stores) {
     class SubscriptionComponent extends React.Component {
       constructor(props) {
         super(props);
-        this.state = getStateFromStores(props)
+        this.state = getStateFromStores(props);
         this.handleChange = this.handleChange.bind(this);
       }
 
@@ -35,8 +35,8 @@ export default function StoreComponent(...stores) {
             { ...this.state } />
         );
       }
-    };
+    }
 
     return copyStaticMethods(SubscriptionComponent, Target);
   };
-};
+}

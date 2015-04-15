@@ -25,7 +25,7 @@ export const getInViewport = (node) => {
   let windowHeight = window.innerHeight ||
     document.documentElement.clientHeight;
   let windowWidth = window.innerWidth ||
-    document.documentElement.clientWidth
+    document.documentElement.clientWidth;
 
   return (
     rect.bottom >= 0 &&

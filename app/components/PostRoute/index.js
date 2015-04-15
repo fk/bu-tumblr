@@ -96,7 +96,9 @@ export default class PostRoute extends React.Component {
               </span>
             }
             { post.get("noteCount") > 0 &&
-              <span className="note-count">{ post.get("noteCount") } notes</span>
+              <span className="note-count">
+                { post.get("noteCount") } notes
+              </span>
             }
           </div>
         }
@@ -107,4 +109,4 @@ export default class PostRoute extends React.Component {
       </div>
     );
   }
-};
+}

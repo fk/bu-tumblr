@@ -43,7 +43,7 @@ var base = {
   ],
   module: {
     loaders: [
-      { test: /\.js$/, loader: "babel?stage=0", exclude: /node_modules/ },
+      { test: /\.js$/, loader: "babel?stage=0!eslint", exclude: /node_modules/ },
       { test: /\.(jpe?g|png|gif|svg)$/, loader: "file" },
       { test: /\.styl$/, loader: "style!css!stylus" },
       { test: /\.json$/, loader: "json" }
@@ -77,7 +77,7 @@ exports.server = assign({}, base, {
   ],
   module: {
     loaders: [
-      { test: /\.js$/, loader: "react-hot!babel?stage=0", exclude: /node_modules/ },
+      { test: /\.js$/, loader: "react-hot!babel?stage=0!eslint", exclude: /node_modules/ },
       { test: /\.json$/, loader: "json", exclude: /node_modules/ },
       { test: /\.(jpe?g|png|gif|svg)$/, loader: "file" },
       { test: /\.styl$/, loader: "style!css!stylus" }

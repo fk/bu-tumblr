@@ -23,4 +23,4 @@ export default (posts) => {
     memo[id] = post;
     return memo;
   }, {});
-}
+};

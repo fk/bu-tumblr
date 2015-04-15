@@ -64,6 +64,6 @@ const setCurrentIndex = (index, size) => {
   }
 
   return index;
-}
+};
 
 export default alt.createStore(LightboxStore, "LightboxStore");

@@ -47,6 +47,7 @@ class AuthorStore {
 
   onGetAuthorError(err) {
     this.loading = false;
+    console.warn(err);
   }
 }
 

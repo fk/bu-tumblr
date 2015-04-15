@@ -1,18 +1,13 @@
 "use strict";
 
-import React, { PropTypes } from "react/addons";
+import React, { PropTypes } from "react";
 import Post from "../Post";
+import PureRender from "../../decorators/PureRender";
 
-const { PureRenderMixin } = React.addons;
-
+@PureRender
 export default class Posts extends React.Component {
   constructor(props) {
     super(props);
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return PureRenderMixin.shouldComponentUpdate
-      .call(this, nextProps, nextState);
   }
 
   render() {
@@ -32,4 +27,4 @@ export default class Posts extends React.Component {
       </div>
     );
   }
-};
+}

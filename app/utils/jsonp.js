@@ -76,4 +76,4 @@ export default async function jsonp(resource, params) {
   let result = await request(url, params);
 
   return result;
-};
+}

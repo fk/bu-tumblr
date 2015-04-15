@@ -13,4 +13,4 @@ export default function (target) {
       (shouldComponentUpdate.call(this, nextProps, nextState) || pureUpdate) :
       pureUpdate;
   };
-};
+}

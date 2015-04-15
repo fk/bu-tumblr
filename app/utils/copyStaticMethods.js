@@ -2,7 +2,8 @@ function noop() {}
 const STATIC_METHODS = Object.getOwnPropertyNames(noop);
 function getStaticMethods(fn) {
   return Object.getOwnPropertyNames(fn)
-    .filter(p => STATIC_METHODS.indexOf(p) === -1 && toString.call(fn[p]) === "[object Function]");
+    .filter(p => (STATIC_METHODS.indexOf(p) === -1)
+      && (toString.call(fn[p]) === "[object Function]"));
 }
 
 export default (target, source) => {
