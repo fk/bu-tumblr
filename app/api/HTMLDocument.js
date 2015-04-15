@@ -28,14 +28,23 @@ export default class App extends React.Component {
         <script src="//use.typekit.net/iey8vjp.js"></script>
         <script dangerouslySetInnerHTML={{__html: TYPE_KIT_EXEC }} />
         <link href={fonts} rel="stylesheet" />
-        { styles.map((href, key) => <link rel="stylesheet" href={ href } />) }
+        { styles.map((href, key) => (
+          <link
+            key={ key }
+            rel="stylesheet"
+            href={ href } />
+        )) }
       </head>
       <body>
         <div
           id="root"
           dangerouslySetInnerHTML={{ __html: markup }} />
         <script dangerouslySetInnerHTML={{ __html: payload }} />
-        { scripts.map((src, key) => <script key={ key } src={ src } />) }
+        { scripts.map((src, key) => (
+          <script
+            key={ key }
+            src={ src } />
+        )) }
       </body>
       </html>
     );

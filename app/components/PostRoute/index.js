@@ -83,9 +83,10 @@ export default class PostRoute extends React.Component {
           <div className="note-band">
             { post.get("tags").size > 0 &&
               <span className="tag-list">
-                # { post.get("tags").map(tag => {
+                # { post.get("tags").map((tag, key) => {
                   return (
                     <Link
+                      key={ key }
                       to="tag"
                       params={{ tagName: tag }}>
                       { tag.toUpperCase() }
