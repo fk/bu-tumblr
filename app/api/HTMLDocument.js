@@ -25,8 +25,6 @@ export default class App extends React.Component {
       <html lang="en">
       <head>
         <title>Brooklyn United</title>
-        <script src="//use.typekit.net/iey8vjp.js"></script>
-        <script dangerouslySetInnerHTML={{__html: TYPE_KIT_EXEC }} />
         <link href={fonts} rel="stylesheet" />
         { styles.map((href, key) => (
           <link
@@ -34,6 +32,8 @@ export default class App extends React.Component {
             rel="stylesheet"
             href={ href } />
         )) }
+        <script src="//use.typekit.net/iey8vjp.js"></script>
+        <script dangerouslySetInnerHTML={{__html: TYPE_KIT_EXEC }} />
       </head>
       <body>
         <div
