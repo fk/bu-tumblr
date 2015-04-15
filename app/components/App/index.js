@@ -56,24 +56,22 @@ export default class App extends React.Component {
     return (
       <div className={ cx }>
         <div className="container">
-          <div className="container-inner">
-            <Header />
-            <RouteHandler />
-          </div>
-          <CSSTransitionGroup transitionName="navigation">
-            { navOpen &&
-              <Navigation key="nav" />
-            }
-          </CSSTransitionGroup>
-          <CSSTransitionGroup transitionName="lightbox">
-            { lightbox.get("photos").size > 0 &&
-              <Lightbox
-                photos={ lightbox.get("photos") }
-                index={ lightbox.get("index")} />
-            }
-          </CSSTransitionGroup>
-          <Footer />
+          <Header />
+          <RouteHandler />
         </div>
+        <CSSTransitionGroup transitionName="navigation">
+          { navOpen &&
+            <Navigation key="nav" />
+          }
+        </CSSTransitionGroup>
+        <CSSTransitionGroup transitionName="lightbox">
+          { lightbox.get("photos").size > 0 &&
+            <Lightbox
+              photos={ lightbox.get("photos") }
+              index={ lightbox.get("index")} />
+          }
+        </CSSTransitionGroup>
+        <Footer />
       </div>
     );
   }
