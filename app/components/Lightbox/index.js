@@ -2,18 +2,31 @@
 
 import React, { PropTypes } from "react/addons";
 import classNames from "classnames";
+import assign from "object-assign";
+import { List, OrderedMap } from "immutable";
 import LightboxThumb from "./LightboxThumb";
 import Spinner from "../Spinner";
 import LightboxActionCreators from "../../actions/LightboxActionCreators";
 import LightboxStore from "../../stores/LightboxStore";
 import StoreComponent from "../../decorators/StoreComponent";
 import PureRender from "../../decorators/PureRender";
+import autobind from "../../decorators/autobind";
 
 const { CSSTransitionGroup } = React.addons;
 
 @PureRender
 @StoreComponent(LightboxStore)
 export default class Lightbox extends React.Component {
+  constructor(props) {
+    super(props);
+    this.navItems = new OrderedMap();
+  }
+
+  state = {
+    frame: null,
+    active: new List()
+  }
+
   static getStateFromStores(props) {
     let { lightbox } = LightboxStore.getState();
 
@@ -41,10 +54,23 @@ export default class Lightbox extends React.Component {
 
   componentDidMount() {
     document.addEventListener("keyup", this.handleKeyPress);
+    this.getFrame();
   }
 
   componentWillUnmount() {
     document.removeEventListener("keyup", this.handleKeyPress);
+    this.frame = cancelAnimationFrame(this.frame);
+    this.navItems = new OrderedMap();
+  }
+
+  @autobind
+  getFrame(frame) {
+    let { index } = this.props;
+    this.frame = requestAnimationFrame(this.getFrame);
+    let thumb = React.findDOMNode(this.navItems.get(index));
+    let { left, width } = thumb.getBoundingClientRect();
+
+    console.log(left, width);
   }
 
   handleClose(event) {
@@ -100,6 +126,7 @@ export default class Lightbox extends React.Component {
             { photos.map((thumb, key) => {
               return (
                 <LightboxThumb
+                  ref={ c => this.navItems = this.navItems.set(key, c) }
                   key={ key }
                   index={ key }
                   photo={ thumb } />

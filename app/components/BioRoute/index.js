@@ -16,7 +16,7 @@ import { uriToName } from "../../utils/uri";
 @PureRender
 @StoreComponent(AuthorStore, PostStore, RouterStore)
 export default class BioRoute extends React.Component {
-  static async fetchData({ params }) {
+  static async fetchData(params, query) {
     let { authorName } = params;
 
     authorName = uriToName(authorName);
