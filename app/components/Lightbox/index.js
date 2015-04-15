@@ -3,7 +3,7 @@
 import React, { PropTypes } from "react/addons";
 import classNames from "classnames";
 import assign from "object-assign";
-import { List, OrderedMap } from "immutable";
+import { OrderedMap } from "immutable";
 import LightboxThumb from "./LightboxThumb";
 import Spinner from "../Spinner";
 import LightboxActionCreators from "../../actions/LightboxActionCreators";
@@ -24,7 +24,7 @@ export default class Lightbox extends React.Component {
 
   state = {
     frame: null,
-    active: new List()
+    active: new OrderedMap()
   }
 
   static getStateFromStores(props) {
@@ -66,9 +66,15 @@ export default class Lightbox extends React.Component {
   @autobind
   getFrame(frame) {
     let { index } = this.props;
+    let { active } = this.state;
     this.frame = requestAnimationFrame(this.getFrame);
     let thumb = React.findDOMNode(this.navItems.get(index));
-    let { left, width } = thumb.getBoundingClientRect();
+    let { left, bottom, width } = thumb.getBoundingClientRect();
+
+    bottom = bottom + 8;
+
+    active = active.merge({ left, bottom, width });
+    this.setState({ active });
   }
 
   handleClose(event) {
@@ -86,6 +92,7 @@ export default class Lightbox extends React.Component {
   }
 
   render() {
+    let { active } = this.state;
     let { lightbox } = this.props;
     let { photos, index } = lightbox.toJS();
     let photo = photos[index];
@@ -135,6 +142,14 @@ export default class Lightbox extends React.Component {
               onClick={ this.handleMoveForward }>
               <i className="fa fa-angle-right" />
             </button>
+            <div
+              style={{
+                position: "fixed",
+                left: active.get("left"),
+                top: active.get("bottom"),
+                width: active.get("width")
+              }}
+              className="active-underline" />
           </nav>
         }
       </div>
