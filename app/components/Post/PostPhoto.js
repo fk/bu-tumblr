@@ -96,6 +96,14 @@ class PostPhoto extends React.Component {
       backgroundImage: `url("${photo.getIn(["alt_sizes", 0, "url"])}")`
     };
 
+    if (!photosetLayout) {
+      let width = photo.getIn(["alt_sizes", 0, "width"]);
+      let height = photo.getIn(["alt_sizes", 0, "height"]);
+
+      styles.height = 0;
+      styles.paddingBottom = ((height / width) * 100) + "%";
+    }
+
     return (
       <li
         key={ key }
