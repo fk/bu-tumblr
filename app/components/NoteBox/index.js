@@ -1,25 +1,34 @@
 "use strict";
 
-import React, { PropTypes } from "react/addons";
+import React, { PropTypes } from "react";
 import { Link } from "react-router";
 import warning from "react/lib/warning";
 import { List } from "immutable";
-
-const { PureRenderMixin } = React.addons;
+import PureRender from "../../decorators/PureRender";
 
 const ACTION_MAP = {
   like: "likes",
-  reblog: "reblogged"
+  reblog: "reblogged",
+  posted: "posted"
 };
 
+@PureRender
 class NoteBox extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return PureRenderMixin.shouldComponentUpdate
-      .call(this, nextProps, nextState);
+  static propTypes = {
+    notes(props, propName, componentName) {
+      let notes = props[propName];
+
+      warning(
+        List.isList(notes),
+        `${componentName}.props.${propName} should be an immutable List.`
+      );
+
+      return null;
+    }
   }
 
   render() {
@@ -31,6 +40,7 @@ class NoteBox extends React.Component {
           let name = `${note.get("blog_name")}.tumblr.com`;
           let avatar = `http://api.tumblr.com/v2/blog/${name}/avatar/16`;
           let action = ACTION_MAP[note.get("type")];
+
           return (
             <li
               className="note"
@@ -44,11 +54,6 @@ class NoteBox extends React.Component {
                 { note.get("blog_name") }
               </a>
               <span className="action">{ action } this</span>
-              { note.get("type") === "reblog" &&
-                <span className="from-statement">
-                  from <Link to="/">Brooklyn United</Link>
-                </span>
-              }
             </li>
           );
         }) }
@@ -56,18 +61,5 @@ class NoteBox extends React.Component {
     );
   }
 }
-
-NoteBox.propTypes = {
-  notes(props, propName, componentName) {
-    let notes = props[propName];
-
-    warning(
-      List.isList(notes),
-      `${componentName}.props.${propName} should be an immutable List.`
-    );
-
-    return null;
-  }
-};
 
 export default NoteBox;

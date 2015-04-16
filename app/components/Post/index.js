@@ -115,7 +115,7 @@ export default class Post extends React.Component {
     };
     const hasTitle = (
       ["text"].indexOf(post.get("type")) === -1
-    );
+    ) && post.has("title");
 
     return (
       <div
