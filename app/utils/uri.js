@@ -11,10 +11,13 @@ const IRREGULAR_HASH = {
 };
 
 export let nameToURI = (name) => {
-  let index = Object.values(IRREGULAR_HASH).indexOf(name);
+  let values = Object.values(IRREGULAR_HASH);
+  let index = values.indexOf(name);
 
   if (index > -1) {
-    return IRREGULAR_HASH[index];
+    let uri = Object.keys(IRREGULAR_HASH)[index];
+
+    return uri;
   }
 
   return name.toLowerCase().replace(/\s/g, "-");
