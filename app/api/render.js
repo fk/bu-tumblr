@@ -1,12 +1,14 @@
+import http from "http";
 import React from "react";
 import ReactRouter from "react-router";
 import HTMLDocument from "./HTMLDocument";
 import alt from "../alt";
 import routes from "../routes";
 import RouterActionCreators from "../actions/RouterActionCreators";
+import PrettyError from "pretty-error";
 
 class RedirectError extends Error {
-  TYPE = Symbol("redirect error")
+  static TYPE = Symbol("redirect error")
 
   constructor(code, path) {
     super();
@@ -15,7 +17,7 @@ class RedirectError extends Error {
   }
 
   toString() {
-    return this.prototype.constructor.TYPE;
+    return RedirectError.TYPE;
   }
 
   getRedirect() {
@@ -26,6 +28,18 @@ class RedirectError extends Error {
   }
 }
 
+class NotFoundError extends Error {
+  static type = Symbol("404 error")
+
+  constructor() {
+    super();
+  }
+
+  toString() {
+    return NotFoundError.TYPE;
+  }
+}
+
 export default () => {
   const doctype = "<!doctype html>";
 
@@ -33,10 +47,17 @@ export default () => {
     let router = ReactRouter.create({
       location: this.req.url,
       routes: routes,
-      onAbort: function({ to, params, query }) {
-        let url = router.makeUrl(to, params, query);
+      onAbort: function(abortReason) {
+        let { to, params, query } = abortReason;
 
-        throw new RedirectError(401, url);
+        if (abortReason === 404) {
+          throw new NotFoundError(abortReason);
+        }
+        else {
+          let url = this.makePath(to, params, query);
+          throw new RedirectError(401, url);
+        }
+
       }
     });
 
@@ -99,8 +120,27 @@ export default () => {
 
           this.redirect(code, path);
           break;
+        case NotFoundError.TYPE:
+          let notFoundHtml = yield new Promise((resolve, reject) => {
+            http.get("http://brooklynunited.com/x-not-found", res => {
+              let body = "";
+              res.on("data", chunk => body += chunk);
+              res.on("end", () => {
+                body = body.replace(
+                  /(src|href)="(\/[A-z])/g,
+                  "$1=\"http://www.brooklynunited.com$2"
+                );
+                resolve(body);
+              });
+            });
+          });
+
+          this.body = notFoundHtml;
+          this.status = 404;
+          break;
         default:
-          console.log(err.stack);
+          let pe = new PrettyError();
+          console.log(pe.render(err));
           this.body = err.stack;
           break;
       }

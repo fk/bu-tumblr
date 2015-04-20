@@ -1,5 +1,9 @@
 import React from "react";
-import {Route, DefaultRoute} from "react-router";
+import {
+  Route,
+  DefaultRoute,
+  NotFoundRoute
+} from "react-router";
 
 export default (
   <Route
@@ -18,5 +22,7 @@ export default (
       name="author"
       path="/author/:authorName"
       handler={ require("./components/BioRoute") } />
+    <NotFoundRoute
+      handler={ require("./components/NotFoundRoute") } />
   </Route>
 );

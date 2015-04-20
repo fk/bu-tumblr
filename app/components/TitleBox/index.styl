@@ -7,7 +7,7 @@ BREAKPOINT = 990px
   position absolute
   margin 0
   min-width 5rem * 4
-  top 0
+  bottom 100%
   left 1.625rem
   z-index 100
   font-size 2rem
@@ -41,12 +41,12 @@ BREAKPOINT = 990px
       transition transform 275ms ease-in-out
       transform rotateX(0deg)
       transform-style preserve-3d
-      padding 3.125rem 5.125rem 2.25rem 1.625rem
+      padding 2.225rem 5.125rem 2.25rem 1.625rem
 
       &::after
         box-sizing content-box
         content attr(title)
-        padding 3.125rem 0 2.235rem
+        padding 2.225rem 0 2.25rem
         text-indent 1.625rem
         position absolute
         display block
@@ -54,8 +54,8 @@ BREAKPOINT = 990px
         left 0
         height 100%
         width 0%
-        color #333
-        background-color #fff
+        color #fff
+        background-color rgb(79, 164, 218)
         overflow hidden
         transition all 400ms ease-in-out
         word-wrap normal
