@@ -133,9 +133,14 @@ class PostPhoto extends React.Component {
     if (!photosetLayout) {
       let width = photo.getIn(["alt_sizes", 0, "width"]);
       let height = photo.getIn(["alt_sizes", 0, "height"]);
+      let paddingBottom = ((height / width) * 100);
+
+      if (paddingBottom > 75) {
+        paddingBottom = 50;
+      }
 
       styles.height = 0;
-      styles.paddingBottom = ((height / width) * 100) + "%";
+      styles.paddingBottom = paddingBottom + "%";
     }
 
     return (
