@@ -86,10 +86,15 @@ class PostPhoto extends React.Component {
       for (let i  = 0; i < splitLayout.length; i++) {
         let numOne = parseInt(splitLayout[i], 10);
         let numTwo = parseInt(splitLayout[i + 1], 10);
+        let numThree = parseInt(splitLayout[i + 1], 10);
 
-        if (((numOne === 1) || (numTwo === 1)) && (numOne + numTwo < 3)) {
+        if (numOne === 1 && numTwo === 1 && numThree === 1) {
+          photosetLayout += "3";
+          i += 2;
+        }
+        else if (((numOne === 1) || (numTwo === 1)) && (numOne + numTwo < 3)) {
           photosetLayout += (numOne + numTwo).toString();
-          i++;
+          i += 1;
         }
         else {
           photosetLayout += numOne.toString();
