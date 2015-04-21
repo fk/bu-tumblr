@@ -38,11 +38,13 @@ class PostPhoto extends React.Component {
     },
     inViewport: PropTypes.bool.isRequired,
     className: PropTypes.string,
-    single: PropTypes.bool
+    single: PropTypes.bool,
+    condensed: PropTypes.bool
   }
 
   static defaultProps = {
-    single: false
+    single: false,
+    condensed: false
   }
 
   @autobind
@@ -66,8 +68,35 @@ class PostPhoto extends React.Component {
   @autobind
   renderPhoto(photo, key, array) {
     const { hovered } = this.state;
-    const { post, single, inViewport, transition, lightbox } = this.props;
-    const { photosetLayout } = post.toJS();
+    const {
+      post,
+      single,
+      inViewport,
+      transition,
+      lightbox,
+      condensed
+    } = this.props;
+
+    let { photosetLayout } = post.toJS();
+
+    if (condensed) {
+      let splitLayout = photosetLayout.split("");
+      photosetLayout = "";
+
+      for (let i  = 0; i < splitLayout.length; i++) {
+        let numOne = parseInt(splitLayout[i], 10);
+        let numTwo = parseInt(splitLayout[i + 1], 10);
+
+        if (((numOne === 1) || (numTwo === 1)) && (numOne + numTwo < 3)) {
+          photosetLayout += (numOne + numTwo).toString();
+          i++;
+        }
+        else {
+          photosetLayout += numOne.toString();
+        }
+      }
+    }
+
     let flex = 1;
     let height = 1;
 
