@@ -12,7 +12,7 @@ export default (
       handler={ require("./components/IndexRoute") } />
     <Route
       name="post"
-      path="/post/:postId"
+      path="/post/:postId/?:postUri?"
       handler={ require("./components/PostRoute") } />
     <Route
       name="tag"

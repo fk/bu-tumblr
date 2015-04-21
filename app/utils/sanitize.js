@@ -20,7 +20,16 @@ export default (posts) => {
       return true;
     });
 
+
+    if (post.title) {
+      post.uri = convertToSlug(post.title);
+    }
+
     memo[id] = post;
     return memo;
   }, {});
 };
+
+const convertToSlug = title => title.toLowerCase()
+  .replace(/[^\w\s]+/g, "")
+  .replace(/\s+/g, "-");
