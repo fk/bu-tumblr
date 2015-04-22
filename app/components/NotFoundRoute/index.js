@@ -7,9 +7,7 @@ export default class RouteNotFound extends React.Component {
 
   render() {
     return (
-      <div className="route-not-found">
-
-      </div>
+      <div className="route-not-found" />
     );
   }
 }

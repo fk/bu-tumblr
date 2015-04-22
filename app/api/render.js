@@ -122,7 +122,7 @@ export default () => {
           break;
         case NotFoundError.TYPE:
           let notFoundHtml = yield new Promise((resolve, reject) => {
-            http.get("http://brooklynunited.com/x-not-found", res => {
+            http.get("http://brooklynunited.com/404.html", res => {
               let body = "";
               res.on("data", chunk => body += chunk);
               res.on("end", () => {
