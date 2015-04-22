@@ -37,8 +37,7 @@ class BackButton extends React.Component {
         onClick={ this.handleClick }
         type="button"
         className="back-button">
-        <i className="fa fa-angle-left" />&nbsp;
-        Back
+        <h5><i className="fa fa-chevron-left" /> Back</h5>
       </button>
     );
   }

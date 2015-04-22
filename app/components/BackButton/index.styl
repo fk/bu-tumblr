@@ -2,9 +2,46 @@
 
 .back-button
   position relative
-  background transparent
+  padding 1.125rem 1.875rem 1.125rem 2.5rem
+  margin 1.414rem
+  background-color #333
+  color #fff
   border none
-  color #58AEDF
   text-transform uppercase
-  margin 2rem 1rem
-  z-index 10
+  font-family "proxima-nova", Helvetica, Arial, sans-serif
+  font-weight bold
+  z-index 100
+  overflow hidden
+
+  &::after
+    content ' '
+    position absolute
+    display block
+    top -100%
+    left -220%
+    width 170%
+    height 450%
+    background-color #ed6550
+    z-index 0
+    transform rotate(45deg)
+    transition transform 350ms ease
+
+  h5
+    position relative
+    float left
+    z-index 10
+    margin 0
+    padding 0
+    font-size 0.915rem
+    line-height 1rem
+
+  .fa
+    position absolute
+    left -18px
+    transition left 350ms ease
+
+  &:hover
+    &::after
+      transform translate3d(110%, 0, 0) rotate(45deg)
+    .fa
+      left -25px
