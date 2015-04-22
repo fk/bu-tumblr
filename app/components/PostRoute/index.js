@@ -39,52 +39,52 @@ export default class PostRoute extends React.Component {
 
   render() {
     let { router, post } = this.props;
+    let title;
+    let date;
 
-    if (!post) {
-      return (
-        <div className="post-route">
-          <BackButton />
-          <Spinner />
-        </div>
-      );
+    if (post) {
+      date = moment(new Date(post.get("date"))).format("MMMM DD, YYYY");
+      title = post.has("title") ?
+        post.get("title") :
+        post.get("type").charAt(0).toUpperCase() + post.get("type").slice(1);
     }
-
-    let date = moment(new Date(post.get("date"))).format("MMMM DD, YYYY");
-    let title = post.has("title") ?
-      post.get("title") :
-      post.get("type").charAt(0).toUpperCase() + post.get("type").slice(1);
 
     return (
       <DocumentTitle title={ `${title} - Brooklyn United` }>
         <div className="post-route">
           <BackButton />
+          { !post &&
+            <Spinner />
+          }
           <Backer />
-          <div className="post-column">
-            { post.has("title") &&
-              <h2>{ post.get("title") }</h2>
-            }
-            <Post
-              post={ post }
-              single={ true } />
-            { post.has("caption") && !!post.get("caption").trim() &&
-              <span
-                className="post-caption"
-                dangerouslySetInnerHTML={{ __html: post.get("caption") }} />
-            }
-            { post.has("author") &&
-              <div className="author">
-                By <Link
-                  to="author"
-                  params={{ authorName: nameToURI(post.get("author")) }}>
-                  { post.get("author") }
-                </Link> on { date }
-              </div>
-            }
-            <ShareBox
-              post={ post }
-              single={ true } />
-          </div>
-          { (post.get("tags").size > 0 || post.get("noteCount") > 0) &&
+          { post &&
+            <div className="post-column">
+              { post.has("title") &&
+                <h2>{ post.get("title") }</h2>
+              }
+              <Post
+                post={ post }
+                single={ true } />
+              { post.has("caption") && !!post.get("caption").trim() &&
+                <span
+                  className="post-caption"
+                  dangerouslySetInnerHTML={{ __html: post.get("caption") }} />
+              }
+              { post.has("author") &&
+                <div className="author">
+                  By <Link
+                    to="author"
+                    params={{ authorName: nameToURI(post.get("author")) }}>
+                    { post.get("author") }
+                  </Link> on { date }
+                </div>
+              }
+              <ShareBox
+                post={ post }
+                single={ true } />
+            </div>
+          }
+          { post && (post.get("tags").size > 0 || post.get("noteCount") > 0) &&
             <div className="note-band">
               { post.get("tags").size > 0 &&
                 <span className="tag-list">
@@ -107,7 +107,7 @@ export default class PostRoute extends React.Component {
               }
             </div>
           }
-          { post.get("noteCount") > 0 &&
+          { post && post.get("noteCount") > 0 &&
             <NoteBox notes={ post.get("notes") } />
           }
           <BackButton />
