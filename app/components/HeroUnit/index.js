@@ -90,6 +90,7 @@ export default class HeroUnit extends React.Component {
           </div>
           <div className="hero-unit-post">
             <Post
+              condensed={ true }
               post={ post } />
           </div>
         </div>

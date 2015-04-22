@@ -25,7 +25,7 @@ export default class ShareBox extends React.Component {
         { !single &&
           <Link
             to="post"
-            params={{ postId: post.get("id") }}
+            params={{ postId: post.get("id"), postUri: post.get("uri") }}
             className="large">
             <span className="cube">
               <span className="face front link">

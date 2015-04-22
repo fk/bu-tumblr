@@ -100,19 +100,35 @@ export default class Post extends React.Component {
   }
 
   render() {
-    const { inViewport, height, transition } = this.state;
-    const { post, viewport, thumbnail, single, ...otherProps } = this.props;
+    const {
+      inViewport,
+      height,
+      transition
+    } = this.state;
+
+    const {
+      post,
+      viewport,
+      thumbnail,
+      single,
+      condensed,
+      ...otherProps
+    } = this.props;
+
     const Component = getPostComponent(post);
+
     const cx = classNames({
       "post": true,
       [`post-${post.get("type")}`]: true,
       "in-viewport": inViewport
     });
+
     const styles = {
       WebkitTransform: `translate3d(0, ${(transition || 0) * 100}px, 0) ` +
         `scale(${(0.2 * transition ) + 1})`,
       opacity: 1 - transition
     };
+
     const hasTitle = (
       ["text"].indexOf(post.get("type")) === -1
     ) && post.has("title");
@@ -130,6 +146,7 @@ export default class Post extends React.Component {
         <Component
           { ...otherProps }
           { ...this.state }
+          condensed={ condensed }
           single={ single }
           inViewport={ inViewport }
           transition={ transition }

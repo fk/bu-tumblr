@@ -20,7 +20,7 @@ class TitleBox extends React.Component {
           <Link
             to="post"
             title={ post.get("title") }
-            params={{ postId: post.get("id") }}>
+            params={{ postId: post.get("id"), postUri: post.get("uri") }}>
             { post.get("title") }
           </Link>
         </h3>
