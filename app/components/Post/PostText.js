@@ -15,9 +15,9 @@ class PostText extends React.Component {
     const { className, post, single, ...otherProps } = this.props;
     let body = post.get("body");
 
-    if (!single) {
-      body = body.replace(/(<([^>]+)>)/ig, "");
-    }
+    // if (!single) {
+    //   body = body.replace(/(<([^>]+)>)/ig, "");
+    // }
 
     return (
       <div className={ classNames([className, { "single": single }]) }>

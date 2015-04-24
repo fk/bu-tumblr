@@ -60,43 +60,43 @@ export default class Post extends React.Component {
     let height = node.clientHeight;
 
     this.setState({ height });
-    this.onAdjust();
+    // this.onAdjust();
   }
 
   componentWillUnmount() {
-    this.animation = cancelAnimationFrame(this.animation);
+    // this.animation = cancelAnimationFrame(this.animation);
   }
 
   @autobind
   onAdjust() {
-    try {
-      let { viewed } = this.state;
-      const { viewport, index } = this.props;
-      const node = React.findDOMNode(this);
-      const inViewport = getInViewport(node);
-      const drag = 250;
+    // try {
+    //   let { viewed } = this.state;
+    //   const { viewport, index } = this.props;
+    //   const node = React.findDOMNode(this);
+    //   const inViewport = getInViewport(node);
+    //   const drag = 250;
 
-      let [viewportX, viewportY, viewportWidth, viewportHeight] = viewport
-        .toArray();
-      let { top: postTop, height: postHeight } = node
-        .getBoundingClientRect();
-      let start = postTop - viewportHeight + 75;
-      let transition = viewed ?
-        0 :
-        1 - Math.min(Math.abs(Math.min(0, start)), drag) / drag;
+    //   let [viewportX, viewportY, viewportWidth, viewportHeight] = viewport
+    //     .toArray();
+    //   let { top: postTop, height: postHeight } = node
+    //     .getBoundingClientRect();
+    //   let start = postTop - viewportHeight + 75;
+    //   let transition = viewed ?
+    //     0 :
+    //     1 - Math.min(Math.abs(Math.min(0, start)), drag) / drag;
 
-      if (transition === 0) {
-        viewed = true;
-      }
+    //   if (transition === 0) {
+    //     viewed = true;
+    //   }
 
-      this.setState({ inViewport, transition, viewed }, () => {
-        this.animation = requestAnimationFrame(this.onAdjust);
-      });
-    }
-    catch (err) {
-      console.log(err);
-      return false;
-    }
+    //   this.setState({ inViewport, transition, viewed }, () => {
+    //     this.animation = requestAnimationFrame(this.onAdjust);
+    //   });
+    // }
+    // catch (err) {
+    //   console.log(err);
+    //   return false;
+    // }
   }
 
   render() {
@@ -135,7 +135,7 @@ export default class Post extends React.Component {
 
     return (
       <div
-        className={ classNames(["post-wrapper", {
+        className={ classNames(["post-wrapper", `post-${post.get("type")}`, {
           thumbnail,
           single
         }]) }
