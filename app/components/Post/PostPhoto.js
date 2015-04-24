@@ -150,7 +150,9 @@ class PostPhoto extends React.Component {
         onMouseLeave={ this.handleHover(null) }
         onClick={ this.handlePhotoClick(photo) }
         className={ cx }
-        style={ styles } />
+        style={ styles }>
+        <div className="shade" />
+      </li>
     );
   }
 
