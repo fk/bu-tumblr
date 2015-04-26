@@ -5,11 +5,13 @@ import { Link } from "react-router";
 import warning from "react/lib/warning";
 import { Map } from "immutable";
 import classNames from "classnames";
+import moment from "moment";
 import LightboxStore from "../../stores/LightboxStore";
 import LightboxActionCreators from "../../actions/LightboxActionCreators";
 import StoreComponent from "../../decorators/StoreComponent";
 import autobind from "../../decorators/autobind";
 import PureRender from "../../decorators/PureRender";
+import { nameToURI } from "../../utils/uri";
 
 @PureRender
 @StoreComponent(LightboxStore)
@@ -159,6 +161,11 @@ class PostPhoto extends React.Component {
   render() {
     const { post, className, single } = this.props;
     const photos = post.get("photos");
+    let date;
+
+    if (post) {
+      date = moment(new Date(post.get("date"))).format("MMMM DD, YYYY");
+    }
 
     return (
       <div
@@ -166,6 +173,22 @@ class PostPhoto extends React.Component {
         <ul className="photos">
           { photos.map(this.renderPhoto) }
         </ul>
+        { (post.get("caption").trim() !== "" || post.has("author")) &&
+          <div className="photo-body">
+            { post.has("caption") &&
+              <div dangerouslySetInnerHTML={{ __html: post.get("caption" )}} />
+            }
+            { post.has("author") && typeof date !== "undefined" &&
+              <div className="author">
+                By <Link
+                  to="author"
+                  params={{ authorName: nameToURI(post.get("author")) }}>
+                  { post.get("author") }
+                </Link> on { date }
+              </div>
+            }
+          </div>
+        }
       </div>
     );
   }
