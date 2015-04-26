@@ -60,43 +60,6 @@ export default class Post extends React.Component {
     let height = node.clientHeight;
 
     this.setState({ height });
-    // this.onAdjust();
-  }
-
-  componentWillUnmount() {
-    // this.animation = cancelAnimationFrame(this.animation);
-  }
-
-  @autobind
-  onAdjust() {
-    // try {
-    //   let { viewed } = this.state;
-    //   const { viewport, index } = this.props;
-    //   const node = React.findDOMNode(this);
-    //   const inViewport = getInViewport(node);
-    //   const drag = 250;
-
-    //   let [viewportX, viewportY, viewportWidth, viewportHeight] = viewport
-    //     .toArray();
-    //   let { top: postTop, height: postHeight } = node
-    //     .getBoundingClientRect();
-    //   let start = postTop - viewportHeight + 75;
-    //   let transition = viewed ?
-    //     0 :
-    //     1 - Math.min(Math.abs(Math.min(0, start)), drag) / drag;
-
-    //   if (transition === 0) {
-    //     viewed = true;
-    //   }
-
-    //   this.setState({ inViewport, transition, viewed }, () => {
-    //     this.animation = requestAnimationFrame(this.onAdjust);
-    //   });
-    // }
-    // catch (err) {
-    //   console.log(err);
-    //   return false;
-    // }
   }
 
   render() {
@@ -123,12 +86,6 @@ export default class Post extends React.Component {
       "in-viewport": inViewport
     });
 
-    const styles = {
-      WebkitTransform: `translate3d(0, ${(transition || 0) * 100}px, 0) ` +
-        `scale(${(0.2 * transition ) + 1})`,
-      opacity: 1 - transition
-    };
-
     const hasTitle = (
       ["text"].indexOf(post.get("type")) === -1
     ) && post.has("title");
@@ -138,8 +95,7 @@ export default class Post extends React.Component {
         className={ classNames(["post-wrapper", `post-${post.get("type")}`, {
           thumbnail,
           single
-        }]) }
-        style={ styles }>
+        }]) }>
         { !(single || thumbnail) && hasTitle &&
           <TitleBox post={ post } />
         }

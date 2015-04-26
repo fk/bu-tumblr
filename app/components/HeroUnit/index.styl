@@ -84,6 +84,24 @@
       background-color #4FA4DA
       color #fff
 
+      a
+        position relative
+        display inline-block
+        float none
+        clear both
+
+        &::after
+          content ' '
+          display block
+          bottom 0
+          left 0
+          width 0
+          height 2px
+          background-color #fff
+          transition width 400ms ease
+        &:hover::after
+          width 100%
+
       li + li
         margin-top 0.5rem
 
