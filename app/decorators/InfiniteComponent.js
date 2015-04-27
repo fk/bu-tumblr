@@ -36,7 +36,7 @@ export default function decorator(Target) {
     checkScroll(event) {
       let { request, page, itemsPerPage, complete } = this.state;
       let { clientHeight } = document.body;
-
+      console.log("CHECK_SCROLL");
       if (complete) {
         return cancelAnimationFrame(this.frame);
       }
