@@ -40,7 +40,7 @@ export default class AuthorRoute extends React.Component {
   render() {
     let { author, posts, loading } = this.props;
 
-    if (loading) {
+    if (loading || !author) {
       return (
         <Spinner />
       );
