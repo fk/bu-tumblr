@@ -16,7 +16,7 @@ import { uriToName } from "../../utils/uri";
 
 @PureRender
 @StoreComponent(AuthorStore, PostStore, RouterStore)
-export default class BioRoute extends React.Component {
+export default class AuthorRoute extends React.Component {
   static async fetchData(params, query) {
     let { authorName } = params;
 
@@ -40,12 +40,15 @@ export default class BioRoute extends React.Component {
   render() {
     let { author, posts, loading } = this.props;
 
+    if (loading) {
+      return (
+        <Spinner />
+      );
+    }
+
     return (
       <DocumentTitle title={ `${author.get("name")} - Brooklyn United` }>
-        <div className="bio-route">
-          { loading &&
-            <Spinner />
-          }
+        <div className="author-route">
           <BackButton />
           <Backer />
           { author &&

@@ -21,7 +21,7 @@ export default (
     <Route
       name="author"
       path="/author/:authorName"
-      handler={ require("./components/BioRoute") } />
+      handler={ require("./components/AuthorRoute") } />
     <NotFoundRoute
       handler={ require("./components/NotFoundRoute") } />
   </Route>
