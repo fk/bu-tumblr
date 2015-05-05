@@ -18,7 +18,7 @@ export default class ShareBox extends React.Component {
   }
 
   render() {
-    const { post, single } = this.props;
+    const { post, single, thumbnail } = this.props;
     const uriUrl = encodeURIComponent(
       `http://blog.brooklynunited.com/post/${post.get("id")}/${post.get("uri")}`
     );
@@ -41,46 +41,54 @@ export default class ShareBox extends React.Component {
             </span>
           </Link>
         }
-        <a href="#">
-          <span className="cube">
-            <span className="face front envelope">
-              <i className="fa fa-envelope" />
+        { !thumbnail &&
+          <a href="#">
+            <span className="cube">
+              <span className="face front envelope">
+                <i className="fa fa-envelope" />
+              </span>
+              <span className="face bottom envelope">
+                <i className="fa fa-envelope" />
+              </span>
             </span>
-            <span className="face bottom envelope">
-              <i className="fa fa-envelope" />
+          </a>
+        }
+        { !thumbnail &&
+          <a href="#">
+            <span className="cube">
+              <span className="face front twitter">
+                <i className="fa fa-twitter" />
+              </span>
+              <span className="face bottom twitter">
+                <i className="fa fa-twitter" />
+              </span>
             </span>
-          </span>
-        </a>
-        <a href="#">
-          <span className="cube">
-            <span className="face front twitter">
-              <i className="fa fa-twitter" />
+          </a>
+        }
+        { !thumbnail &&
+          <a href="#">
+            <span className="cube">
+              <span className="face front retweet">
+                <i className="fa fa-retweet" />
+              </span>
+              <span className="face bottom retweet">
+                <i className="fa fa-retweet" />
+              </span>
             </span>
-            <span className="face bottom twitter">
-              <i className="fa fa-twitter" />
+          </a>
+        }
+        { !thumbnail &&
+          <a href={ `https://www.facebook.com/sharer/sharer.php?u=${fbUrl}` }>
+            <span className="cube">
+              <span className="face front facebook">
+                <i className="fa fa-facebook" />
+              </span>
+              <span className="face bottom facebook">
+                <i className="fa fa-facebook" />
+              </span>
             </span>
-          </span>
-        </a>
-        <a href="#">
-          <span className="cube">
-            <span className="face front retweet">
-              <i className="fa fa-retweet" />
-            </span>
-            <span className="face bottom retweet">
-              <i className="fa fa-retweet" />
-            </span>
-          </span>
-        </a>
-        <a href={ `https://www.facebook.com/sharer/sharer.php?u=${fbUrl}` }>
-          <span className="cube">
-            <span className="face front facebook">
-              <i className="fa fa-facebook" />
-            </span>
-            <span className="face bottom facebook">
-              <i className="fa fa-facebook" />
-            </span>
-          </span>
-        </a>
+          </a>
+        }
       </nav>
     );
   }

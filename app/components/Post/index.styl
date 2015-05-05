@@ -58,8 +58,14 @@
     margin 0 auto !important
     display block !important
 
-  .read-more-button
-    float right
+  .read-more-wrapper
+    position relative
+    width 100%
+    display block
+    cf()
+
+    .read-more-button
+      float right
 
   +below(900px)
     padding 2.375rem 1.6125rem
@@ -94,6 +100,17 @@
 
   &.single .text-body
     column-count 1
+
+  .thumbnail &
+    padding 1.5rem 3rem
+
+    h3
+      font-size 1.414em
+      padding 0
+
+    .read-more-button
+      padding 0.5rem
+      margin 0.25rem 0
 
 .post-photo
   .photos

@@ -30,8 +30,8 @@ export default class HeroUnit extends React.Component {
             className="intro">
             <div className="we-are">
               <h3>We are<br/>Brooklyn United</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Sed interdum lacus solliitudin feugiat pellen tesque.</p>
+              <p>We make compelling websites and write about it now and then.
+              But mostly just .gifs</p>
             </div>
             <nav className="hashtags">
               <h4>Search by hashtag</h4>

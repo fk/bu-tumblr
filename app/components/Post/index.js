@@ -105,12 +105,15 @@ export default class Post extends React.Component {
           { ...this.state }
           condensed={ condensed }
           single={ single }
+          thumbnail={ thumbnail }
           inViewport={ inViewport }
           transition={ transition }
           post={ post }
           className={ cx } />
         { !(single) &&
-          <ShareBox post={ post } />
+          <ShareBox
+            thumbnail={ thumbnail }
+            post={ post } />
         }
       </div>
     );

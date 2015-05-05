@@ -24,10 +24,15 @@ export default class PostText extends React.Component {
   }
 
   render() {
-    const { className, post, single, ...otherProps } = this.props;
+    const { className, post, single, thumbnail, ...otherProps } = this.props;
     let body = !single && post.has("bodyAbstract") ?
       post.get("bodyAbstract") :
       post.get("body");
+
+    if (thumbnail) {
+      body = body.replace(/<(?:.|\n)*?>/gm, "")
+        .split(".").splice(0, 2).join(".") + ".";
+    }
 
     return (
       <div className={ classNames([className, { "single": single }]) }>
@@ -39,7 +44,9 @@ export default class PostText extends React.Component {
           dangerouslySetInnerHTML={{ __html: body }} />
         {
           !single && post.has("bodyAbstract") &&
-          <ReadMoreButton post={ post } />
+          <div className="read-more-wrapper">
+            <ReadMoreButton post={ post } />
+          </div>
         }
         { post.has("author") &&
           <AuthorByLine post={ post } />
