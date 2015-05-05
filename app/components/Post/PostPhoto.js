@@ -6,6 +6,7 @@ import warning from "react/lib/warning";
 import { Map } from "immutable";
 import classNames from "classnames";
 import moment from "moment";
+import AuthorByLine from "../AuthorByLine";
 import LightboxStore from "../../stores/LightboxStore";
 import LightboxActionCreators from "../../actions/LightboxActionCreators";
 import StoreComponent from "../../decorators/StoreComponent";
@@ -81,7 +82,7 @@ class PostPhoto extends React.Component {
 
     let { photosetLayout } = post.toJS();
 
-    if (condensed) {
+    if (condensed && photosetLayout) {
       let splitLayout = photosetLayout.split("");
       photosetLayout = "";
 
@@ -178,14 +179,8 @@ class PostPhoto extends React.Component {
             { post.has("caption") &&
               <div dangerouslySetInnerHTML={{ __html: post.get("caption" )}} />
             }
-            { post.has("author") && typeof date !== "undefined" &&
-              <div className="author">
-                By <Link
-                  to="author"
-                  params={{ authorName: nameToURI(post.get("author")) }}>
-                  { post.get("author") }
-                </Link> on { date }
-              </div>
+            { post.has("author") &&
+              <AuthorByLine post={ post } />
             }
           </div>
         }

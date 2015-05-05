@@ -3,6 +3,7 @@
 import React, { PropTypes } from "react/addons";
 import { Link } from "react-router";
 import classNames from "classnames";
+import AuthorByLine from "../AuthorByLine";
 import ReadMoreButton from "../ReadMoreButton";
 
 const { PureRenderMixin } = React.addons;
@@ -39,6 +40,9 @@ export default class PostText extends React.Component {
         {
           !single && post.has("bodyAbstract") &&
           <ReadMoreButton post={ post } />
+        }
+        { post.has("author") &&
+          <AuthorByLine post={ post } />
         }
       </div>
     );

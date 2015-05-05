@@ -54,6 +54,10 @@
   color #fff
   font-family "proxima-nova", helvetica, arial, sans-serif
 
+  iframe
+    margin 0 auto !important
+    display block !important
+
   .read-more-button
     float right
 
@@ -144,12 +148,25 @@
     color #fff
 
 .post-video
-  .player
-    width 100%
-    padding-bottom 100% * (9/16)
-    iframe
-      position absolute
-      top 0
-      left 0
+  &.instagram
+    position relative
+    display block
+    height auto
+    margin 0 auto
+    width 484px
+
+    .player
+      height auto
+      padding-bottom 0
+      iframe
+        position relative
+  &.vimeo
+    .player
       width 100%
-      height 100%
+      padding-bottom 100% * (9/16)
+      iframe
+        position absolute
+        top 0
+        left 0
+        width 100%
+        height 100%

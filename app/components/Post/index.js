@@ -10,6 +10,7 @@ import PostQuote from "./PostQuote";
 import PostText from "./PostText";
 import PostVideo from "./PostVideo";
 import TitleBox from "../TitleBox";
+import AuthorByLine from "../AuthorByLine";
 import ShareBox from "../ShareBox";
 import AppStore from "../../stores/AppStore";
 import autobind from "../../decorators/autobind";
@@ -108,7 +109,7 @@ export default class Post extends React.Component {
           transition={ transition }
           post={ post }
           className={ cx } />
-        { !(single || thumbnail) &&
+        { !(single) &&
           <ShareBox post={ post } />
         }
       </div>

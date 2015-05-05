@@ -5,10 +5,10 @@ import warning from "react/lib/warning";
 import { Link } from "react-router";
 import DocumentTitle from "react-document-title";
 import { OrderedMap } from "immutable";
-import moment from "moment";
 import Post from "../Post";
 import Backer from "../Backer";
 import Spinner from "../Spinner";
+import AuthorByLine from "../AuthorByLine";
 import NoteBox from "../NoteBox";
 import Footer from "../Footer";
 import ShareBox from "../ShareBox";
@@ -18,7 +18,6 @@ import RouterStore from "../../stores/RouterStore";
 import PostActionCreators from "../../actions/PostActionCreators";
 import PureRender from "../../decorators/PureRender";
 import StoreComponent from "../../decorators/StoreComponent";
-import { nameToURI } from "../../utils/uri";
 
 @PureRender
 @StoreComponent(PostStore, RouterStore)
@@ -40,10 +39,8 @@ export default class PostRoute extends React.Component {
   render() {
     let { router, post } = this.props;
     let title;
-    let date;
 
     if (post) {
-      date = moment(new Date(post.get("date"))).format("MMMM DD, YYYY");
       title = post.has("title") ?
         post.get("title") :
         post.get("type").charAt(0).toUpperCase() + post.get("type").slice(1);
@@ -71,13 +68,7 @@ export default class PostRoute extends React.Component {
                   dangerouslySetInnerHTML={{ __html: post.get("caption") }} />
               }
               { post.has("author") &&
-                <div className="author">
-                  By <Link
-                    to="author"
-                    params={{ authorName: nameToURI(post.get("author")) }}>
-                    { post.get("author") }
-                  </Link> on { date }
-                </div>
+                <AuthorByLine post={ post } />
               }
               <ShareBox
                 post={ post }

@@ -1,6 +1,7 @@
 "use strict";
 
 import React, { PropTypes } from "react/addons";
+import classNames from "classnames";
 
 const { PureRenderMixin } = React.addons;
 
@@ -15,10 +16,13 @@ class PostVideo extends React.Component {
     let embed = post.getIn(["player", 2, "embed_code"]);
 
     return (
-      <div className={ className }>
+      <div className={ classNames([className, post.get("videoType")]) }>
         <div
           className="player"
           dangerouslySetInnerHTML={{ __html: embed }} />
+        { post.has("author") &&
+          <AuthorByLine post={ post } />
+        }
       </div>
     );
   }
