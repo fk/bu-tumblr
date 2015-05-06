@@ -6,6 +6,20 @@ import classNames from "classnames";
 const { PureRenderMixin } = React.addons;
 
 class PostVideo extends React.Component {
+  componentDidMount() {
+    let { twttr, instgrm } = window;
+
+    if (twttr) {
+      twttr.ready(() => {
+        twttr.widgets.load();
+      });
+    }
+
+    if (instgrm) {
+      instgrm.Embeds.process();
+    }
+  }
+
   shouldComponentUpdate(nextProps, nextState) {
     return PureRenderMixin.shouldComponentUpdate
       .call(this, nextProps, nextState);

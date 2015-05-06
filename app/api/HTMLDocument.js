@@ -26,6 +26,7 @@ export default class App extends React.Component {
       <html lang="en">
       <head>
         <title>{ DocumentTitle.rewind() }</title>
+        <meta name="twitter:widgets:csp" content="on" />
         <link href={fonts} rel="stylesheet" />
         { styles.map((href, key) => (
           <link
@@ -41,30 +42,12 @@ export default class App extends React.Component {
           id="root"
           dangerouslySetInnerHTML={{ __html: markup }} />
         <script dangerouslySetInnerHTML={{ __html: payload }} />
+        <script src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
         { scripts.map((src, key) => (
           <script
             key={ key }
             src={ src } />
         )) }
-
-        <script dangerouslySetInnerHTML={{
-          __html: `window.twttr = (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0],
-              t = window.twttr || {};
-            if (d.getElementById(id)) return t;
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "https://platform.twitter.com/widgets.js";
-            fjs.parentNode.insertBefore(js, fjs);
-
-            t._e = [];
-            t.ready = function(f) {
-              t._e.push(f);
-            };
-
-            return t;
-          }(document, "script", "twitter-wjs"));`
-        }} />
       </body>
       </html>
     );

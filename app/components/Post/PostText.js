@@ -18,6 +18,20 @@ export default class PostText extends React.Component {
     single: false
   }
 
+  componentDidMount() {
+    let { twttr, instgrm } = window;
+
+    if (twttr) {
+      twttr.ready(() => {
+        twttr.widgets.load();
+      });
+    }
+
+    if (instgrm) {
+      instgrm.Embeds.process();
+    }
+  }
+
   shouldComponentUpdate(nextProps, nextState) {
     return PureRenderMixin.shouldComponentUpdate
       .call(this, nextProps, nextState);

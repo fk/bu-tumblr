@@ -60,11 +60,6 @@ export default class Post extends React.Component {
     let node = React.findDOMNode(this);
     let height = node.clientHeight;
 
-    if (process.env.BROWSER) {
-      let { twttr } = window;
-      twttr.ready(() => twttr.widgets.load());
-    }
-
     this.setState({ height });
   }
 

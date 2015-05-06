@@ -8,7 +8,7 @@ import router from "./router";
 import RouterActionCreators from "./actions/RouterActionCreators";
 
 let bootstrapping = true;
-let { payload } = window;
+let { payload, twttr } = window;
 alt.bootstrap(payload);
 
 router.run((Handler, state) => {
