@@ -12,7 +12,9 @@ export default class AuthorByLine extends React.Component {
 
   render() {
     let { post } = this.props;
-    let date = moment(new Date(post.get("date"))).format("MMMM DD, YYYY");
+    let postDate = post.get("date").split(" ").shift();
+
+    let date = moment(postDate).format("MMMM DD, YYYY");
 
     return (
       <div className="author">
