@@ -97,9 +97,16 @@ export default class Post extends React.Component {
           thumbnail,
           single
         }]) }>
-        { !(single || thumbnail) && hasTitle &&
-          <TitleBox post={ post } />
-        }
+        <header className="post-header">
+          { !(single || thumbnail) && hasTitle &&
+            <TitleBox post={ post } />
+          }
+          { !(single) &&
+            <ShareBox
+              thumbnail={ thumbnail }
+              post={ post } />
+          }
+        </header>
         <Component
           { ...otherProps }
           { ...this.state }
@@ -110,11 +117,6 @@ export default class Post extends React.Component {
           transition={ transition }
           post={ post }
           className={ cx } />
-        { !(single) &&
-          <ShareBox
-            thumbnail={ thumbnail }
-            post={ post } />
-        }
       </div>
     );
   }
