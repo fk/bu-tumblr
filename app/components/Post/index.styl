@@ -14,8 +14,14 @@
   &.post-text
     max-width 51.5rem
 
+    +below(990px)
+      max-width 100%
+
   &.post-quote
     max-width 95rem
+
+    +below(990px)
+      max-width 100%
 
 .post
   width 100%
@@ -24,6 +30,7 @@
   margin 0 auto
   display block
   position relative
+  clear both
   font-family proxima-nova, Helvetica, Arial, sans-serif
 
 .post.post-quote
@@ -96,12 +103,6 @@
     font-size 0.875rem
     line-height 1.5rem
 
-    +below(990px)
-      column-count 2
-
-    +below(570px)
-      column-count 1
-
   &.single .text-body
     column-count 1
 
@@ -160,6 +161,14 @@
           +below(600px)
             height @height * (1/2)
 
+  .post-header
+    display block
+    max-width 51.5rem
+    margin 0 auto
+
+    +below(990px)
+      max-width 100%
+
   .photo-body
     line-height 1.5rem
     margin 0 auto
@@ -167,6 +176,9 @@
     max-width 51.5rem
     background-color #333
     color #fff
+
+    +below(990px)
+      max-width 100%
 
 .post-video
   &.instagram

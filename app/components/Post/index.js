@@ -67,6 +67,7 @@ export default class Post extends React.Component {
     const {
       inViewport,
       height,
+      width,
       transition
     } = this.state;
 
