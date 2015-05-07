@@ -56,8 +56,7 @@ export default class PostText extends React.Component {
         <div
           className="text-body"
           dangerouslySetInnerHTML={{ __html: body }} />
-        {
-          !single && post.has("bodyAbstract") &&
+        { !single && post.has("bodyAbstract") &&
           <div className="read-more-wrapper">
             <ReadMoreButton post={ post } />
           </div>
