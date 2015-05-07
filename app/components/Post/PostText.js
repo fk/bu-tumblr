@@ -62,9 +62,6 @@ export default class PostText extends React.Component {
             <ReadMoreButton post={ post } />
           </div>
         }
-        { post.has("author") &&
-          <AuthorByLine post={ post } />
-        }
       </div>
     );
   }

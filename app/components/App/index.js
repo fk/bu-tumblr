@@ -57,7 +57,7 @@ export default class App extends React.Component {
       <div className={ cx }>
         <div className="container">
           <Header />
-          <RouteHandler />
+          <RouteHandler name={ name } />
         </div>
         <CSSTransitionGroup transitionName="navigation">
           { navOpen &&
