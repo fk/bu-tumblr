@@ -1,5 +1,7 @@
 "use strict";
 
+require("babel/polyfill");
+
 const autobind = (target, key, descriptor) => {
   let { name: componentName } = target.constructor;
   let { value: fn } = descriptor;
