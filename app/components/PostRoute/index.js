@@ -56,6 +56,9 @@ export default class PostRoute extends React.Component {
           <Backer />
           { post &&
             <div className="post-column">
+              <ShareBox
+                post={ post }
+                single={ true } />
               { post.has("title") &&
                 <h2>{ post.get("title") }</h2>
               }
@@ -70,9 +73,6 @@ export default class PostRoute extends React.Component {
               { post.has("author") &&
                 <AuthorByLine post={ post } />
               }
-              <ShareBox
-                post={ post }
-                single={ true } />
             </div>
           }
           { post && (post.get("tags").size > 0 || post.get("noteCount") > 0) &&
