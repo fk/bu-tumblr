@@ -41,7 +41,6 @@ export default class App extends React.Component {
         <div
           id="root"
           dangerouslySetInnerHTML={{ __html: markup }} />
-        <script src="https://getfirebug.com/firebug-lite-debug.js" />
         <script dangerouslySetInnerHTML={{ __html: payload }} />
         <script src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
         { scripts.map((src, key) => (
