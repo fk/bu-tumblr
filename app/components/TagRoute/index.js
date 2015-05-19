@@ -11,8 +11,8 @@ import InfiniteComponent from "../../decorators/InfiniteComponent";
 import PureRender from "../../decorators/PureRender";
 
 @PureRender
-@StoreComponent(PostStore, RouterStore)
 @InfiniteComponent
+@StoreComponent(PostStore, RouterStore)
 export default class TagRoute extends React.Component {
   static async fetchData(params, query) {
     return await PostActionCreators.getPostsByTagName(params.tagName);
