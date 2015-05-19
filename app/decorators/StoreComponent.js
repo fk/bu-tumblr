@@ -11,7 +11,12 @@ export default function StoreComponent(...stores) {
     class SubscriptionComponent extends React.Component {
       constructor(props) {
         super(props);
-        this.state = getStateFromStores(props);
+        try {
+          this.state = getStateFromStores(props);
+        }
+        catch (err) {
+          document.body.innerHTML = Target.displayName;
+        }
         this.handleChange = this.handleChange.bind(this);
       }
 
