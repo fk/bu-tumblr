@@ -15,7 +15,7 @@ export default function StoreComponent(...stores) {
           this.state = getStateFromStores(props);
         }
         catch (err) {
-          document.body.innerHTML = Target.displayName;
+          document.body.innerHTML = Target.name;
         }
         this.handleChange = this.handleChange.bind(this);
       }
