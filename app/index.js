@@ -12,15 +12,10 @@ let { payload, twttr } = window;
 alt.bootstrap(payload);
 
 router.run((Handler, state) => {
-  try {
-    fetchData(state);
+  fetchData(state);
 
-    RouterActionCreators.routeChange(state);
-    React.render(<Handler { ...state } />, document.getElementById("root"));
-  }
-  catch (err) {
-    document.body.innerHTML = err.stack;
-  }
+  RouterActionCreators.routeChange(state);
+  React.render(<Handler { ...state } />, document.getElementById("root"));
 });
 
 async function fetchData(state) {
