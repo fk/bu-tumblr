@@ -154,7 +154,10 @@
         &.flex-{n}
           span(1/n)
 
-      for n in 1..7
+      &.height-1
+        height auto
+
+      for n in 2..7
         &.height-{n}
           // height 38.75rem - (6.25rem * n)
           height 38.75rem
