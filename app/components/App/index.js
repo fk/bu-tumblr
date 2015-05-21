@@ -5,6 +5,7 @@ import { RouteHandler } from "react-router";
 import classNames from "classnames";
 import Header from "../Header";
 import Footer from "../Footer";
+import Loader from "../Loader";
 import Navigation from "../Navigation";
 import Lightbox from "../Lightbox";
 import AppActionCreators from "../../actions/AppActionCreators";
@@ -72,6 +73,7 @@ export default class App extends React.Component {
           }
         </CSSTransitionGroup>
         <Footer />
+        { /* <Loader /> */ }
       </div>
     );
   }
