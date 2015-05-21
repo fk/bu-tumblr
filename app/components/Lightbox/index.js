@@ -159,6 +159,11 @@ export default class Lightbox extends React.Component {
               className="active-underline" />
           </nav>
         }
+        <button
+          onClick={ this.handleClose }
+          className="close-btn">
+          <i className="fa fa-close" />
+        </button>
       </div>
     );
   }
