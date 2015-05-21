@@ -11,6 +11,9 @@
   right 0
   background-color rgba(79,164,218,.85)
   overflow scroll
+  display flex
+  flex-flow row wrap
+  align-items center
 
   &.navigation-enter, &.navigation-leave
     transition transform 400ms ease, opacity 400ms ease
@@ -32,26 +35,25 @@
       opacity 0
 
   nav
-    position absolute
     width 99.9%
     padding 0 65px
-    top 50%
+    // top 50%
     text-align right
-    transform translateY(-50%) translateZ(0)
+    // transform translateY(-50%) translateZ(0)
     font-size 19px
     transition all 400ms ease
 
     +below(769px)
       text-align center
 
-    @keyframes fadeInUp
-      from
-        transform translateY(-30%) translateZ(0)
-      to
-        transform translateY(-50%) translateZ(0)
+    // @keyframes fadeInUp
+    //   from
+    //     transform translateY(-30%) translateZ(0)
+    //   to
+    //     transform translateY(-50%) translateZ(0)
 
-    animation fadeInUp 600ms ease
-    animation-fill-mode both
+    // animation fadeInUp 600ms ease
+    // animation-fill-mode both
     cf()
 
     a
