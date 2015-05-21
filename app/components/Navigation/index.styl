@@ -1,4 +1,6 @@
 @import "nib"
+@import "jeet"
+@import "rupture"
 
 .navigation
   font-family Montserrat, Helvetica, Arial, sans-serif
@@ -37,6 +39,10 @@
     text-align right
     transform translateY(-50%) translateZ(0)
     font-size 19px
+    transition all 400ms ease
+
+    +below(769px)
+      text-align center
 
     @keyframes fadeInUp
       from
@@ -57,12 +63,28 @@
       text-decoration none
       text-transform uppercase
       display block
+      font-size 19px
+      transition all 400ms ease
+
+      +below(1201px)
+        font-size 20px
+
+      +below(1025px)
+        font-size 20px
+
+      +below(768px)
+        font-size 14px
+
+      +below(500px)
+        font-size 10px
+
 
       h2
         font-size 3.75em
         position relative
         display inline-block
         margin 0
+
 
         .highlight
           position absolute

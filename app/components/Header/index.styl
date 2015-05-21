@@ -32,12 +32,22 @@
   opacity 1
   transition opacity 400ms ease
 
+  +below(769px)
+    margin-top 10px
+    padding 0 10px
+
   .navigation-open .header &
     opacity 0
 
 .logo
   h1
     transition opacity 200ms ease-in-out
+    +below(769px)
+      font-size 1.8em
+      line-height 0.85em
+    +below(500)
+      font-size 1.4em
+
   .fixed &
     visibility hidden
   &:hover h1
