@@ -174,6 +174,19 @@ class PostPhoto extends React.Component {
         <ul className="photos">
           { photos.map(this.renderPhoto) }
         </ul>
+        { (!single && (post.has("caption") && !!post.get("caption").trim() )
+          || post.has("author")) &&
+          <div className="post-body">
+            { post.has("caption") && !!post.get("caption").trim() &&
+              <span
+                className="post-caption"
+                dangerouslySetInnerHTML={{ __html: post.get("caption") }} />
+            }
+            { post.has("author") &&
+              <AuthorByLine post={ post } />
+            }
+          </div>
+        }
       </div>
     );
   }
