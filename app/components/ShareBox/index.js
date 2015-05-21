@@ -23,6 +23,13 @@ export default class ShareBox extends React.Component {
       `${post.get("uri")}`;
     const uriUrl = encodeURIComponent(url);
     const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+    const twUrl = `http://twitter.com/home?status=Check%20out%20@` +
+      `brooklynunited’s%20zany%20blog ${uriUrl}`;
+    const tmUrl = `https://www.tumblr.com/reblog/${post.get("id")}/`
+     + `${post.get("reblogKey")}`;
+    const emUrl = `mailto:?subject=Check%20out%20@` +
+      `brooklynunited’s%20zany%20blog&body=Check%20out%20@` +
+      `brooklynunited’s%20zany%20blog ${url}`;
 
     return (
       <nav className="social">
@@ -42,7 +49,7 @@ export default class ShareBox extends React.Component {
           </Link>
         }
         { !thumbnail &&
-          <a href="#">
+          <a href={ emUrl }>
             <span className="cube">
               <span className="face front envelope">
                 <i className="fa fa-envelope" />
@@ -54,7 +61,7 @@ export default class ShareBox extends React.Component {
           </a>
         }
         { !thumbnail &&
-          <a href="#">
+          <a href={ twUrl }>
             <span className="cube">
               <span className="face front twitter">
                 <i className="fa fa-twitter" />
@@ -66,7 +73,7 @@ export default class ShareBox extends React.Component {
           </a>
         }
         { !thumbnail &&
-          <a href="#">
+          <a href={ tmUrl }>
             <span className="cube">
               <span className="face front retweet">
                 <i className="fa fa-retweet" />
