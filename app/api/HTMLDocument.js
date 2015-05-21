@@ -52,7 +52,7 @@ export default class App extends React.Component {
           id="root"
           dangerouslySetInnerHTML={{ __html: markup }} />
         <script dangerouslySetInnerHTML={{ __html: payload }} />
-        <script src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <script src="//platform.twitter.com/widgets.js" charSet="utf-8"></script>
         { scripts.map((src, key) => (
           <script
             key={ key }
