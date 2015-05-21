@@ -27,6 +27,13 @@ export default class App extends React.Component {
       <head>
         <title>{ DocumentTitle.rewind() }</title>
         <meta name="twitter:widgets:csp" content="on" />
+        <meta property="og:title" content="Brooklyn United" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="blog.brooklynunited.com" />
+        <meta property="og:image" content="www.xxxxxxxxx.jpg" />
+        <meta property="og:site_name" content="Blog - Brooklyn United" />
+        <meta property="fb:admins" content="618382230" />
+        <meta property="og:description" content="We’re a culture-led, results-driven digital agency. Don’t lose your job over not hiring us." />
         <link href={fonts} rel="stylesheet" />
         { styles.map((href, key) => (
           <link
