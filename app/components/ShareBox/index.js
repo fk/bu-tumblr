@@ -19,10 +19,10 @@ export default class ShareBox extends React.Component {
 
   render() {
     const { post, single, thumbnail } = this.props;
-    const uriUrl = encodeURIComponent(
-      `http://blog.brooklynunited.com/post/${post.get("id")}/${post.get("uri")}`
-    );
-    const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${uriUrl}`;
+    const url = `http://blog.brooklynunited.com/post/${post.get("id")}/` +
+      `${post.get("uri")}`;
+    const uriUrl = encodeURIComponent(url);
+    const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
 
     return (
       <nav className="social">
@@ -78,7 +78,7 @@ export default class ShareBox extends React.Component {
           </a>
         }
         { !thumbnail &&
-          <a href={ `https://www.facebook.com/sharer/sharer.php?u=${fbUrl}` }>
+          <a href={ fbUrl }>
             <span className="cube">
               <span className="face front facebook">
                 <i className="fa fa-facebook" />
