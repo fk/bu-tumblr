@@ -7,7 +7,7 @@ function capitalize (word) {
 const IRREGULAR_HASH = {
   "christian-debotton": "Christian de Botton",
   "lindsay-devellis": "Lindsay DeVellis",
-  "colleen-orourke": "Collen O'Rourke"
+  "colleen-o'rourke": "Colleen O'Rourke"
 };
 
 export let nameToURI = (name) => {
