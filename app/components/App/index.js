@@ -12,13 +12,13 @@ import AppActionCreators from "../../actions/AppActionCreators";
 import AppStore from "../../stores/AppStore";
 import LightboxStore from "../../stores/LightboxStore";
 import PureRender from "../../decorators/PureRender";
-import StoreComponent from "../../decorators/StoreComponent";
+import storeComponent from "../../decorators/storeComponent";
 import { getViewport } from "../../utils/viewport";
 
 const { CSSTransitionGroup } = React.addons;
 
 @PureRender
-@StoreComponent(AppStore, LightboxStore)
+@storeComponent(AppStore, LightboxStore)
 export default class App extends React.Component {
   static propTypes = { env: PropTypes.string }
 

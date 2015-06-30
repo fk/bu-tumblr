@@ -4,11 +4,11 @@ import React from "react";
 import classNames from "classnames";
 import AppStore from "../../stores/AppStore";
 import AppActionCreators from "../../actions/AppActionCreators";
-import StoreComponent from "../../decorators/StoreComponent";
+import storeComponent from "../../decorators/storeComponent";
 import PureRender from "../../decorators/PureRender";
 
 @PureRender
-@StoreComponent(AppStore)
+@storeComponent(AppStore)
 export default class Header extends React.Component {
   constructor(props) {
     super(props);

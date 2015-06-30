@@ -8,14 +8,14 @@ import LightboxThumb from "./LightboxThumb";
 import Spinner from "../Spinner";
 import LightboxActionCreators from "../../actions/LightboxActionCreators";
 import LightboxStore from "../../stores/LightboxStore";
-import StoreComponent from "../../decorators/StoreComponent";
+import storeComponent from "../../decorators/storeComponent";
 import PureRender from "../../decorators/PureRender";
 import autobind from "../../decorators/autobind";
 
 const { CSSTransitionGroup } = React.addons;
 
 @PureRender
-@StoreComponent(LightboxStore)
+@storeComponent(LightboxStore)
 export default class Lightbox extends React.Component {
   constructor(props) {
     super(props);

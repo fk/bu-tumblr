@@ -1,10 +1,10 @@
 import React, { PropTypes } from "react";
 import LightboxStore from "../../stores/LightboxStore";
 import PureRender from "../../decorators/PureRender";
-import StoreComponent from "../../decorators/StoreComponent";
+import storeComponent from "../../decorators/storeComponent";
 
 @PureRender
-@StoreComponent(LightboxStore)
+@storeComponent(LightboxStore)
 export default class ActiveUnderline extends React.Component {
   render() {
     return (

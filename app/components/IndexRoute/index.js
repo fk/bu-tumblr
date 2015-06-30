@@ -7,13 +7,13 @@ import HeroUnit from "../HeroUnit";
 import LeadingQuote from "../LeadingQuote";
 import PostActionCreators from "../../actions/PostActionCreators";
 import PostStore from "../../stores/PostStore";
-import StoreComponent from "../../decorators/StoreComponent";
+import storeComponent from "../../decorators/storeComponent";
 import InfiniteComponent from "../../decorators/InfiniteComponent";
 import PureRender from "../../decorators/PureRender";
 
 @PureRender
 @InfiniteComponent
-@StoreComponent(PostStore)
+@storeComponent(PostStore)
 export default class IndexRoute extends React.Component {
   static async fetchData() {
     return await PostActionCreators.getPosts();

@@ -17,10 +17,10 @@ import PostStore from "../../stores/PostStore";
 import RouterStore from "../../stores/RouterStore";
 import PostActionCreators from "../../actions/PostActionCreators";
 import PureRender from "../../decorators/PureRender";
-import StoreComponent from "../../decorators/StoreComponent";
+import storeComponent from "../../decorators/storeComponent";
 
 @PureRender
-@StoreComponent(PostStore, RouterStore)
+@storeComponent(PostStore, RouterStore)
 export default class PostRoute extends React.Component {
   static async fetchData(params) {
     let { postId } = params;

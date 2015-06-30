@@ -9,13 +9,13 @@ import moment from "moment";
 import AuthorByLine from "../AuthorByLine";
 import LightboxStore from "../../stores/LightboxStore";
 import LightboxActionCreators from "../../actions/LightboxActionCreators";
-import StoreComponent from "../../decorators/StoreComponent";
+import storeComponent from "../../decorators/storeComponent";
 import autobind from "../../decorators/autobind";
 import PureRender from "../../decorators/PureRender";
 import { nameToURI } from "../../utils/uri";
 
 @PureRender
-@StoreComponent(LightboxStore)
+@storeComponent(LightboxStore)
 class PostPhoto extends React.Component {
   state = {
     hovered: null

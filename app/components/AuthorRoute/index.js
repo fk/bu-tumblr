@@ -10,12 +10,12 @@ import AuthorActionCreators from "../../actions/AuthorActionCreators";
 import AuthorStore from "../../stores/AuthorStore";
 import PostStore from "../../stores/PostStore";
 import RouterStore from "../../stores/RouterStore";
-import StoreComponent from "../../decorators/StoreComponent";
+import storeComponent from "../../decorators/storeComponent";
 import PureRender from "../../decorators/PureRender";
 import { uriToName } from "../../utils/uri";
 
 @PureRender
-@StoreComponent(AuthorStore, PostStore, RouterStore)
+@storeComponent(AuthorStore, PostStore, RouterStore)
 export default class AuthorRoute extends React.Component {
   static async fetchData(params, query) {
     let { authorName } = params;

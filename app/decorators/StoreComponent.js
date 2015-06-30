@@ -4,7 +4,7 @@ import React from "react";
 import autobind from "./autobind";
 import copyStaticMethods from "../utils/copyStaticMethods";
 
-export default function StoreComponent(...stores) {
+export default function storeComponent(...stores) {
   return function decorator(Target) {
     let { getStateFromStores, fetchData } = Target;
 

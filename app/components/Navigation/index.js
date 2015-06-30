@@ -3,13 +3,13 @@
 import React from "react";
 import AppActionCreators from "../../actions/AppActionCreators";
 import AppStore from "../../stores/AppStore";
-import StoreComponent from "../../decorators/StoreComponent";
+import storeComponent from "../../decorators/storeComponent";
 import PureRender from "../../decorators/PureRender";
 
 const { CSSTransitionGroup } = React.addons;
 
 @PureRender
-@StoreComponent(AppStore)
+@storeComponent(AppStore)
 export default class Navigation extends React.Component {
   constructor(props) {
     super(props);

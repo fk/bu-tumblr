@@ -6,13 +6,13 @@ import BackButton from "../BackButton";
 import PostActionCreators from "../../actions/PostActionCreators";
 import PostStore from "../../stores/PostStore";
 import RouterStore from "../../stores/RouterStore";
-import StoreComponent from "../../decorators/StoreComponent";
+import storeComponent from "../../decorators/storeComponent";
 import InfiniteComponent from "../../decorators/InfiniteComponent";
 import PureRender from "../../decorators/PureRender";
 
 @PureRender
 @InfiniteComponent
-@StoreComponent(PostStore, RouterStore)
+@storeComponent(PostStore, RouterStore)
 export default class TagRoute extends React.Component {
   static async fetchData(params, query) {
     return await PostActionCreators.getPostsByTagName(params.tagName);
