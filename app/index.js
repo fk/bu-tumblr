@@ -1,21 +1,20 @@
 "use strict";
 
-require("babel/polyfill");
-
 import alt from "./alt";
 import React from "react";
+import ReactDOM from "react-dom";
 import router from "./router";
 import RouterActionCreators from "./actions/RouterActionCreators";
 
 let bootstrapping = true;
 let { payload, twttr } = window;
-alt.bootstrap(payload);
+alt.bootstrap(JSON.stringify(payload));
 
 router.run((Handler, state) => {
   fetchData(state);
 
   RouterActionCreators.routeChange(state);
-  React.render(<Handler { ...state } />, document.getElementById("root"));
+  ReactDOM.render(<Handler { ...state } />, document.getElementById("root"));
 });
 
 async function fetchData(state) {

@@ -1,18 +1,13 @@
 "use strict";
 
 import React, { PropTypes } from "react";
-import warning from "react/lib/warning";
 import { Link } from "react-router";
 import DocumentTitle from "react-document-title";
-import { OrderedMap } from "immutable";
 import Post from "../Post";
 import Backer from "../Backer";
 import Spinner from "../Spinner";
 import AuthorByLine from "../AuthorByLine";
 import NoteBox from "../NoteBox";
-import Footer from "../Footer";
-import ShareBox from "../ShareBox";
-import BackButton from "../BackButton";
 import PostStore from "../../stores/PostStore";
 import RouterStore from "../../stores/RouterStore";
 import PostActionCreators from "../../actions/PostActionCreators";
@@ -47,18 +42,14 @@ export default class PostRoute extends React.Component {
     }
 
     return (
-      <DocumentTitle title={ `${title} - Brooklyn United` }>
+      <DocumentTitle title={ `${title} - gabion` }>
         <div className="post-route">
-          <BackButton />
           { !post &&
             <Spinner />
           }
           <Backer />
           { post &&
             <div className="post-column">
-              <ShareBox
-                post={ post }
-                single={ true } />
               { post.has("title") &&
                 <h2>{ post.get("title") }</h2>
               }
@@ -101,7 +92,6 @@ export default class PostRoute extends React.Component {
           { post && post.get("noteCount") > 0 &&
             <NoteBox notes={ post.get("notes") } />
           }
-          <BackButton />
         </div>
       </DocumentTitle>
     );

@@ -1,18 +1,15 @@
 "use strict";
 
 import React, { PropTypes } from "react";
-import { Link } from "react-router";
-import warning from "react/lib/warning";
+import warning from "warning";
 import { Map } from "immutable";
 import classNames from "classnames";
-import moment from "moment";
 import AuthorByLine from "../AuthorByLine";
 import LightboxStore from "../../stores/LightboxStore";
 import LightboxActionCreators from "../../actions/LightboxActionCreators";
 import storeComponent from "../../decorators/storeComponent";
 import autobind from "../../decorators/autobind";
 import PureRender from "../../decorators/PureRender";
-import { nameToURI } from "../../utils/uri";
 
 @PureRender
 @storeComponent(LightboxStore)
@@ -86,7 +83,7 @@ class PostPhoto extends React.Component {
       let splitLayout = photosetLayout.split("");
       photosetLayout = "";
 
-      for (let i  = 0; i < splitLayout.length; i++) {
+      for (let i = 0; i < splitLayout.length; i++) {
         let numOne = parseInt(splitLayout[i], 10);
         let numTwo = parseInt(splitLayout[i + 1], 10);
         let numThree = parseInt(splitLayout[i + 1], 10);
@@ -129,22 +126,7 @@ class PostPhoto extends React.Component {
         lightbox.get("photos").size === 0
     }]);
 
-    let styles = {
-      backgroundImage: `url("${photo.getIn(["alt_sizes", 0, "url"])}")`
-    };
-
-    if (!photosetLayout) {
-      let width = photo.getIn(["alt_sizes", 0, "width"]);
-      let height = photo.getIn(["alt_sizes", 0, "height"]);
-      let paddingBottom = ((height / width) * 100);
-
-      if (paddingBottom > 75) {
-        paddingBottom = 50;
-      }
-
-      styles.height = 0;
-      styles.paddingBottom = paddingBottom + "%";
-    }
+    let src = photo.getIn(["alt_sizes", 0, "url"]);
 
     return (
       <li
@@ -153,20 +135,18 @@ class PostPhoto extends React.Component {
         onMouseLeave={ this.handleHover(null) }
         onClick={ this.handlePhotoClick(photo) }
         className={ cx }
-        style={ styles }>
+      >
+        <img
+          src={ src }>
+        </img>
         <div className="shade" />
       </li>
-    );
+      );
   }
 
   render() {
     const { post, className, single } = this.props;
     const photos = post.get("photos");
-    let date;
-
-    if (post) {
-      date = moment(new Date(post.get("date"))).format("MMMM DD, YYYY");
-    }
 
     return (
       <div

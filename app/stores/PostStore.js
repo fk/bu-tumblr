@@ -2,7 +2,7 @@
 
 import alt from "../alt";
 import sanitize from "../utils/sanitize";
-import warning from "react/lib/warning";
+import warning from "warning";
 import { Iterable, OrderedMap, fromJS, Record, List } from "immutable";
 import PostActionCreators from "../actions/PostActionCreators";
 import AuthorActionCreators from "../actions/AuthorActionCreators";

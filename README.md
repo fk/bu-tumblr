@@ -1,29 +1,30 @@
-# Brooklyn United Blog
+# Gabion
 
 ## Stack
-This is written using:
-1. React
-2. Flux
-3. Koa.js
-4. ES6/Babel
-5. Gulp
+
+1. [React](https://facebook.github.io/react/)
+2. Flux ([Alt](http://alt.js.org/))
+3. [Koa](http://koajs.com/)
+4. ES6/[Babel](https://babeljs.io/)/[Webpack](http://webpack.github.io/)
+5. [Gulp](http://gulpjs.com/)
 
 ## Usage
-To run using the koa server, run gulp watch. To build for deployment to Tubmlr,
-run `NODE_ENV=production gulp`, and then upload the public assets to Tumblr,
-and reference them in the tumblr template. Make sure the markup has the
-following markup:
+
+To run using the Koa server, run `gulp watch`. To build for deployment to Tumblr,
+run `NODE_ENV=production gulp` or `npm run production` and then upload the public assets to Tumblr,
+and reference them in the Tumblr template:
 
 ```html
 <!doctype>
 <html lang="en">
 <head>
-  <title>Brooklyn United Blog</title>
-  <link rel="stylesheet" href="(ref to app.min.css)"></link>
+  <title>Gabion</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="http://static.tumblr.com/app.min.css"></link>
 </head>
 <body>
   <div id="root"></div>
-  <script src="(ref to bundle.min.js)"></script>
+  <script src="http://static.tumblr.com/bundle.min.js"></script>
 </body>
 </html>
 ```

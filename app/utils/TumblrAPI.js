@@ -9,8 +9,8 @@ const Post = new Schema("posts");
 const Author = new Schema("authors");
 
 const ENDPOINT_ROOT = "http://api.tumblr.com/v2/blog";
-const TUMBLR = "brooklynunited.tumblr.com";
-const API_KEY = "iiXyRVDvsjEMOJV1Ick83wXNir0GsHsH3NbIctuRjbPvVjq65Q";
+const TUMBLR = "hellodirty.tumblr.com";
+const API_KEY = "QtDWjNqgwJ6g2cQ8yHAYnHuIG0OWvDeC4Ca8YpCewOd69zdRwD";
 
 export default {
   async getPosts(params = {}) {

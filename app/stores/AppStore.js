@@ -9,9 +9,11 @@ class AppStore {
     this.bindActions(AppActionCreators);
 
     this.app = new OrderedMap({
-      homeUrl: "http://brooklynunited.com",
+      homeUrl: "http://hellodirty.com",
+      title: "Gabion",
+      htmlTitle: "Gabion<br />Alpha",
       navOpen: false,
-      mastheadColor: "#58AEDF",
+      mastheadColor: "#ff00ff",
       fixedHeader: false,
       viewport: List.of(0, 0, 0, 0)
     });

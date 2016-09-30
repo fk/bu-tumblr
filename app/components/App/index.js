@@ -1,11 +1,11 @@
 "use strict";
 
-import React, { PropTypes } from "react/addons";
+import React, { PropTypes } from "react";
 import { RouteHandler } from "react-router";
 import classNames from "classnames";
 import Header from "../Header";
 import Footer from "../Footer";
-import Loader from "../Loader";
+import Spinner from "../Spinner";
 import Navigation from "../Navigation";
 import Lightbox from "../Lightbox";
 import AppActionCreators from "../../actions/AppActionCreators";
@@ -14,16 +14,11 @@ import LightboxStore from "../../stores/LightboxStore";
 import PureRender from "../../decorators/PureRender";
 import storeComponent from "../../decorators/storeComponent";
 import { getViewport } from "../../utils/viewport";
-
-const { CSSTransitionGroup } = React.addons;
+import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 
 @PureRender
 @storeComponent(AppStore, LightboxStore)
 export default class App extends React.Component {
-  static propTypes = { env: PropTypes.string }
-
-  static defaultProps = { env: "development" }
-
   static getStateFromStores(props) {
     let { app } = AppStore.getState();
     let { lightbox } = LightboxStore.getState();
@@ -60,20 +55,26 @@ export default class App extends React.Component {
           <Header />
           <RouteHandler name={ name } />
         </div>
-        <CSSTransitionGroup transitionName="navigation">
+        <ReactCSSTransitionGroup
+            transitionName="navigation"
+            transitionEnterTimeout={400}
+            transitionLeaveTimeout={400}>
           { navOpen &&
             <Navigation key="nav" />
           }
-        </CSSTransitionGroup>
-        <CSSTransitionGroup transitionName="lightbox">
+        </ReactCSSTransitionGroup>
+        <ReactCSSTransitionGroup
+            transitionName="lightbox"
+            transitionEnterTimeout={400}
+            transitionLeaveTimeout={400}>
           { lightbox.get("photos").size > 0 &&
             <Lightbox
               photos={ lightbox.get("photos") }
               index={ lightbox.get("index")} />
           }
-        </CSSTransitionGroup>
+        </ReactCSSTransitionGroup>
         <Footer />
-        { /* <Loader /> */ }
+        { /* <Spinner /> */ }
       </div>
     );
   }

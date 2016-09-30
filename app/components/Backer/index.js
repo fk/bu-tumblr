@@ -12,9 +12,9 @@ export default class Backer extends React.Component {
       <div className="backer">
         <svg
           preserveAspectRatio="none"
-          viewBox="0 0 100 100">
+          viewBox="0 0 120 20">
           <g>
-            <path d="M0,0 L0,100 L100,100" />
+            <path d="M10.9,13c4.9,0,4.9-6,9.8-6c4.9,0,4.9,6,9.8,6c4.9,0,4.9-6,9.8-6c4.9,0,4.9,6,9.8,6c4.9,0,4.9-6,9.8-6 c4.9,0,4.9,6,9.8,6c4.9,0,4.9-6,9.8-6c4.9,0,4.9,6,9.8,6c4.9,0,4.9-6,9.8-6s4.9,6,9.8,6"/>
           </g>
         </svg>
       </div>

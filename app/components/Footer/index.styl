@@ -1,24 +1,27 @@
-@import "nib"
 @import "jeet"
 @import "rupture"
 
 .footer
   display flex
   align-items center
-  height 11.125rem
+  padding 2rem
 
-  .made-in, nav
+  nav
     cf()
 
   nav ul
-
     cf()
+    list-style none
+    padding 0
+
+    a
+      color: #999
 
     li
       float left
 
       & + li
-        margin-left 15px
+        margin-left 1rem
 
   .address, .phone, .contact
     display block

@@ -1,16 +1,11 @@
 "use strict";
 
-import React, { PropTypes } from "react/addons";
+import React, { PropTypes } from "react";
 import { Link } from "react-router";
+import PureRender from "../../decorators/PureRender";
 
-const { PureRenderMixin } = React.addons;
-
+@PureRender
 class ReadMoreButton extends React.Component {
-  shouldComponentUpdate(nextProps, nextState) {
-    return PureRenderMixin.shouldComponentUpdate
-      .call(this, nextProps, nextState);
-  }
-
   render() {
     let { post } = this.props;
 

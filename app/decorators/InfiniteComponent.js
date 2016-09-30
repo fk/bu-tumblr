@@ -1,5 +1,4 @@
 import React from "react";
-import assign from "object-assign";
 import { OrderedMap } from "immutable";
 import copyStaticMethods from "../utils/copyStaticMethods";
 import { getViewport } from "../utils/viewport";
@@ -15,9 +14,9 @@ export default function decorator(Target) {
       request: false,
       page: 0,
       itemsPerPage: 20
-    }
+    };
 
-    frame = null
+    frame = null;
 
     constructor(props) {
       super(props);

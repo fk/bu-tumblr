@@ -1,11 +1,13 @@
+@import "../../stylus/variables"
+
 .posts
+  max-width: 40rem
+  margin: 0 auto
+
   .post-wrapper
     display block
     position relative
     margin-top 8rem
 
-    +below(900px)
-      margin-top 4rem
-
-    +below(600px)
+    +below(DISPLAY_MEDIUM)
       margin-top 4rem

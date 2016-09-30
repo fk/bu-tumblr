@@ -1,7 +1,8 @@
 "use strict";
 
 import React, { PropTypes } from "react";
-import warning from "react/lib/warning";
+import ReactDOM from "react-dom";
+import warning from "warning";
 import classNames from "classnames";
 import { Map, List } from "immutable";
 import PostPhoto from "./PostPhoto";
@@ -9,11 +10,11 @@ import PostLink from "./PostLink";
 import PostQuote from "./PostQuote";
 import PostText from "./PostText";
 import PostVideo from "./PostVideo";
+import PostAnswer from "./PostAnswer";
+import PostAudio from "./PostAudio";
 import TitleBox from "../TitleBox";
-import AuthorByLine from "../AuthorByLine";
 import ShareBox from "../ShareBox";
 import AppStore from "../../stores/AppStore";
-import autobind from "../../decorators/autobind";
 import storeComponent from "../../decorators/storeComponent";
 import PureRender from "../../decorators/PureRender";
 import { getInViewport, getViewPort } from "../../utils/viewport";
@@ -57,7 +58,7 @@ export default class Post extends React.Component {
   }
 
   componentDidMount() {
-    let node = React.findDOMNode(this);
+    let node = ReactDOM.findDOMNode(this);
     let height = node.clientHeight;
 
     this.setState({ height });
@@ -102,11 +103,6 @@ export default class Post extends React.Component {
           { !(single || thumbnail) && hasTitle &&
             <TitleBox post={ post } />
           }
-          { !(single) &&
-            <ShareBox
-              thumbnail={ thumbnail }
-              post={ post } />
-          }
         </header>
         <Component
           { ...otherProps }
@@ -118,6 +114,17 @@ export default class Post extends React.Component {
           transition={ transition }
           post={ post }
           className={ cx } />
+        <footer>
+          {/*
+            * { !(single) &&
+            */}
+            <ShareBox
+              thumbnail={ thumbnail }
+              post={ post } />
+           {/*
+             *}
+             */}
+            </footer>
       </div>
     );
   }
@@ -137,6 +144,10 @@ const getPostComponent = (post) => {
       return PostQuote;
     case "photo":
       return PostPhoto;
+    case "answer":
+      return PostAnswer;
+    case "audio":
+      return PostAudio;
     default:
       console.warn(post.get("type"), "is unhandled.");
       return PostText;

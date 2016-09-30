@@ -1,8 +1,8 @@
 "use strict";
 
-import React, { PropTypes } from "react/addons";
+import React, { PropTypes } from "react";
+import ReactDOM from "react-dom";
 import classNames from "classnames";
-import assign from "object-assign";
 import { OrderedMap } from "immutable";
 import LightboxThumb from "./LightboxThumb";
 import Spinner from "../Spinner";
@@ -11,8 +11,7 @@ import LightboxStore from "../../stores/LightboxStore";
 import storeComponent from "../../decorators/storeComponent";
 import PureRender from "../../decorators/PureRender";
 import autobind from "../../decorators/autobind";
-
-const { CSSTransitionGroup } = React.addons;
+import Icon from "../Icons";
 
 @PureRender
 @storeComponent(LightboxStore)
@@ -75,7 +74,7 @@ export default class Lightbox extends React.Component {
     let { index } = this.props;
     let { active } = this.state;
     this.frame = requestAnimationFrame(this.getFrame);
-    let thumb = React.findDOMNode(this.navItems.get(index));
+    let thumb = ReactDOM.findDOMNode(this.navItems.get(index));
     let { left, bottom, width } = thumb.getBoundingClientRect();
 
     bottom = bottom + 8;
@@ -133,7 +132,7 @@ export default class Lightbox extends React.Component {
             <button
               className="lightbox-arrow left"
               onClick={ this.handleMoveBack }>
-              <i className="fa fa-angle-left" />
+              <Icon icon="chevron-left" />
             </button>
             { photos.map((thumb, key) => {
               return (
@@ -147,7 +146,7 @@ export default class Lightbox extends React.Component {
             <button
               className="lightbox-arrow right"
               onClick={ this.handleMoveForward }>
-              <i className="fa fa-angle-right" />
+              <Icon icon="chevron-right" />
             </button>
             <div
               style={{
@@ -162,7 +161,7 @@ export default class Lightbox extends React.Component {
         <button
           onClick={ this.handleClose }
           className="close-btn">
-          <i className="fa fa-close" />
+          <Icon icon="close" />
         </button>
       </div>
     );

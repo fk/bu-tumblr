@@ -5,8 +5,8 @@ import DocumentTitle from "react-document-title";
 import Spinner from "../Spinner";
 import Backer from "../Backer";
 import Post from "../Post";
-import BackButton from "../BackButton";
 import AuthorActionCreators from "../../actions/AuthorActionCreators";
+import AppStore from "../../stores/AppStore";
 import AuthorStore from "../../stores/AuthorStore";
 import PostStore from "../../stores/PostStore";
 import RouterStore from "../../stores/RouterStore";
@@ -26,6 +26,7 @@ export default class AuthorRoute extends React.Component {
   }
 
   static getStateFromStores(props) {
+    let { app } = AppStore.getState();
     let { router } = RouterStore.getState();
     let { loading } = AuthorStore.getState();
 
@@ -34,11 +35,12 @@ export default class AuthorRoute extends React.Component {
     let author = AuthorStore.getByName(authorName);
     let posts = PostStore.getPostsByAuthor(authorName);
 
-    return { author, loading, posts };
+    return { author, loading, posts, app };
   }
 
   render() {
     let { author, posts, loading } = this.props;
+    let title = this.props.app.get("title");
 
     if (loading || !author) {
       return (
@@ -47,9 +49,8 @@ export default class AuthorRoute extends React.Component {
     }
 
     return (
-      <DocumentTitle title={ `${author.get("name")} - Brooklyn United` }>
+        <DocumentTitle title={ `${author.get("name")} - ${title}` }>
         <div className="author-route">
-          <BackButton />
           <Backer />
           { author &&
             <div className="author-column">
@@ -88,7 +89,6 @@ export default class AuthorRoute extends React.Component {
               }) }
             </div>
           }
-          <BackButton />
         </div>
       </DocumentTitle>
     );

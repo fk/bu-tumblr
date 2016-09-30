@@ -1,9 +1,7 @@
 "use strict";
 
 import React, { PropTypes } from "react";
-import { Link } from "react-router";
-import warning from "react/lib/warning";
-import { OrderedMap, Map } from "immutable";
+import { Map } from "immutable";
 import Post from "../Post";
 import PureRender from "../../decorators/PureRender";
 
@@ -28,65 +26,6 @@ export default class HeroUnit extends React.Component {
           <div
             ref={ c => this._intro = c }
             className="intro">
-            <div className="we-are">
-              <h3>We are<br/>Brooklyn United</h3>
-              <p>We make compelling websites and write about it now and then.
-              But mostly just .gifs</p>
-            </div>
-            <nav className="hashtags">
-              <h4>Search by hashtag</h4>
-              <ul>
-                <li>
-                  <Link
-                    to="tag"
-                    params={{ tagName: "people" }}>
-                    #people
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="tag"
-                    params={{ tagName: "design" }}>
-                    #design
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="tag"
-                    params={{ tagName: "strategy" }}>
-                    #strategy
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="tag"
-                    params={{ tagName: "business" }}>
-                    #business
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="tag"
-                    params={{ tagName: "technology" }}>
-                    #technology
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="tag"
-                    params={{ tagName: "client services" }}>
-                    #client services
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="tag"
-                    params={{ tagName: "random" }}>
-                    #random
-                  </Link>
-                </li>
-              </ul>
-            </nav>
           </div>
           <div className="hero-unit-post">
             <Post

@@ -3,10 +3,10 @@
 import React from "react";
 import AppActionCreators from "../../actions/AppActionCreators";
 import AppStore from "../../stores/AppStore";
+import { Link } from "react-router";
 import storeComponent from "../../decorators/storeComponent";
 import PureRender from "../../decorators/PureRender";
-
-const { CSSTransitionGroup } = React.addons;
+import Icon from "../Icons";
 
 @PureRender
 @storeComponent(AppStore)
@@ -32,33 +32,62 @@ export default class Navigation extends React.Component {
   render() {
     let { app } = this.props;
     let { homeUrl } = app.toJS();
+    let { htmlTitle } = app.toJS();
 
     return (
       <div className="navigation">
-        <a className="logo" href={homeUrl}>
-          <h1>Brooklyn<br/>United</h1>
+        <a className="logo" href={ homeUrl }>
+          <h1 dangerouslySetInnerHTML={{ __html: htmlTitle }} />
         </a>
-        <button
-          className="close-btn"
-          type="button"
-          children="Close"
-          onClick={this.handleClickClose} />
-        <nav>
-          <a href={`${homeUrl}/work`}>
-            <h2>Work<span className="highlight">Work</span></h2>
+        <button onClick={ this.handleClickClose } className="close-btn">
+          <Icon icon="close" />
+        </button>
+        <nav className="external">
+          <a href={`${homeUrl}/about`}>
+            <h2>About</h2>
           </a>
-          <a href={`${homeUrl}/services`}>
-            <h2>Services<span className="highlight">Services</span></h2>
+          <a href={`${homeUrl}/archive`}>
+            <h2>Archive</h2>
           </a>
-          <a href={`${homeUrl}/people`}>
-            <h2>People<span className="highlight">People</span></h2>
-          </a>
-          <a href={`${homeUrl}/careers`}>
-            <h2>Careers<span className="highlight">Careers</span></h2>
-          </a>
-          <a href="http://blog.brooklynunited.com">
-            <h2>Blog<span className="highlight">Blog</span></h2>
-          </a>
+        </nav>
+        <nav className="hashtags">
+          <ul>
+            <li>
+              <Link
+                  to="tag"
+                  params={{ tagName: "graffiti" }}>
+                #graffiti
+              </Link>
+            </li>
+            <li>
+              <Link
+                  to="tag"
+                  params={{ tagName: "music" }}>
+                #music
+              </Link>
+            </li>
+            <li>
+              <Link
+                  to="tag"
+                  params={{ tagName: "personal" }}>
+                #personal
+              </Link>
+            </li>
+            <li>
+              <Link
+                  to="tag"
+                  params={{ tagName: "masonite" }}>
+                #masonite
+              </Link>
+            </li>
+            <li>
+              <Link
+                  to="tag"
+                  params={{ tagName: "masonite debug" }}>
+                #masonite debug
+              </Link>
+            </li>
+          </ul>
         </nav>
       </div>
     );

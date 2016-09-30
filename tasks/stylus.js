@@ -5,11 +5,10 @@ var gif = require("gulp-if");
 var watch = require('gulp-watch');
 var concat = require("gulp-concat");
 var gutil = require("gulp-util");
-var minifyCSS = require("gulp-minify-css");
+var cleanCSS = require("gulp-clean-css");
 var stylus = require("gulp-stylus");
 var plumber = require("gulp-plumber");
 var sourcemaps = require("gulp-sourcemaps");
-var nib = require("nib");
 var jeet = require("jeet");
 var rupture = require("rupture");
 var streamqueue = require("streamqueue");
@@ -25,11 +24,11 @@ module.exports = {
     var fonts = gulp.src("./node_modules/font-awesome/css/font-awesome.css");
     var styles = gulp.src("./app/stylus/index.styl")
       .pipe(stylus({
-        use: [nib(), jeet(), rupture()]
+        use: [jeet(), rupture()]
       }));
     var components = gulp.src("./app/components/**/*.styl")
       .pipe(stylus({
-        use: [nib(), jeet(), rupture()]
+        use: [jeet(), rupture()]
       }));
 
 
@@ -45,7 +44,10 @@ module.exports = {
 
     return stream.done()
       .pipe(concat(gif(production, "app.min.css", "app.css")))
-      .pipe(gif(production, minifyCSS(), gutil.noop()))
+      .pipe(gif(production, cleanCSS({debug: true}, function(details) {
+        console.log(details.name + ': ' + details.stats.originalSize);
+        console.log(details.name + ': ' + details.stats.minifiedSize);
+      }), gutil.noop()))
       .pipe(gif(
         !production,
         sourcemaps.write(),

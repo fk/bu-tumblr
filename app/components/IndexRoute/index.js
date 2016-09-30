@@ -1,6 +1,6 @@
 "use strict";
 
-import React from "react/addons";
+import React from "react";
 import DocumentTitle from "react-document-title";
 import Posts from "../Posts";
 import HeroUnit from "../HeroUnit";
@@ -30,6 +30,7 @@ export default class IndexRoute extends React.Component {
   static getStateFromStores(props) {
     let { posts } = PostStore.getState();
     posts = posts.sort((a, b) => a.get("id") < b.get("id") ? 1 : -1);
+
     return { posts };
   }
 
@@ -39,7 +40,7 @@ export default class IndexRoute extends React.Component {
     let posts = postsArr.shift();
 
     return (
-      <DocumentTitle title="Blog - Brooklyn United">
+      <DocumentTitle title="gabion">
         <div className="index-route">
           <LeadingQuote />
           <HeroUnit post={ leadingPost } />

@@ -21,6 +21,11 @@ module.exports = {
       __dirname, "../node_modules/.bin"
     ) + ":" + process.env.PATH;
 
+    // @see https://github.com/petruisfan/node-supervisor
+    // start node with the --harmony flag
+    // ignore the public folder
+    // watch all .js files for changes
+    // and run server
     spawn("supervisor", ["--harmony", "--ignore ./public", "-e js", server], {
       stdio: "inherit",
       env: process.env

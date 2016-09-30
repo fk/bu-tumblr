@@ -1,21 +1,22 @@
-@import "nib"
+@import "../../stylus/variables"
 @import "jeet"
 @import "rupture"
 
 .navigation
-  font-family Montserrat, Helvetica, Arial, sans-serif
   position fixed
   top 0
   left 0
   bottom 0
   right 0
-  background-color rgba(79,164,218,.85)
-  overflow scroll
+  background-color $modal-bg
+  backface-visibility none
+  overflow auto
   display flex
   flex-flow row wrap
   align-items center
 
-  &.navigation-enter, &.navigation-leave
+  &.navigation-enter,
+  &.navigation-leave
     transition transform 400ms ease, opacity 400ms ease
 
   &.navigation-enter
@@ -34,92 +35,64 @@
       transform scale(1.1)
       opacity 0
 
-  nav
+  .external
     width 99.9%
-    padding 0 65px
-    // top 50%
-    text-align right
-    // transform translateY(-50%) translateZ(0)
+    padding 0 2rem
+    top 50%
+    transform translateY(-50%) translateZ(0)
     font-size 19px
     transition all 400ms ease
-
-    +below(769px)
-      text-align center
-
-    // @keyframes fadeInUp
-    //   from
-    //     transform translateY(-30%) translateZ(0)
-    //   to
-    //     transform translateY(-50%) translateZ(0)
-
-    // animation fadeInUp 600ms ease
-    // animation-fill-mode both
+    animation fadeInUp 600ms ease
+    animation-fill-mode both
     cf()
 
     a
-      display inline-block
+      display inline
       position relative
-      margin 1.25em 2em
-      color #fff
-      font-family Montserrat, Helvetica, Arial, sans-serif
+      margin 1.25em 1rem 1.2em 0
+      color #000
       text-decoration none
       text-transform uppercase
-      display block
       font-size 19px
       transition all 400ms ease
 
-      +below(1201px)
-        font-size 20px
-
-      +below(1025px)
-        font-size 20px
-
-      +below(768px)
-        font-size 14px
-
-      +below(500px)
-        font-size 10px
-
-
       h2
-        font-size 3.75em
         position relative
-        display inline-block
+        display inline
         margin 0
-
-
-        .highlight
-          position absolute
-          top 0
-          left 0
-          margin 0
-          padding 0
-          color #333
-          overflow hidden
-          width 0
-          transition width 400ms ease
-
-        &:hover .highlight
-          width 100%
+        font-weight bold
 
   .logo
     position absolute
     top 30px
-    left 30px
+    left 0
     text-decoration none
-    color #fff
+    color #000
     margin-top 0
 
   .close-btn
+    button()
     position absolute
-    top 30px
-    right 30px
-    text-transform uppercase
-    padding-right 26px
-    border none
-    color #fff
-    background-color transparent
-    background-image url('../img/close-icon.png')
-    background-size 16px 12px
-    background-repeat no-repeat
-    background-position center right
+    top 2rem
+    right 2rem
+
+@keyframes fadeInUp
+  from
+    transform translateY(-30%) translateZ(0)
+  to
+    transform translateY(-50%) translateZ(0)
+
+.hashtags ul
+  list-style none
+  padding 0 2rem
+
+  li
+    display inline
+    margin-right 1rem
+
+  a
+    text-decoration none
+    color $gray
+
+    &:hover
+      color black

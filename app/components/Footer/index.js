@@ -11,38 +11,18 @@ export default class Footer extends React.Component {
     return (
       <footer className="footer">
         <article className="footer-column connect">
-          <a
-            href="http://www.digital.nyc/startups"
-            className="made-in">
-            Made in NY
-          </a> |
           <nav>
             <ul>
               <li>
-                <a href="http://www.twitter.com/brooklynunited">
+                <a href="http://www.twitter.com/fk">
                   <i className="fa fa-twitter" />
-                </a>
-              </li>
-              <li>
-                <a href="http://www.facebook.com/brooklynunited">
-                  <i className="fa fa-facebook" />
-                </a>
-              </li>
-              <li>
-                <a href="http://www.instagram.com/brooklynunited">
-                  <i className="fa fa-instagram" />
-                </a>
-              </li>
-              <li>
-                <a href="http://www.linkedin.com/brooklynunited">
-                  <i className="fa fa-linkedin" />
                 </a>
               </li>
             </ul>
           </nav>
         </article>
         <article className="footer-column">
-          <img src="/img/brooklynunited-logo-animated.gif" />
+
         </article>
         <article className="footer-column">
           <address

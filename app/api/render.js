@@ -1,5 +1,6 @@
 import http from "http";
 import React from "react";
+import ReactDOMServer from "react-dom/server";
 import ReactRouter from "react-router";
 import HTMLDocument from "./HTMLDocument";
 import alt from "../alt";
@@ -90,11 +91,11 @@ export default () => {
         }
       });
 
-      let markup = React.renderToString(
+      let markup = ReactDOMServer.renderToString(
         <Handler { ...state } />
       );
 
-      let html = React.renderToStaticMarkup(
+      let html = ReactDOMServer.renderToStaticMarkup(
         <HTMLDocument
           markup={ markup }
           payload={ alt.flush() }
@@ -122,13 +123,13 @@ export default () => {
           break;
         case NotFoundError.TYPE:
           let notFoundHtml = yield new Promise((resolve, reject) => {
-            http.get("http://brooklynunited.com/404.html", res => {
+            http.get("http://hellodirty.com/404.html", res => {
               let body = "";
               res.on("data", chunk => body += chunk);
               res.on("end", () => {
                 body = body.replace(
                   /(src|href)="(\/[A-z])/g,
-                  "$1=\"http://www.brooklynunited.com$2"
+                  "$1=\"http://www.hellodirty.com$2"
                 );
                 resolve(body);
               });

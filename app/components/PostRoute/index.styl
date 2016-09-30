@@ -1,32 +1,19 @@
-@import "nib"
+@import "../../stylus/variables"
 @import "jeet"
 @import "rupture"
 
 .post-route
   position relative
   padding-bottom 5.125rem
-  color #fff
 
   .post-column
-    background-color #333
     padding 5.125rem 4.5rem
     max-width 51.5rem
     margin 3.25rem auto 0
     position relative
 
-    .post-caption
-      display block
-      margin-top 5.25rem
-
-      p
-        font-size 1rem * (14/16)
-        line-height 1rem * (24/16)
-
-    .social
-      bottom auto
-      top -4.125rem * (1/2)
-
-    .post-photo, .post-video
+    .post-photo,
+    .post-video
       position relative
       top 0
       left 50%
@@ -41,8 +28,6 @@
     max-width 51.5rem
     padding 1rem
     z-index 1000
-    color #333333
-    background-color #F1F1F1
     transform translateZ(0)
     cf()
 
@@ -53,8 +38,6 @@
 
       a
         text-decoration none
-        color #333
-        font-weight bold
 
         & + a::before
           content ', '
@@ -63,6 +46,5 @@
       position relative
       col(3/12)
       float right
-      text-transform uppercase
       opacity 0.5
       text-align right

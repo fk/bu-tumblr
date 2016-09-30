@@ -1,10 +1,10 @@
 "use strict";
 
-import React, { PropTypes } from "react/addons";
+import React, { PropTypes } from "react";
 import classNames from "classnames";
+import PureRender from "../../decorators/PureRender";
 
-const { PureRenderMixin } = React.addons;
-
+@PureRender
 class PostVideo extends React.Component {
   componentDidMount() {
     let { twttr, instgrm } = window;
@@ -20,23 +20,27 @@ class PostVideo extends React.Component {
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return PureRenderMixin.shouldComponentUpdate
-      .call(this, nextProps, nextState);
-  }
-
   render() {
     const { className, post, single } = this.props;
     let embed = post.getIn(["player", 2, "embed_code"]);
 
     return (
       <div className={ classNames([className, post.get("videoType")]) }>
+        <div>
         <div
-          className="player"
+          className="video-container"
           dangerouslySetInnerHTML={{ __html: embed }} />
-        { post.has("author") &&
+        </div>
+        <div className="post-body">
+          { post.has("caption") && !!post.get("caption").trim() &&
+          <span
+              className="post-caption"
+              dangerouslySetInnerHTML={{ __html: post.get("caption") }} />
+          }
+          { post.has("author") &&
           <AuthorByLine post={ post } />
-        }
+          }
+        </div>
       </div>
     );
   }

@@ -1,4 +1,4 @@
-@import "nib"
+@import "../../stylus/variables"
 @import "jeet"
 
 .header
@@ -6,6 +6,7 @@
   width 100%
   transition background-color 175ms ease-in-out
   transform translateZ(0)
+  pointer-events none
   cf()
 
   a
@@ -14,71 +15,51 @@
 
   &.fixed
     position fixed
-    height 53px
     top 0
     left 0
     right 0
-    padding 0 10px
-    background-color #fff
-    border-bottom 1px solid #f2f2f2
     z-index 10000
 
+.logo,
+.menu-btn,
+.back-btn
+  pointer-events all
 
-.logo, .gear, .menu-btn
-  col(1/3)
-  padding 0 1.25em
-  margin-top 20px
+.logo
+  padding 1rem 2rem 0
   vertical-align middle
   opacity 1
   transition opacity 400ms ease
-
-  +below(769px)
-    margin-top 10px
-    padding 0 10px
+  position relative
 
   .navigation-open .header &
     opacity 0
 
 .logo
+  float left
+
   h1
     transition opacity 200ms ease-in-out
+    margin-top 0
+
     +below(769px)
       font-size 1.8em
-      line-height 0.85em
+
     +below(500)
       font-size 1.4em
 
-  .fixed &
-    visibility hidden
   &:hover h1
     opacity 0.7
 
-.gear
-  text-align center
-  visibility hidden
-  .fixed &
-    visibility visible
-    margin-top 10px
-
 .menu-btn
-  display inline-block
-  background none
-  border none
-  text-align right
-  color #000
-  text-transform uppercase
-  font-family Montserrat, Helvetica, Arial, sans-serif
+  float right
+  button()
 
-  .menu-icon
-    width 16px
-    height 12px
-    max-width 16px
-    margin-left 10px
-    margin-bottom 2px
-    width 6.5em
   .line
-    fill #000
+    fill @color
+
   .fixed &
-    color #333
+    color #999
+
     .line
-      fill #58AEDF
+      fill @color

@@ -1,7 +1,6 @@
 "use strict";
 
-import { addons } from "react/addons";
-const { PureRenderMixin } = addons;
+import PureRenderMixin from "react-addons-pure-render-mixin";
 
 export default function (target) {
   let { shouldComponentUpdate } = target;

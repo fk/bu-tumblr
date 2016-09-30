@@ -1,7 +1,6 @@
 "use strict";
 
 import React from "react";
-import autobind from "./autobind";
 import copyStaticMethods from "../utils/copyStaticMethods";
 
 export default function storeComponent(...stores) {

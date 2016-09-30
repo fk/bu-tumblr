@@ -1,9 +1,8 @@
 "use strict";
 
-import React, { PropTypes } from "react/addons";
-import Router from "react-router";
-
-const { PureRenderMixin } = React.addons;
+import React, { PropTypes } from "react";
+import Icon from "../Icons";
+import classNames from "classnames";
 
 class BackButton extends React.Component {
   constructor(props) {
@@ -14,11 +13,6 @@ class BackButton extends React.Component {
 
   static contextTypes = {
     router: PropTypes.func
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return PureRenderMixin.shouldComponentUpdate
-      .call(this, nextProps, nextState);
   }
 
   handleClick(event) {
@@ -32,12 +26,19 @@ class BackButton extends React.Component {
   }
 
   render() {
+    let { router } = this.context;
+    let cx = classNames(["back-btn", {
+      "is-hidden": (router.getLocation().getCurrentPath() === "/")
+    }]);
+
     return (
       <button
         onClick={ this.handleClick }
         type="button"
-        className="back-button">
-        <h5><i className="fa fa-chevron-left" /> Back</h5>
+        className={cx}>
+        <h5>
+          <Icon icon="arrow-back" />
+        </h5>
       </button>
     );
   }

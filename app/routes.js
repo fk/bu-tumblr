@@ -4,25 +4,31 @@ import {
   DefaultRoute,
   NotFoundRoute
 } from "react-router";
+import App from "./components/App";
+import Index from "./components/IndexRoute";
+import Post from "./components/PostRoute";
+import Tag from "./components/TagRoute";
+import Author from "./components/AuthorRoute";
+import NotFound from "./components/NotFoundRoute";
 
 export default (
   <Route
-    handler={ require("./components/App") }>
+    handler={ App }>
     <DefaultRoute
-      handler={ require("./components/IndexRoute") } />
+      handler={ Index } />
     <Route
       name="post"
       path="/post/:postId/?:postUri?"
-      handler={ require("./components/PostRoute") } />
+      handler={ Post } />
     <Route
       name="tag"
-      path="/tag/:tagName"
-      handler={ require("./components/TagRoute") } />
+      path="/tagged/:tagName"
+      handler={ Tag } />
     <Route
       name="author"
       path="/author/:authorName"
-      handler={ require("./components/AuthorRoute") } />
+      handler={ Author } />
     <NotFoundRoute
-      handler={ require("./components/NotFoundRoute") } />
+      handler={ NotFound } />
   </Route>
 );

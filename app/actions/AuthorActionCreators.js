@@ -12,27 +12,29 @@ class AuthorActionCreators {
     );
   }
 
-  async getAuthor(name) {
-    this.dispatch();
+  getAuthor(name) {
+    return async (dispatch) => {
+      dispatch();
 
-    try {
-      let calls = [];
-      let data = { entities: {}, result: [] };
-      calls.push(TumblrAPI.getAuthor(name));
-      calls.push(TumblrAPI.getPostsByAuthor(name));
+      try {
+        let calls = [];
+        let data = { entities: {}, result: [] };
+        calls.push(TumblrAPI.getAuthor(name));
+        calls.push(TumblrAPI.getPostsByAuthor(name));
 
-      for (let call of calls) {
-        let response = await call;
+        for (let call of calls) {
+          let response = await call;
 
-        data.entities = assign(data.entities, response.entities);
-        data.result = data.result.concat(response.result);
+          data.entities = assign(data.entities, response.entities);
+          data.result = data.result.concat(response.result);
+        }
+
+        this.getAuthorSuccess(data);
       }
-
-      this.actions.getAuthorSuccess(data);
-    }
-    catch (err) {
-      this.actions.getAuthorError(err);
-    }
+      catch (err) {
+        this.getAuthorError(err);
+      }
+    };
   }
 }
 

@@ -1,71 +1,16 @@
+@import "../../stylus/variables"
 @import "jeet"
 @import "rupture"
 
-BREAKPOINT = 990px
-
 .title-box
-  // position absolute
-  // left 1.625rem
-  position relative
-  margin 0
-  min-width 5rem * 4
-  bottom 100%
-  z-index 100
   font-size 2rem
-  color #fff
-  z-index 200
   cf()
 
-  +below(BREAKPOINT)
-    position relative
-    margin 0
-    top 0
-    left 0
-    height 4.125rem
-    line-height @height
-    font-size 1.414rem
-
-  &.no-title
-    background-color transparent
-
   h3
-    font-weight 400
     margin 0
     padding 0
-    float left
-    width 100%
 
     a
-      display block
-      position relative
-      color #fff
-      overflow hidden
-      transition transform 275ms ease-in-out
-      transform rotateX(0deg)
-      transform-style preserve-3d
-      padding 2.5rem 5.125rem 1.25rem 1.625rem
-      width 100%
-      background-color #333
-
-      &::after
-        box-sizing content-box
-        content attr(title)
-        padding 2.5rem 0 3.125rem
-        text-indent 1.625rem
-        position absolute
-        display block
-        top 0
-        left 0
-        height 100%
-        width 0%
-        color #fff
-        background-color rgb(79, 164, 218)
-        overflow hidden
-        transition all 400ms ease-in-out
-        word-wrap normal
-        word-break keep-all
-        white-space nowrap
-
-      &:hover::after
-        width 100%
-
+      color $blue
+      text-decoration none
+      padding 2.5rem 0 1.25rem

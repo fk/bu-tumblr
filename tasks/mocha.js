@@ -11,7 +11,7 @@ module.exports = {
     gulp.src("./tests/**/*Test.js", { read: false })
       .pipe(plumber())
       .pipe(mocha({
-        compilers: "babel:babel/register"
+        compilers: "babel-cli:babel-register"
       }));
   },
 

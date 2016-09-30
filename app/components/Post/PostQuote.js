@@ -1,17 +1,11 @@
 "use strict";
 
-import React, { PropTypes } from "react/addons";
-import { Link } from "react-router";
+import React, { PropTypes } from "react";
 import AuthorByLine from "../AuthorByLine";
+import PureRender from "../../decorators/PureRender";
 
-const { PureRenderMixin } = React.addons;
-
+@PureRender
 class PostQuote extends React.Component {
-  shouldComponentUpdate(nextProps, nextState) {
-    return PureRenderMixin.shouldComponentUpdate
-      .call(this, nextProps, nextState);
-  }
-
   render() {
     const { className, single, post } = this.props;
 
@@ -37,6 +31,5 @@ PostQuote.propTypes = {
 PostQuote.defaultProps = {
   single: false
 };
-
 
 export default PostQuote;

@@ -1,8 +1,7 @@
 "use strict";
 
 import React, { PropTypes } from "react";
-import { Link } from "react-router";
-import warning from "react/lib/warning";
+import warning from "warning";
 import { List } from "immutable";
 import PureRender from "../../decorators/PureRender";
 
