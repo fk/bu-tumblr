@@ -22,28 +22,9 @@ export default class Footer extends React.Component {
           </nav>
         </article>
         <article className="footer-column">
-
         </article>
         <article className="footer-column">
-          <address
-            className="address"
-            itemScope
-            itemType="http://schema.org/PostalAddress">
-            <span itemProp="streetAddress">20 Jay St. #402, </span>
-            <span itemProp="addressLocality">Brooklyn, </span>
-            <span itemProp="addressRegion">NY</span>
-            <span itemProp="postalCode">11201</span>
-          </address>
-          <a
-            className="phone"
-            href="tel:1-718-254-9048">
-            +1 718 254 9048
-          </a>
-          <a
-            className="contact"
-            href="http://brooklynunited.com/#talk-to-us">
-            Get in touch
-          </a>
+          &copy; 2016
         </article>
       </footer>
     );

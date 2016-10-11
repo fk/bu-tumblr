@@ -31,8 +31,8 @@ export default class Header extends React.Component {
   }
 
   render() {
-    const { home, app } = this.props;
-    const { mastheadColor, homeUrl, fixedHeader } = app.toJS();
+    const { app } = this.props;
+    const { homeUrl, fixedHeader } = app.toJS();
 
     const cx = classNames({
       "header": true,

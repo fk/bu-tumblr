@@ -15,15 +15,13 @@ export default class Posts extends React.Component {
 
     return (
       <div className="posts">
-        { posts.map((post, key) => {
-          return (
-            <Post
+        { posts.entrySeq().map( ([key, post]) =>
+          <Post
               className={ `post post-${post.get("type")}` }
               key={ key }
               index={ key }
               post={ post } />
-          );
-        }) }
+        ) }
       </div>
     );
   }

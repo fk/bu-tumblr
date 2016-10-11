@@ -1,3 +1,4 @@
+@import "../../stylus/variables"
 @import "jeet"
 
 .note-box
@@ -13,22 +14,21 @@
   .note
     padding 1rem 0
     border-bottom 1px solid #F1F1F1
+    line-height 1.5rem
     cf()
 
     &:last-child
       border-bottom none
 
-    .avatar, .blog-name, .action, .from-statement
-      display block
-      float left
-
     .avatar
-      width 1rem
-      height 1rem
-      margin-right 0.25rem
+      width 1.5rem
+      height 1.5rem
+      margin-right 0.75rem
+      vertical-align middle
 
-    .blog-name
-      margin-right 0.25rem
+    a
+      color: #000
+      text-decoration none
 
-    .from-statement
-      margin-left 0.25rem
+      &:hover
+        color: $blue

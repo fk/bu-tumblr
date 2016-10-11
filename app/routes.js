@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  Route,
-  DefaultRoute,
-  NotFoundRoute
-} from "react-router";
+import { Route, DefaultRoute, NotFoundRoute } from "react-router";
 import App from "./components/App";
 import Index from "./components/IndexRoute";
 import Post from "./components/PostRoute";

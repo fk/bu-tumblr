@@ -5,7 +5,16 @@ import AuthorByLine from "../AuthorByLine";
 import PureRender from "../../decorators/PureRender";
 
 @PureRender
-class PostQuote extends React.Component {
+export default class PostQuote extends React.Component {
+  static propTypes = {
+    post: PropTypes.object.isRequired,
+    single: PropTypes.bool
+  }
+
+  static defaultProps = {
+    single: false
+  }
+
   render() {
     const { className, single, post } = this.props;
 
@@ -13,7 +22,8 @@ class PostQuote extends React.Component {
       <div className={ className }>
         <quote dangerouslySetInnerHTML={{ __html: post.get("text") }} />
         { post.has("source") &&
-          <span className="source">{ post.get("source") }</span>
+          <span className="source"
+                dangerouslySetInnerHTML={{ __html: post.get("source") }} />
         }
         { post.has("author") &&
           <AuthorByLine post={ post } />
@@ -22,14 +32,3 @@ class PostQuote extends React.Component {
     );
   }
 }
-
-PostQuote.propTypes = {
-  post: PropTypes.object.isRequired,
-  single: PropTypes.bool
-};
-
-PostQuote.defaultProps = {
-  single: false
-};
-
-export default PostQuote;

@@ -1,4 +1,13 @@
 {
-  "presets": ["stage-0", "react", "es2015"],
-  "plugins": ["transform-decorators-legacy", "transform-class-properties", "syntax-async-functions", "syntax-async-generators"]
+  "presets": [
+    "stage-0",
+    "react",
+    "es2015"
+  ],
+  "plugins": [
+    "transform-decorators-legacy",
+    "transform-class-properties",
+    "syntax-async-functions",
+    "syntax-async-generators"
+  ]
 }

@@ -13,7 +13,6 @@ class AppStore {
       title: "Gabion",
       htmlTitle: "Gabion<br />Alpha",
       navOpen: false,
-      mastheadColor: "#ff00ff",
       fixedHeader: false,
       viewport: List.of(0, 0, 0, 0)
     });

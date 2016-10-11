@@ -13,7 +13,7 @@ import PureRender from "../../decorators/PureRender";
 
 @PureRender
 @storeComponent(LightboxStore)
-class PostPhoto extends React.Component {
+export default class PostPhoto extends React.Component {
   state = {
     hovered: null
   }
@@ -171,5 +171,3 @@ class PostPhoto extends React.Component {
     );
   }
 }
-
-export default PostPhoto;

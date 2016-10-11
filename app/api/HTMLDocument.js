@@ -5,7 +5,7 @@ import DocumentTitle from "react-document-title";
 import serialize from "serialize-javascript";
 
 const env = process.env.NODE_ENV || "development";
-const fonts = "//fonts.googleapis.com/css?family=Space+Mono:400i,700i";
+const fonts = "//fonts.googleapis.com/css?family=Space+Mono:400,400i,700";
 const css = env !== "production" ?
   "/stylesheets/app.min.css" : "/stylesheets/app.css";
 

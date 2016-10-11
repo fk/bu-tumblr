@@ -114,7 +114,7 @@ export default class Post extends React.Component {
           transition={ transition }
           post={ post }
           className={ cx } />
-        <footer>
+        <footer className="post-footer">
           {/*
             * { !(single) &&
             */}

@@ -24,7 +24,7 @@ export default class Navigation extends React.Component {
   }
 
   handleClickClose(event) {
-    event.preventDefault();
+    event.stopPropagation();
 
     AppActionCreators.toggleNavigation();
   }
@@ -55,35 +55,40 @@ export default class Navigation extends React.Component {
             <li>
               <Link
                   to="tag"
-                  params={{ tagName: "graffiti" }}>
+                  params={{ tagName: "graffiti" }}
+                  onClick={ this.handleClickClose }>
                 #graffiti
               </Link>
             </li>
             <li>
               <Link
                   to="tag"
-                  params={{ tagName: "music" }}>
+                  params={{ tagName: "music" }}
+                  onClick={ this.handleClickClose }>
                 #music
               </Link>
             </li>
             <li>
               <Link
                   to="tag"
-                  params={{ tagName: "personal" }}>
+                  params={{ tagName: "personal" }}
+                  onClick={ this.handleClickClose }>
                 #personal
               </Link>
             </li>
             <li>
               <Link
                   to="tag"
-                  params={{ tagName: "masonite" }}>
+                  params={{ tagName: "masonite" }}
+                  onClick={ this.handleClickClose }>
                 #masonite
               </Link>
             </li>
             <li>
               <Link
                   to="tag"
-                  params={{ tagName: "masonite debug" }}>
+                  params={{ tagName: "masonite debug" }}
+                  onClick={ this.handleClickClose }>
                 #masonite debug
               </Link>
             </li>

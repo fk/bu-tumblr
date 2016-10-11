@@ -2,7 +2,6 @@
 
 import koa from "koa";
 import { join } from "path";
-import React from "react";
 import compress from "koa-compress";
 import serveStatic from "koa-static";
 import bodyparser from "koa-bodyparser";

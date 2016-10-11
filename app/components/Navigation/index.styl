@@ -13,11 +13,11 @@
   overflow auto
   display flex
   flex-flow row wrap
-  align-items center
+  align-content flex-start
 
   &.navigation-enter,
   &.navigation-leave
-    transition transform 400ms ease, opacity 400ms ease
+    transition transform $animation-speed-fast $animation-curve-default , opacity $animation-speed-fast $animation-curve-default
 
   &.navigation-enter
     transform scale(1.1)
@@ -36,15 +36,11 @@
       opacity 0
 
   .external
-    width 99.9%
     padding 0 2rem
-    top 50%
-    transform translateY(-50%) translateZ(0)
-    font-size 19px
-    transition all 400ms ease
-    animation fadeInUp 600ms ease
-    animation-fill-mode both
-    cf()
+    margin-top 8rem
+    flex-grow 0
+    flex-shrink 0
+    width 100%
 
     a
       display inline
@@ -52,19 +48,17 @@
       margin 1.25em 1rem 1.2em 0
       color #000
       text-decoration none
-      text-transform uppercase
-      font-size 19px
-      transition all 400ms ease
+      color $gray
 
       h2
-        position relative
         display inline
         margin 0
         font-weight bold
+        font-size 1.4rem
 
   .logo
     position absolute
-    top 30px
+    top 1rem
     left 0
     text-decoration none
     color #000
@@ -73,16 +67,18 @@
   .close-btn
     button()
     position absolute
-    top 2rem
+    top 1rem
     right 2rem
 
 @keyframes fadeInUp
   from
     transform translateY(-30%) translateZ(0)
   to
-    transform translateY(-50%) translateZ(0)
+    transform translateY(0) translateZ(0)
 
 .hashtags ul
+  flex-grow 0
+  flex-shrink 0
   list-style none
   padding 0 2rem
 
@@ -96,3 +92,6 @@
 
     &:hover
       color black
+
+    &.active
+      color $blue

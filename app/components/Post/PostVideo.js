@@ -5,7 +5,16 @@ import classNames from "classnames";
 import PureRender from "../../decorators/PureRender";
 
 @PureRender
-class PostVideo extends React.Component {
+export default class PostVideo extends React.Component {
+  static propTypes = {
+    post: PropTypes.object.isRequired,
+    single: PropTypes.bool
+  }
+
+  static defaultProps = {
+    single: false
+  }
+
   componentDidMount() {
     let { twttr, instgrm } = window;
 
@@ -45,14 +54,3 @@ class PostVideo extends React.Component {
     );
   }
 }
-
-PostVideo.propTypes = {
-  post: PropTypes.object.isRequired,
-  single: PropTypes.bool
-};
-
-PostVideo.defaultProps = {
-  single: false
-};
-
-export default PostVideo;
