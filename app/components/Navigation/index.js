@@ -32,16 +32,9 @@ export default class Navigation extends React.Component {
   render() {
     let { app } = this.props;
     let { homeUrl } = app.toJS();
-    let { htmlTitle } = app.toJS();
 
     return (
       <div className="navigation">
-        <a className="logo" href={ homeUrl }>
-          <h1 dangerouslySetInnerHTML={{ __html: htmlTitle }} />
-        </a>
-        <button onClick={ this.handleClickClose } className="close-btn">
-          <Icon icon="close" />
-        </button>
         <nav className="external">
           <a href={`${homeUrl}/about`}>
             <h2>About</h2>
@@ -51,48 +44,36 @@ export default class Navigation extends React.Component {
           </a>
         </nav>
         <nav className="hashtags">
-          <ul>
-            <li>
-              <Link
-                  to="tag"
-                  params={{ tagName: "graffiti" }}
-                  onClick={ this.handleClickClose }>
-                #graffiti
-              </Link>
-            </li>
-            <li>
-              <Link
-                  to="tag"
-                  params={{ tagName: "music" }}
-                  onClick={ this.handleClickClose }>
-                #music
-              </Link>
-            </li>
-            <li>
-              <Link
-                  to="tag"
-                  params={{ tagName: "personal" }}
-                  onClick={ this.handleClickClose }>
-                #personal
-              </Link>
-            </li>
-            <li>
-              <Link
-                  to="tag"
-                  params={{ tagName: "masonite" }}
-                  onClick={ this.handleClickClose }>
-                #masonite
-              </Link>
-            </li>
-            <li>
-              <Link
-                  to="tag"
-                  params={{ tagName: "masonite debug" }}
-                  onClick={ this.handleClickClose }>
-                #masonite debug
-              </Link>
-            </li>
-          </ul>
+          <Link
+              to="tag"
+              params={{ tagName: "graffiti" }}
+              onClick={ this.handleClickClose }>
+            #graffiti
+          </Link>
+          <Link
+              to="tag"
+              params={{ tagName: "music" }}
+              onClick={ this.handleClickClose }>
+            #music
+          </Link>
+          <Link
+              to="tag"
+              params={{ tagName: "personal" }}
+              onClick={ this.handleClickClose }>
+            #personal
+          </Link>
+          <Link
+              to="tag"
+              params={{ tagName: "masonite" }}
+              onClick={ this.handleClickClose }>
+            #masonite
+          </Link>
+          <Link
+              to="tag"
+              params={{ tagName: "masonite debug" }}
+              onClick={ this.handleClickClose }>
+            #masonite debug
+          </Link>
         </nav>
       </div>
     );

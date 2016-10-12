@@ -40,18 +40,18 @@ export default class Header extends React.Component {
     });
 
     return (
-      <header className={cx}>
+      <header className={ cx }>
         <BackButton />
         <Link
           to="/"
-          className="logo item"
+          className="logo"
           href={ homeUrl }>
           <h1>Gabion<br />Alpha</h1>
         </Link>
         <button
-          className="menu-btn item"
-          onClick={this.handleNavToggle}>
-          <Icon icon="menu" />
+          className="menu-btn"
+          onClick={ this.handleNavToggle }>
+          <div className="hamburger"></div>
         </button>
       </header>
     );

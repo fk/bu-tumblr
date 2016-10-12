@@ -12,7 +12,7 @@
   backface-visibility none
   overflow auto
   display flex
-  flex-flow row wrap
+  flex-direction column
   align-content flex-start
 
   &.navigation-enter,
@@ -76,19 +76,18 @@
   to
     transform translateY(0) translateZ(0)
 
-.hashtags ul
-  flex-grow 0
-  flex-shrink 0
-  list-style none
-  padding 0 2rem
-
-  li
-    display inline
-    margin-right 1rem
+.hashtags
+  padding 2rem
+  line-height 1.5
+  width 100%
 
   a
+    margin-right 1rem
     text-decoration none
     color $gray
+    display block
+    float left
+    white-space nowrap
 
     &:hover
       color black
