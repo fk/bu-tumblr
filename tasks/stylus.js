@@ -12,8 +12,28 @@ var sourcemaps = require("gulp-sourcemaps");
 var jeet = require("jeet");
 var rupture = require("rupture");
 var streamqueue = require("streamqueue");
+var postcss = require("gulp-postcss");
+var autoprefixer = require("autoprefixer");
+var flexbugsFixes = require("postcss-flexbugs-fixes");
 
 var production = process.env.NODE_ENV === "production";
+
+var postcssProcessors = [
+  flexbugsFixes(),
+  autoprefixer({
+    "browsers": [
+      "Chrome >= 35",
+      "Firefox >= 38",
+      "Edge >= 12",
+      "Explorer >= 9",
+      "iOS >= 8",
+      "Safari >= 8",
+      "Android 2.3",
+      "Android >= 4",
+      "Opera >= 12"
+    ]
+  })
+]
 
 module.exports = {
   taskName: "stylus",
@@ -31,7 +51,6 @@ module.exports = {
         use: [jeet(), rupture()]
       }));
 
-
     stream.pipe(gif(
       !production,
       sourcemaps.init({ loadMaps: true }),
@@ -44,6 +63,7 @@ module.exports = {
 
     return stream.done()
       .pipe(concat(gif(production, "app.min.css", "app.css")))
+      .pipe(postcss(postcssProcessors))
       .pipe(gif(production, cleanCSS({debug: true}, function(details) {
         console.log(details.name + ': ' + details.stats.originalSize);
         console.log(details.name + ': ' + details.stats.minifiedSize);
