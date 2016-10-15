@@ -14,13 +14,13 @@
   &.post-text
     max-width 51.5rem
 
-    +below(DISPLAY_MEDIUM)
+    +below(m)
       max-width 100%
 
   &.post-quote
     max-width 51.5rem
 
-    +below(DISPLAY_MEDIUM)
+    +below(m)
       max-width 100%
 
 .post-caption
@@ -29,7 +29,7 @@
 
 .post-body,
 .post-wrapper footer
-  +below(DISPLAY_SMALL)
+  +below(2)
     padding 0 1rem
 
   p
@@ -43,3 +43,7 @@
   position relative
   clear both
   line-height 1.4
+
+  iframe[style]
+    width 100% !important
+    max-width 100% !important

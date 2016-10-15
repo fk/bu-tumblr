@@ -5,8 +5,11 @@ import warning from "warning";
 import { Map } from "immutable";
 import classNames from "classnames";
 import AuthorByLine from "../AuthorByLine";
+import Placeholder from "./Placeholder";
 import LightboxStore from "../../stores/LightboxStore";
 import LightboxActionCreators from "../../actions/LightboxActionCreators";
+import ReactCSSTransitionGroup from "react-addons-css-transition-group";
+import LazyLoad from "react-lazyload";
 import storeComponent from "../../decorators/storeComponent";
 import autobind from "../../decorators/autobind";
 import PureRender from "../../decorators/PureRender";
@@ -127,6 +130,12 @@ export default class PostPhoto extends React.Component {
     }]);
 
     let src = photo.getIn(["alt_sizes", 0, "url"]);
+    let photoWidth = photo.getIn(["alt_sizes", 0, "width"]);
+    let photoHeight = photo.getIn(["alt_sizes", 0, "height"]);
+    let paddingBottom = ((photoHeight / photoWidth) * 100);
+
+    let placeholderStyles = {};
+    placeholderStyles.paddingBottom = paddingBottom + "%";
 
     return (
       <li
@@ -136,9 +145,15 @@ export default class PostPhoto extends React.Component {
         onClick={ this.handlePhotoClick(photo) }
         className={ cx }
       >
-        <img
-          src={ src }>
-        </img>
+        <LazyLoad placeholder={<Placeholder style={ placeholderStyles } />}>
+          <ReactCSSTransitionGroup
+            transitionName="fade" key="1"
+            transitionAppear={true} transitionAppearTimeout={200}
+            transitionEnter={false}
+            transitionLeave={false}>
+            <img src={ src } />
+          </ReactCSSTransitionGroup>
+        </LazyLoad>
         <div className="shade" />
       </li>
       );

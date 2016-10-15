@@ -34,10 +34,21 @@ export default class App extends React.Component {
     document.addEventListener("scroll", this.updateScrollState, false);
     document.addEventListener("resize", this.updateScrollState, false);
     this.updateScrollState();
+    this.detectBlendMode();
   }
 
   updateScrollState(event) {
     AppActionCreators.setScrollState(getViewport());
+  }
+
+  // @see https://github.com/Modernizr/Modernizr/issues/1388
+  // @see https://dev.opera.com/articles/getting-to-know-css-blend-modes/
+  // @see http://blogs.adobe.com/webplatform/2013/09/12/browser-support-matrix-for-css-blending/
+  detectBlendMode() {
+    if ("CSS" in window && "supports" in window.CSS) {
+      let support = window.CSS.supports("mix-blend-mode", "exclusion");
+      support && document.body.classList.add("blend-mode-support");
+    }
   }
 
   render() {

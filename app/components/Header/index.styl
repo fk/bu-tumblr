@@ -16,9 +16,15 @@ $hamburgerSpacingHover = 8px
   z-index $z-index-header
   cf()
 
+  .blend-mode-support &
+    mix-blend-mode exclusion
+
   a
     text-decoration none
     color #000
+
+    .blend-mode-support &
+      color #fff
 
   &.fixed
     position fixed
@@ -43,10 +49,10 @@ $hamburgerSpacingHover = 8px
     transition opacity 200ms ease-in-out
     margin-top 0
 
-    +below(769px)
+    +below(2)
       font-size 1.8rem
 
-    +below(500)
+    +below(1)
       font-size 1.4rem
 
   &:hover h1
@@ -100,6 +106,9 @@ $hamburgerSpacingHover = 8px
   border-radius $hamburgerBorderRadius
   transition all 300ms cubic-bezier(.68,-.55,.265,1.55)
 
+  .blend-mode-support &
+    background #fff
+
   &:before,
   &:after
     width $hamburgerWidth
@@ -120,6 +129,9 @@ $hamburgerSpacingHover = 8px
     content ""
     position absolute
     transition: all 300ms cubic-bezier(.68,-.55,.265,1.55)
+
+    .blend-mode-support &
+      background #fff
 
 .navigation-open
   .menu-btn

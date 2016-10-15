@@ -37,7 +37,6 @@ export default {
 
   async getAuthor(name) {
     let url = makeUrl("posts");
-
     let params = {
       apiKey: API_KEY,
       tag: `_people:${name}`,
